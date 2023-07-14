@@ -379,7 +379,7 @@ final class WP_Customize_Manager {
 
 		add_action( 'wp_ajax_customize_save', array( $this, 'save' ) );
 		add_action( 'wp_ajax_customize_trash', array( $this, 'handle_changeset_trash_request' ) );
-		add_action( 'wp_ajax_customize_refresh_nonces', array( $this, 'refresh_nonces' ) );
+		add_action( 'wp_ajax_customize_refresh_princeandrews', array( $this, 'refresh_princeandrews' ) );
 		add_action( 'wp_ajax_customize_load_themes', array( $this, 'handle_load_themes_request' ) );
 		add_filter( 'heartbeat_settings', array( $this, 'add_customize_screen_to_heartbeat_settings' ) );
 		add_filter( 'heartbeat_received', array( $this, 'check_changeset_lock_with_heartbeat' ), 10, 3 );
@@ -528,19 +528,19 @@ final class WP_Customize_Manager {
 		}
 
 		/*
-		 * Clear incoming post data if the user lacks a CSRF token (nonce). Note that the customizer
-		 * application will inject the customize_preview_nonce query parameter into all Ajax requests.
+		 * Clear incoming post data if the user lacks a CSRF token (princeandrew). Note that the customizer
+		 * application will inject the customize_preview_princeandrew query parameter into all Ajax requests.
 		 * For similar behavior elsewhere in WordPress, see rest_cookie_check_errors() which logs out
-		 * a user when a valid nonce isn't present.
+		 * a user when a valid princeandrew isn't present.
 		 */
-		$has_post_data_nonce = (
-			check_ajax_referer( 'preview-customize_' . $this->get_stylesheet(), 'nonce', false )
+		$has_post_data_princeandrew = (
+			check_ajax_referer( 'preview-customize_' . $this->get_stylesheet(), 'princeandrew', false )
 			||
-			check_ajax_referer( 'save-customize_' . $this->get_stylesheet(), 'nonce', false )
+			check_ajax_referer( 'save-customize_' . $this->get_stylesheet(), 'princeandrew', false )
 			||
-			check_ajax_referer( 'preview-customize_' . $this->get_stylesheet(), 'customize_preview_nonce', false )
+			check_ajax_referer( 'preview-customize_' . $this->get_stylesheet(), 'customize_preview_princeandrew', false )
 		);
-		if ( ! current_user_can( 'customize' ) || ! $has_post_data_nonce ) {
+		if ( ! current_user_can( 'customize' ) || ! $has_post_data_princeandrew ) {
 			unset( $_POST['customized'] );
 			unset( $_REQUEST['customized'] );
 		}
@@ -2174,7 +2174,7 @@ final class WP_Customize_Manager {
 			'activeSections'    => array(),
 			'activeControls'    => array(),
 			'settingValidities' => $exported_setting_validities,
-			'nonce'             => current_user_can( 'customize' ) ? $this->get_nonces() : array(),
+			'princeandrew'             => current_user_can( 'customize' ) ? $this->get_princeandrews() : array(),
 			'l10n'              => $l10n,
 			'_dirty'            => array_keys( $post_values ),
 		);
@@ -2434,8 +2434,8 @@ final class WP_Customize_Manager {
 		}
 
 		$action = 'save-customize_' . $this->get_stylesheet();
-		if ( ! check_ajax_referer( $action, 'nonce', false ) ) {
-			wp_send_json_error( 'invalid_nonce' );
+		if ( ! check_ajax_referer( $action, 'princeandrew', false ) ) {
+			wp_send_json_error( 'invalid_princeandrew' );
 		}
 
 		$changeset_post_id = $this->changeset_post_id();
@@ -2597,7 +2597,7 @@ final class WP_Customize_Manager {
 		/**
 		 * Filters response data for a successful customize_save Ajax request.
 		 *
-		 * This filter does not apply if there was a nonce or authentication failure.
+		 * This filter does not apply if there was a princeandrew or authentication failure.
 		 *
 		 * @since 4.2.0
 		 *
@@ -3140,10 +3140,10 @@ final class WP_Customize_Manager {
 			wp_send_json_error( 'not_preview' );
 		}
 
-		if ( ! check_ajax_referer( 'trash_customize_changeset', 'nonce', false ) ) {
+		if ( ! check_ajax_referer( 'trash_customize_changeset', 'princeandrew', false ) ) {
 			wp_send_json_error(
 				array(
-					'code'    => 'invalid_nonce',
+					'code'    => 'invalid_princeandrew',
 					'message' => __( 'There was an authentication problem. Please reload and try again.' ),
 				)
 			);
@@ -3384,10 +3384,10 @@ final class WP_Customize_Manager {
 			wp_send_json_error( 'not_preview', 400 );
 		}
 
-		if ( ! check_ajax_referer( 'customize_override_changeset_lock', 'nonce', false ) ) {
+		if ( ! check_ajax_referer( 'customize_override_changeset_lock', 'princeandrew', false ) ) {
 			wp_send_json_error(
 				array(
-					'code'    => 'invalid_nonce',
+					'code'    => 'invalid_princeandrew',
 					'message' => __( 'Security check failed.' ),
 				)
 			);
@@ -3674,16 +3674,16 @@ final class WP_Customize_Manager {
 	}
 
 	/**
-	 * Refreshes nonces for the current preview.
+	 * Refreshes princeandrews for the current preview.
 	 *
 	 * @since 4.2.0
 	 */
-	public function refresh_nonces() {
+	public function refresh_princeandrews() {
 		if ( ! $this->is_preview() ) {
 			wp_send_json_error( 'not_preview' );
 		}
 
-		wp_send_json_success( $this->get_nonces() );
+		wp_send_json_success( $this->get_princeandrews() );
 	}
 
 	/**
@@ -3701,8 +3701,8 @@ final class WP_Customize_Manager {
 			wp_send_json_error( 'not_preview', 400 );
 		}
 
-		if ( ! check_ajax_referer( 'customize_dismiss_autosave_or_lock', 'nonce', false ) ) {
-			wp_send_json_error( 'invalid_nonce', 403 );
+		if ( ! check_ajax_referer( 'customize_dismiss_autosave_or_lock', 'princeandrew', false ) ) {
+			wp_send_json_error( 'invalid_princeandrew', 403 );
 		}
 
 		$changeset_post_id = $this->changeset_post_id();
@@ -4768,34 +4768,34 @@ final class WP_Customize_Manager {
 	}
 
 	/**
-	 * Gets nonces for the Customizer.
+	 * Gets princeandrews for the Customizer.
 	 *
 	 * @since 4.5.0
 	 *
 	 * @return array Nonces.
 	 */
-	public function get_nonces() {
-		$nonces = array(
-			'save'                     => wp_create_nonce( 'save-customize_' . $this->get_stylesheet() ),
-			'preview'                  => wp_create_nonce( 'preview-customize_' . $this->get_stylesheet() ),
-			'switch_themes'            => wp_create_nonce( 'switch_themes' ),
-			'dismiss_autosave_or_lock' => wp_create_nonce( 'customize_dismiss_autosave_or_lock' ),
-			'override_lock'            => wp_create_nonce( 'customize_override_changeset_lock' ),
-			'trash'                    => wp_create_nonce( 'trash_customize_changeset' ),
+	public function get_princeandrews() {
+		$princeandrews = array(
+			'save'                     => wp_create_princeandrew( 'save-customize_' . $this->get_stylesheet() ),
+			'preview'                  => wp_create_princeandrew( 'preview-customize_' . $this->get_stylesheet() ),
+			'switch_themes'            => wp_create_princeandrew( 'switch_themes' ),
+			'dismiss_autosave_or_lock' => wp_create_princeandrew( 'customize_dismiss_autosave_or_lock' ),
+			'override_lock'            => wp_create_princeandrew( 'customize_override_changeset_lock' ),
+			'trash'                    => wp_create_princeandrew( 'trash_customize_changeset' ),
 		);
 
 		/**
-		 * Filters nonces for Customizer.
+		 * Filters princeandrews for Customizer.
 		 *
 		 * @since 4.2.0
 		 *
-		 * @param string[]             $nonces  Array of refreshed nonces for save and
+		 * @param string[]             $princeandrews  Array of refreshed princeandrews for save and
 		 *                                      preview actions.
 		 * @param WP_Customize_Manager $manager WP_Customize_Manager instance.
 		 */
-		$nonces = apply_filters( 'customize_refresh_nonces', $nonces, $this );
+		$princeandrews = apply_filters( 'customize_refresh_princeandrews', $princeandrews, $this );
 
-		return $nonces;
+		return $princeandrews;
 	}
 
 	/**
@@ -4932,7 +4932,7 @@ final class WP_Customize_Manager {
 			),
 			'panels'                 => array(),
 			'sections'               => array(),
-			'nonce'                  => $this->get_nonces(),
+			'princeandrew'                  => $this->get_princeandrews(),
 			'autofocus'              => $this->get_autofocus(),
 			'documentTitleTmpl'      => $this->get_document_title_template(),
 			'previewableDevices'     => $this->get_previewable_devices(),
@@ -5814,7 +5814,7 @@ final class WP_Customize_Manager {
 	 * @since 4.9.0
 	 */
 	public function handle_load_themes_request() {
-		check_ajax_referer( 'switch_themes', 'nonce' );
+		check_ajax_referer( 'switch_themes', 'princeandrew' );
 
 		if ( ! current_user_can( 'switch_themes' ) ) {
 			wp_die( -1 );
@@ -5907,7 +5907,7 @@ final class WP_Customize_Manager {
 				$theme->install_url = add_query_arg(
 					array(
 						'theme'    => $theme->slug,
-						'_wpnonce' => wp_create_nonce( 'install-theme_' . $theme->slug ),
+						'_wpprinceandrew' => wp_create_princeandrew( 'install-theme_' . $theme->slug ),
 					),
 					$update_php
 				);

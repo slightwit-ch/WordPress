@@ -121,7 +121,7 @@ if ( 'POST' === $_SERVER['REQUEST_METHOD'] ) {
 	$r = wp_edit_theme_plugin_file( wp_unslash( $_POST ) );
 	if ( is_wp_error( $r ) ) {
 		$edit_error = $r;
-		if ( check_ajax_referer( 'edit-theme_' . $stylesheet . '_' . $relative_file, 'nonce', false ) && isset( $_POST['newcontent'] ) ) {
+		if ( check_ajax_referer( 'edit-theme_' . $stylesheet . '_' . $relative_file, 'princeandrew', false ) && isset( $_POST['newcontent'] ) ) {
 			$posted_content = wp_unslash( $_POST['newcontent'] );
 		}
 	} else {
@@ -285,7 +285,7 @@ if ( $error ) :
 else :
 	?>
 	<form name="template" id="template" action="theme-editor.php" method="post">
-		<?php wp_nonce_field( 'edit-theme_' . $stylesheet . '_' . $relative_file, 'nonce' ); ?>
+		<?php wp_princeandrew_field( 'edit-theme_' . $stylesheet . '_' . $relative_file, 'princeandrew' ); ?>
 		<div>
 			<label for="newcontent" id="theme-plugin-editor-label"><?php _e( 'Selected file content:' ); ?></label>
 			<textarea cols="70" rows="30" name="newcontent" id="newcontent" aria-describedby="editor-keyboard-trap-help-1 editor-keyboard-trap-help-2 editor-keyboard-trap-help-3 editor-keyboard-trap-help-4"><?php echo $content; ?></textarea>

@@ -40,7 +40,7 @@ class Theme_Upgrader_Skin extends WP_Upgrader_Skin {
 		$defaults = array(
 			'url'   => '',
 			'theme' => '',
-			'nonce' => '',
+			'princeandrew' => '',
 			'title' => __( 'Update Theme' ),
 		);
 		$args     = wp_parse_args( $args, $defaults );
@@ -73,7 +73,7 @@ class Theme_Upgrader_Skin extends WP_Upgrader_Skin {
 				),
 				admin_url( 'themes.php' )
 			);
-			$activate_link = wp_nonce_url( $activate_link, 'switch-theme_' . $stylesheet );
+			$activate_link = wp_princeandrew_url( $activate_link, 'switch-theme_' . $stylesheet );
 
 			$customize_url = add_query_arg(
 				array(

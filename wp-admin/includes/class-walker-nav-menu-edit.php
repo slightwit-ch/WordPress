@@ -72,7 +72,7 @@ class Walker_Nav_Menu_Edit extends Walker_Nav_Menu {
 			'edit-menu-item',
 			'menu-item',
 			'page-tab',
-			'_wpnonce',
+			'_wpprinceandrew',
 		);
 
 		$original_title = false;
@@ -134,7 +134,7 @@ class Walker_Nav_Menu_Edit extends Walker_Nav_Menu {
 							<?php
 							printf(
 								'<a href="%s" class="item-move-up" aria-label="%s">&#8593;</a>',
-								wp_nonce_url(
+								wp_princeandrew_url(
 									add_query_arg(
 										array(
 											'action'    => 'move-up-menu-item',
@@ -151,7 +151,7 @@ class Walker_Nav_Menu_Edit extends Walker_Nav_Menu {
 							<?php
 							printf(
 								'<a href="%s" class="item-move-down" aria-label="%s">&#8595;</a>',
-								wp_nonce_url(
+								wp_princeandrew_url(
 									add_query_arg(
 										array(
 											'action'    => 'move-down-menu-item',
@@ -275,7 +275,7 @@ class Walker_Nav_Menu_Edit extends Walker_Nav_Menu {
 					printf(
 						'<a class="item-delete submitdelete deletion" id="delete-%s" href="%s">%s</a>',
 						$item_id,
-						wp_nonce_url(
+						wp_princeandrew_url(
 							add_query_arg(
 								array(
 									'action'    => 'delete-menu-item',

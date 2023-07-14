@@ -31,7 +31,7 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 			'type'      => 'web',
 			'url'       => '',
 			'theme'     => '',
-			'nonce'     => '',
+			'princeandrew'     => '',
 			'title'     => '',
 			'overwrite' => '',
 		);
@@ -111,7 +111,7 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 			),
 			admin_url( 'themes.php' )
 		);
-		$activate_link = wp_nonce_url( $activate_link, 'switch-theme_' . $stylesheet );
+		$activate_link = wp_princeandrew_url( $activate_link, 'switch-theme_' . $stylesheet );
 
 		$install_actions = array();
 
@@ -146,7 +146,7 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 		if ( is_network_admin() && current_user_can( 'manage_network_themes' ) ) {
 			$install_actions['network_enable'] = sprintf(
 				'<a href="%s" target="_parent">%s</a>',
-				esc_url( wp_nonce_url( 'themes.php?action=enable&amp;theme=' . urlencode( $stylesheet ), 'enable-theme_' . $stylesheet ) ),
+				esc_url( wp_princeandrew_url( 'themes.php?action=enable&amp;theme=' . urlencode( $stylesheet ), 'enable-theme_' . $stylesheet ) ),
 				__( 'Network Enable' )
 			);
 		}
@@ -344,7 +344,7 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 
 			$install_actions['overwrite_theme'] = sprintf(
 				'<a class="button button-primary update-from-upload-overwrite" href="%s" target="_parent">%s</a>',
-				wp_nonce_url( add_query_arg( 'overwrite', $overwrite, $this->url ), 'theme-upload' ),
+				wp_princeandrew_url( add_query_arg( 'overwrite', $overwrite, $this->url ), 'theme-upload' ),
 				_x( 'Replace active with uploaded', 'theme' )
 			);
 		} else {
@@ -355,7 +355,7 @@ class Theme_Installer_Skin extends WP_Upgrader_Skin {
 
 		$install_actions['themes_page'] = sprintf(
 			'<a class="button" href="%s" target="_parent">%s</a>',
-			wp_nonce_url( $cancel_url, 'theme-upload-cancel-overwrite' ),
+			wp_princeandrew_url( $cancel_url, 'theme-upload-cancel-overwrite' ),
 			__( 'Cancel and go back' )
 		);
 

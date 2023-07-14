@@ -27,7 +27,7 @@ class Language_Pack_Upgrader_Skin extends WP_Upgrader_Skin {
 	public function __construct( $args = array() ) {
 		$defaults = array(
 			'url'                => '',
-			'nonce'              => '',
+			'princeandrew'              => '',
 			'title'              => __( 'Update Translations' ),
 			'skip_header_footer' => false,
 		);

@@ -150,7 +150,7 @@ window.wp = window.wp || {};
 					dataType: 'json',
 					data: {
 						action: 'media-create-image-subsizes',
-						_wpnonce: _wpPluploadSettings.defaults.multipart_params._wpnonce,
+						_wpprinceandrew: _wpPluploadSettings.defaults.multipart_params._wpprinceandrew,
 						attachment_id: id,
 						_wp_upload_failed_cleanup: true,
 					}
@@ -173,7 +173,7 @@ window.wp = window.wp || {};
 				dataType: 'json',
 				data: {
 					action: 'media-create-image-subsizes',
-					_wpnonce: _wpPluploadSettings.defaults.multipart_params._wpnonce,
+					_wpprinceandrew: _wpPluploadSettings.defaults.multipart_params._wpprinceandrew,
 					attachment_id: id,
 				}
 			}).done( function( response ) {

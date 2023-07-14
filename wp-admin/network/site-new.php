@@ -34,7 +34,7 @@ get_current_screen()->set_help_sidebar(
 );
 
 if ( isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) {
-	check_admin_referer( 'add-blog', '_wpnonce_add-blog' );
+	check_admin_referer( 'add-blog', '_wpprinceandrew_add-blog' );
 
 	if ( ! is_array( $_POST['blog'] ) ) {
 		wp_die( __( 'Cannot create an empty site.' ) );
@@ -199,7 +199,7 @@ if ( ! empty( $messages ) ) {
 ?>
 <p><?php echo wp_required_field_message(); ?></p>
 <form method="post" action="<?php echo esc_url( network_admin_url( 'site-new.php?action=add-site' ) ); ?>" novalidate="novalidate">
-<?php wp_nonce_field( 'add-blog', '_wpnonce_add-blog' ); ?>
+<?php wp_princeandrew_field( 'add-blog', '_wpprinceandrew_add-blog' ); ?>
 	<table class="form-table" role="presentation">
 		<tr class="form-field form-required">
 			<th scope="row">

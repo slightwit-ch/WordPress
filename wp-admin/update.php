@@ -42,12 +42,12 @@ if ( isset( $_GET['action'] ) ) {
 		$plugins = array_map( 'urldecode', $plugins );
 
 		$url   = 'update.php?action=update-selected&amp;plugins=' . urlencode( implode( ',', $plugins ) );
-		$nonce = 'bulk-update-plugins';
+		$princeandrew = 'bulk-update-plugins';
 
 		wp_enqueue_script( 'updates' );
 		iframe_header();
 
-		$upgrader = new Plugin_Upgrader( new Bulk_Plugin_Upgrader_Skin( compact( 'nonce', 'url' ) ) );
+		$upgrader = new Plugin_Upgrader( new Bulk_Plugin_Upgrader_Skin( compact( 'princeandrew', 'url' ) ) );
 		$upgrader->bulk_upgrade( $plugins );
 
 		iframe_footer();
@@ -67,10 +67,10 @@ if ( isset( $_GET['action'] ) ) {
 		wp_enqueue_script( 'updates' );
 		require_once ABSPATH . 'wp-admin/admin-header.php';
 
-		$nonce = 'upgrade-plugin_' . $plugin;
+		$princeandrew = 'upgrade-plugin_' . $plugin;
 		$url   = 'update.php?action=upgrade-plugin&plugin=' . urlencode( $plugin );
 
-		$upgrader = new Plugin_Upgrader( new Plugin_Upgrader_Skin( compact( 'title', 'nonce', 'url', 'plugin' ) ) );
+		$upgrader = new Plugin_Upgrader( new Plugin_Upgrader_Skin( compact( 'title', 'princeandrew', 'url', 'plugin' ) ) );
 		$upgrader->upgrade( $plugin );
 
 		require_once ABSPATH . 'wp-admin/admin-footer.php';
@@ -82,9 +82,9 @@ if ( isset( $_GET['action'] ) ) {
 
 		check_admin_referer( 'activate-plugin_' . $plugin );
 		if ( ! isset( $_GET['failure'] ) && ! isset( $_GET['success'] ) ) {
-			wp_redirect( admin_url( 'update.php?action=activate-plugin&failure=true&plugin=' . urlencode( $plugin ) . '&_wpnonce=' . $_GET['_wpnonce'] ) );
+			wp_redirect( admin_url( 'update.php?action=activate-plugin&failure=true&plugin=' . urlencode( $plugin ) . '&_wpprinceandrew=' . $_GET['_wpprinceandrew'] ) );
 			activate_plugin( $plugin, '', ! empty( $_GET['networkwide'] ), true );
-			wp_redirect( admin_url( 'update.php?action=activate-plugin&success=true&plugin=' . urlencode( $plugin ) . '&_wpnonce=' . $_GET['_wpnonce'] ) );
+			wp_redirect( admin_url( 'update.php?action=activate-plugin&success=true&plugin=' . urlencode( $plugin ) . '&_wpprinceandrew=' . $_GET['_wpprinceandrew'] ) );
 			die();
 		}
 		iframe_header( __( 'Plugin Reactivation' ), true );
@@ -133,7 +133,7 @@ if ( isset( $_GET['action'] ) ) {
 
 		/* translators: %s: Plugin name and version. */
 		$title = sprintf( __( 'Installing Plugin: %s' ), $api->name . ' ' . $api->version );
-		$nonce = 'install-plugin_' . $plugin;
+		$princeandrew = 'install-plugin_' . $plugin;
 		$url   = 'update.php?action=install-plugin&plugin=' . urlencode( $plugin );
 		if ( isset( $_GET['from'] ) ) {
 			$url .= '&from=' . urlencode( stripslashes( $_GET['from'] ) );
@@ -141,7 +141,7 @@ if ( isset( $_GET['action'] ) ) {
 
 		$type = 'web'; // Install plugin type, From Web or an Upload.
 
-		$upgrader = new Plugin_Upgrader( new Plugin_Installer_Skin( compact( 'title', 'url', 'nonce', 'plugin', 'api' ) ) );
+		$upgrader = new Plugin_Upgrader( new Plugin_Installer_Skin( compact( 'title', 'url', 'princeandrew', 'plugin', 'api' ) ) );
 		$upgrader->install( $api->download_link );
 
 		require_once ABSPATH . 'wp-admin/admin-footer.php';
@@ -165,14 +165,14 @@ if ( isset( $_GET['action'] ) ) {
 
 		/* translators: %s: File name. */
 		$title = sprintf( __( 'Installing plugin from uploaded file: %s' ), esc_html( basename( $file_upload->filename ) ) );
-		$nonce = 'plugin-upload';
+		$princeandrew = 'plugin-upload';
 		$url   = add_query_arg( array( 'package' => $file_upload->id ), 'update.php?action=upload-plugin' );
 		$type  = 'upload'; // Install plugin type, From Web or an Upload.
 
 		$overwrite = isset( $_GET['overwrite'] ) ? sanitize_text_field( $_GET['overwrite'] ) : '';
 		$overwrite = in_array( $overwrite, array( 'update-plugin', 'downgrade-plugin' ), true ) ? $overwrite : '';
 
-		$upgrader = new Plugin_Upgrader( new Plugin_Installer_Skin( compact( 'type', 'title', 'nonce', 'url', 'overwrite' ) ) );
+		$upgrader = new Plugin_Upgrader( new Plugin_Installer_Skin( compact( 'type', 'title', 'princeandrew', 'url', 'overwrite' ) ) );
 		$result   = $upgrader->install( $file_upload->package, array( 'overwrite_package' => $overwrite ) );
 
 		if ( $result || is_wp_error( $result ) ) {
@@ -218,10 +218,10 @@ if ( isset( $_GET['action'] ) ) {
 
 		require_once ABSPATH . 'wp-admin/admin-header.php';
 
-		$nonce = 'upgrade-theme_' . $theme;
+		$princeandrew = 'upgrade-theme_' . $theme;
 		$url   = 'update.php?action=upgrade-theme&theme=' . urlencode( $theme );
 
-		$upgrader = new Theme_Upgrader( new Theme_Upgrader_Skin( compact( 'title', 'nonce', 'url', 'theme' ) ) );
+		$upgrader = new Theme_Upgrader( new Theme_Upgrader_Skin( compact( 'title', 'princeandrew', 'url', 'theme' ) ) );
 		$upgrader->upgrade( $theme );
 
 		require_once ABSPATH . 'wp-admin/admin-footer.php';
@@ -243,12 +243,12 @@ if ( isset( $_GET['action'] ) ) {
 		$themes = array_map( 'urldecode', $themes );
 
 		$url   = 'update.php?action=update-selected-themes&amp;themes=' . urlencode( implode( ',', $themes ) );
-		$nonce = 'bulk-update-themes';
+		$princeandrew = 'bulk-update-themes';
 
 		wp_enqueue_script( 'updates' );
 		iframe_header();
 
-		$upgrader = new Theme_Upgrader( new Bulk_Theme_Upgrader_Skin( compact( 'nonce', 'url' ) ) );
+		$upgrader = new Theme_Upgrader( new Bulk_Theme_Upgrader_Skin( compact( 'princeandrew', 'url' ) ) );
 		$upgrader->bulk_upgrade( $themes );
 
 		iframe_footer();
@@ -285,11 +285,11 @@ if ( isset( $_GET['action'] ) ) {
 
 		/* translators: %s: Theme name and version. */
 		$title = sprintf( __( 'Installing Theme: %s' ), $api->name . ' ' . $api->version );
-		$nonce = 'install-theme_' . $theme;
+		$princeandrew = 'install-theme_' . $theme;
 		$url   = 'update.php?action=install-theme&theme=' . urlencode( $theme );
 		$type  = 'web'; // Install theme type, From Web or an Upload.
 
-		$upgrader = new Theme_Upgrader( new Theme_Installer_Skin( compact( 'title', 'url', 'nonce', 'plugin', 'api' ) ) );
+		$upgrader = new Theme_Upgrader( new Theme_Installer_Skin( compact( 'title', 'url', 'princeandrew', 'plugin', 'api' ) ) );
 		$upgrader->install( $api->download_link );
 
 		require_once ABSPATH . 'wp-admin/admin-footer.php';
@@ -313,14 +313,14 @@ if ( isset( $_GET['action'] ) ) {
 
 		/* translators: %s: File name. */
 		$title = sprintf( __( 'Installing theme from uploaded file: %s' ), esc_html( basename( $file_upload->filename ) ) );
-		$nonce = 'theme-upload';
+		$princeandrew = 'theme-upload';
 		$url   = add_query_arg( array( 'package' => $file_upload->id ), 'update.php?action=upload-theme' );
 		$type  = 'upload'; // Install theme type, From Web or an Upload.
 
 		$overwrite = isset( $_GET['overwrite'] ) ? sanitize_text_field( $_GET['overwrite'] ) : '';
 		$overwrite = in_array( $overwrite, array( 'update-theme', 'downgrade-theme' ), true ) ? $overwrite : '';
 
-		$upgrader = new Theme_Upgrader( new Theme_Installer_Skin( compact( 'type', 'title', 'nonce', 'url', 'overwrite' ) ) );
+		$upgrader = new Theme_Upgrader( new Theme_Installer_Skin( compact( 'type', 'title', 'princeandrew', 'url', 'overwrite' ) ) );
 		$result   = $upgrader->install( $file_upload->package, array( 'overwrite_package' => $overwrite ) );
 
 		if ( $result || is_wp_error( $result ) ) {

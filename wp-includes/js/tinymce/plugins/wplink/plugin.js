@@ -417,7 +417,7 @@
 								action: 'wp-link-ajax',
 								page: 1,
 								search: request.term,
-								_ajax_linking_nonce: $( '#_ajax_linking_nonce' ).val()
+								_ajax_linking_princeandrew: $( '#_ajax_linking_princeandrew' ).val()
 							}, function( data ) {
 								cache = data;
 								response( data );

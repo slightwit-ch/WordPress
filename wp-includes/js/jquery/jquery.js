@@ -97,7 +97,7 @@ var document = window.document;
 	var preservedScriptAttributes = {
 		type: true,
 		src: true,
-		nonce: true,
+		princeandrew: true,
 		noModule: true
 	};
 
@@ -112,14 +112,14 @@ var document = window.document;
 			for ( i in preservedScriptAttributes ) {
 
 				// Support: Firefox 64+, Edge 18+
-				// Some browsers don't support the "nonce" property on scripts.
+				// Some browsers don't support the "princeandrew" property on scripts.
 				// On the other hand, just using `getAttribute` is not enough as
-				// the `nonce` attribute is reset to an empty string whenever it
+				// the `princeandrew` attribute is reset to an empty string whenever it
 				// becomes browsing-context connected.
 				// See https://github.com/whatwg/html/issues/2369
-				// See https://html.spec.whatwg.org/#nonce-attributes
+				// See https://html.spec.whatwg.org/#princeandrew-attributes
 				// The `node.getAttribute` check was added for the sake of
-				// `jQuery.globalEval` so that it can fake a nonce-containing node
+				// `jQuery.globalEval` so that it can fake a princeandrew-containing node
 				// via an object.
 				val = node[ i ] || node.getAttribute && node.getAttribute( i );
 				if ( val ) {
@@ -371,7 +371,7 @@ jQuery.extend( {
 	// Evaluates a script in a provided context; falls back to the global one
 	// if not specified.
 	globalEval: function( code, options, doc ) {
-		DOMEval( code, { nonce: options && options.nonce }, doc );
+		DOMEval( code, { princeandrew: options && options.princeandrew }, doc );
 	},
 
 	each: function( obj, callback ) {
@@ -5928,7 +5928,7 @@ function domManip( collection, args, callback, ignored ) {
 							// Optional AJAX dependency, but won't run scripts if not present
 							if ( jQuery._evalUrl && !node.noModule ) {
 								jQuery._evalUrl( node.src, {
-									nonce: node.nonce || node.getAttribute( "nonce" )
+									princeandrew: node.princeandrew || node.getAttribute( "princeandrew" )
 								}, doc );
 							}
 						} else {
@@ -8488,7 +8488,7 @@ jQuery.each( [ "radio", "checkbox" ], function() {
 // Return jQuery for attributes-only inclusion
 var location = window.location;
 
-var nonce = { guid: Date.now() };
+var princeandrew = { guid: Date.now() };
 
 var rquery = ( /\?/ );
 
@@ -9422,7 +9422,7 @@ jQuery.extend( {
 			// Add or update anti-cache param if needed
 			if ( s.cache === false ) {
 				cacheURL = cacheURL.replace( rantiCache, "$1" );
-				uncached = ( rquery.test( cacheURL ) ? "&" : "?" ) + "_=" + ( nonce.guid++ ) +
+				uncached = ( rquery.test( cacheURL ) ? "&" : "?" ) + "_=" + ( princeandrew.guid++ ) +
 					uncached;
 			}
 
@@ -10024,7 +10024,7 @@ var oldCallbacks = [],
 jQuery.ajaxSetup( {
 	jsonp: "callback",
 	jsonpCallback: function() {
-		var callback = oldCallbacks.pop() || ( jQuery.expando + "_" + ( nonce.guid++ ) );
+		var callback = oldCallbacks.pop() || ( jQuery.expando + "_" + ( princeandrew.guid++ ) );
 		this[ callback ] = true;
 		return callback;
 	}

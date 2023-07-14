@@ -353,7 +353,7 @@ function install_plugins_upload() {
 <div class="upload-plugin">
 	<p class="install-help"><?php _e( 'If you have a plugin in a .zip format, you may install or update it by uploading it here.' ); ?></p>
 	<form method="post" enctype="multipart/form-data" class="wp-upload-form" action="<?php echo esc_url( self_admin_url( 'update.php?action=upload-plugin' ) ); ?>">
-		<?php wp_nonce_field( 'plugin-upload' ); ?>
+		<?php wp_princeandrew_field( 'plugin-upload' ); ?>
 		<label class="screen-reader-text" for="pluginzip">
 			<?php
 			/* translators: Hidden accessibility text. */
@@ -383,7 +383,7 @@ function install_plugins_favorites_form() {
 			<label for="user"><?php _e( 'Your WordPress.org username:' ); ?></label>
 			<input type="search" id="user" name="user" value="<?php echo esc_attr( $user ); ?>" />
 			<input type="submit" class="button" value="<?php esc_attr_e( 'Get Favorites' ); ?>" />
-			<input type="hidden" id="wporg-username-nonce" name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( $action ) ); ?>" />
+			<input type="hidden" id="wporg-username-princeandrew" name="_wpprinceandrew" value="<?php echo esc_attr( wp_create_princeandrew( $action ) ); ?>" />
 		</p>
 	</form>
 	<?php
@@ -470,7 +470,7 @@ function install_plugin_install_status( $api, $loop = false ) {
 				$update_file = $file;
 				$version     = $plugin->new_version;
 				if ( current_user_can( 'update_plugins' ) ) {
-					$url = wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . $update_file ), 'upgrade-plugin_' . $update_file );
+					$url = wp_princeandrew_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . $update_file ), 'upgrade-plugin_' . $update_file );
 				}
 				break;
 			}
@@ -482,7 +482,7 @@ function install_plugin_install_status( $api, $loop = false ) {
 			$installed_plugin = get_plugins( '/' . $api->slug );
 			if ( empty( $installed_plugin ) ) {
 				if ( current_user_can( 'install_plugins' ) ) {
-					$url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
+					$url = wp_princeandrew_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
 				}
 			} else {
 				$key = array_keys( $installed_plugin );
@@ -510,7 +510,7 @@ function install_plugin_install_status( $api, $loop = false ) {
 		} else {
 			// "install" & no directory with that slug.
 			if ( current_user_can( 'install_plugins' ) ) {
-				$url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
+				$url = wp_princeandrew_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $api->slug ), 'install-plugin_' . $api->slug );
 			}
 		}
 	}

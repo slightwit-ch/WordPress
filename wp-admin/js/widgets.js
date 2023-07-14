@@ -491,7 +491,7 @@ window.wpWidgets = {
 	saveOrder : function( sidebarId ) {
 		var data = {
 			action: 'widgets-order',
-			savewidgets: $('#_wpnonce_widgets').val(),
+			savewidgets: $('#_wpprinceandrew_widgets').val(),
 			sidebars: []
 		};
 
@@ -528,7 +528,7 @@ window.wpWidgets = {
 
 		a = {
 			action: 'save-widget',
-			savewidgets: $('#_wpnonce_widgets').val(),
+			savewidgets: $('#_wpprinceandrew_widgets').val(),
 			sidebar: sidebarId
 		};
 
@@ -600,7 +600,7 @@ window.wpWidgets = {
 
 		a = {
 			action : 'delete-inactive-widgets',
-			removeinactivewidgets : $( '#_wpnonce_remove_inactive_widgets' ).val()
+			removeinactivewidgets : $( '#_wpprinceandrew_remove_inactive_widgets' ).val()
 		};
 
 		data = $.param( a );

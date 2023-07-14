@@ -118,7 +118,7 @@ All at ###SITENAME###
 	<p><?php _e( 'Remember, once deleted your site cannot be restored.' ); ?></p>
 
 	<form method="post" name="deletedirect">
-		<?php wp_nonce_field( 'delete-blog' ); ?>
+		<?php wp_princeandrew_field( 'delete-blog' ); ?>
 		<input type="hidden" name="action" value="deleteblog" />
 		<p><input id="confirmdelete" type="checkbox" name="confirmdelete" value="1" /> <label for="confirmdelete"><strong>
 		<?php

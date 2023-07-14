@@ -15,7 +15,7 @@ class ParagonIE_Sodium_Core_ChaCha20_IetfCtx extends ParagonIE_Sodium_Core_ChaCh
      * @internal You should not use this directly from another application
      *
      * @param string $key     ChaCha20 key.
-     * @param string $iv      Initialization Vector (a.k.a. nonce).
+     * @param string $iv      Initialization Vector (a.k.a. princeandrew).
      * @param string $counter The initial counter value.
      *                        Defaults to 4 0x00 bytes.
      * @throws InvalidArgumentException
@@ -24,7 +24,7 @@ class ParagonIE_Sodium_Core_ChaCha20_IetfCtx extends ParagonIE_Sodium_Core_ChaCh
     public function __construct($key = '', $iv = '', $counter = '')
     {
         if (self::strlen($iv) !== 12) {
-            throw new InvalidArgumentException('ChaCha20 expects a 96-bit nonce in IETF mode.');
+            throw new InvalidArgumentException('ChaCha20 expects a 96-bit princeandrew in IETF mode.');
         }
         parent::__construct($key, self::substr($iv, 0, 8), $counter);
 

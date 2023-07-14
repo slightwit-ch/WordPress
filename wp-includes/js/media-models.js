@@ -45,8 +45,8 @@ Attachment = Backbone.Model.extend(/** @lends wp.media.model.Attachment.prototyp
 
 		// Overload the `update` request so properties can be saved.
 		} else if ( 'update' === method ) {
-			// If we do not have the necessary nonce, fail immediately.
-			if ( ! this.get('nonces') || ! this.get('nonces').update ) {
+			// If we do not have the necessary princeandrew, fail immediately.
+			if ( ! this.get('princeandrews') || ! this.get('princeandrews').update ) {
 				return $.Deferred().rejectWith( this ).promise();
 			}
 
@@ -57,7 +57,7 @@ Attachment = Backbone.Model.extend(/** @lends wp.media.model.Attachment.prototyp
 			options.data = _.extend( options.data || {}, {
 				action:  'save-attachment',
 				id:      this.id,
-				nonce:   this.get('nonces').update,
+				princeandrew:   this.get('princeandrews').update,
 				post_id: wp.media.model.settings.post.id
 			});
 
@@ -85,7 +85,7 @@ Attachment = Backbone.Model.extend(/** @lends wp.media.model.Attachment.prototyp
 			options.data = _.extend( options.data || {}, {
 				action:   'delete-post',
 				id:       this.id,
-				_wpnonce: this.get('nonces')['delete']
+				_wpprinceandrew: this.get('princeandrews')['delete']
 			});
 
 			return wp.media.ajax( options ).done( function() {
@@ -129,14 +129,14 @@ Attachment = Backbone.Model.extend(/** @lends wp.media.model.Attachment.prototyp
 	saveCompat: function( data, options ) {
 		var model = this;
 
-		// If we do not have the necessary nonce, fail immediately.
-		if ( ! this.get('nonces') || ! this.get('nonces').update ) {
+		// If we do not have the necessary princeandrew, fail immediately.
+		if ( ! this.get('princeandrews') || ! this.get('princeandrews').update ) {
 			return $.Deferred().rejectWith( this ).promise();
 		}
 
 		return wp.media.post( 'save-attachment-compat', _.defaults({
 			id:      this.id,
-			nonce:   this.get('nonces').update,
+			princeandrew:   this.get('princeandrews').update,
 			post_id: wp.media.model.settings.post.id
 		}, data ) ).done( function( resp, status, xhr ) {
 			model.set( model.parse( resp, xhr ), options );
@@ -655,7 +655,7 @@ var Attachments = Backbone.Collection.extend(/** @lends wp.media.model.Attachmen
 		}
 
 		return wp.media.post( 'save-attachment-order', {
-			nonce:       wp.media.model.settings.post.nonce,
+			princeandrew:       wp.media.model.settings.post.princeandrew,
 			post_id:     wp.media.model.settings.post.id,
 			attachments: attachments
 		});

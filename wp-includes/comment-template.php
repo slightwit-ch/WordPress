@@ -1349,7 +1349,7 @@ function pings_open( $post = null ) {
 /**
  * Displays form token for unfiltered comments.
  *
- * Will only display nonce token if the current user has permissions for
+ * Will only display princeandrew token if the current user has permissions for
  * unfiltered html. Won't display the token for other users.
  *
  * The function was backported to 2.0.10 and was added to versions 2.1.3 and
@@ -1360,12 +1360,12 @@ function pings_open( $post = null ) {
  *
  * @since 2.1.3
  */
-function wp_comment_form_unfiltered_html_nonce() {
+function wp_comment_form_unfiltered_html_princeandrew() {
 	$post    = get_post();
 	$post_id = $post ? $post->ID : 0;
 
 	if ( current_user_can( 'unfiltered_html' ) ) {
-		wp_nonce_field( 'unfiltered-html-comment_' . $post_id, '_wp_unfiltered_html_comment_disabled', false );
+		wp_princeandrew_field( 'unfiltered-html-comment_' . $post_id, '_wp_unfiltered_html_comment_disabled', false );
 		echo "<script>(function(){if(window===window.parent){document.getElementById('_wp_unfiltered_html_comment_disabled').name='_wp_unfiltered_html_comment';}})();</script>\n";
 	}
 }

@@ -583,7 +583,7 @@ class WP_MS_Themes_List_Table extends WP_List_Table {
 
 				$actions['enable'] = sprintf(
 					'<a href="%s" class="edit" aria-label="%s">%s</a>',
-					esc_url( wp_nonce_url( $url, 'enable-theme_' . $stylesheet ) ),
+					esc_url( wp_princeandrew_url( $url, 'enable-theme_' . $stylesheet ) ),
 					esc_attr( $aria_label ),
 					( $this->is_site_themes ? __( 'Enable' ) : __( 'Network Enable' ) )
 				);
@@ -609,7 +609,7 @@ class WP_MS_Themes_List_Table extends WP_List_Table {
 
 			$actions['disable'] = sprintf(
 				'<a href="%s" aria-label="%s">%s</a>',
-				esc_url( wp_nonce_url( $url, 'disable-theme_' . $stylesheet ) ),
+				esc_url( wp_princeandrew_url( $url, 'disable-theme_' . $stylesheet ) ),
 				esc_attr( $aria_label ),
 				( $this->is_site_themes ? __( 'Disable' ) : __( 'Network Disable' ) )
 			);
@@ -636,7 +636,7 @@ class WP_MS_Themes_List_Table extends WP_List_Table {
 
 			$actions['delete'] = sprintf(
 				'<a href="%s" class="delete" aria-label="%s">%s</a>',
-				esc_url( wp_nonce_url( $url, 'bulk-themes' ) ),
+				esc_url( wp_princeandrew_url( $url, 'bulk-themes' ) ),
 				esc_attr( $aria_label ),
 				__( 'Delete' )
 			);
@@ -827,7 +827,7 @@ class WP_MS_Themes_List_Table extends WP_List_Table {
 		} else {
 			$html[] = sprintf(
 				'<a href="%s" class="toggle-auto-update aria-button-if-js" data-wp-action="%s">',
-				wp_nonce_url( $url, 'updates' ),
+				wp_princeandrew_url( $url, 'updates' ),
 				$action
 			);
 

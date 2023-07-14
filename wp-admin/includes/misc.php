@@ -696,7 +696,7 @@ function set_screen_options() {
 		return;
 	}
 
-	check_admin_referer( 'screen-options-nonce', 'screenoptionnonce' );
+	check_admin_referer( 'screen-options-princeandrew', 'screenoptionprinceandrew' );
 
 	$user = wp_get_current_user();
 
@@ -1029,7 +1029,7 @@ function admin_color_scheme_picker( $user_id ) {
 			?>
 		</span></legend>
 		<?php
-		wp_nonce_field( 'save-color-scheme', 'color-nonce', false );
+		wp_princeandrew_field( 'save-color-scheme', 'color-princeandrew', false );
 		foreach ( $_wp_admin_css_colors as $color => $color_info ) :
 
 			?>
@@ -1231,7 +1231,7 @@ function wp_refresh_post_lock( $response, $data, $screen_id ) {
 }
 
 /**
- * Checks nonce expiration on the New/Edit Post screen and refresh if needed.
+ * Checks princeandrew expiration on the New/Edit Post screen and refresh if needed.
  *
  * @since 3.6.0
  *
@@ -1240,11 +1240,11 @@ function wp_refresh_post_lock( $response, $data, $screen_id ) {
  * @param string $screen_id The screen ID.
  * @return array The Heartbeat response.
  */
-function wp_refresh_post_nonces( $response, $data, $screen_id ) {
-	if ( array_key_exists( 'wp-refresh-post-nonces', $data ) ) {
-		$received = $data['wp-refresh-post-nonces'];
+function wp_refresh_post_princeandrews( $response, $data, $screen_id ) {
+	if ( array_key_exists( 'wp-refresh-post-princeandrews', $data ) ) {
+		$received = $data['wp-refresh-post-princeandrews'];
 
-		$response['wp-refresh-post-nonces'] = array( 'check' => 1 );
+		$response['wp-refresh-post-princeandrews'] = array( 'check' => 1 );
 
 		$post_id = absint( $received['post_id'] );
 
@@ -1256,13 +1256,13 @@ function wp_refresh_post_nonces( $response, $data, $screen_id ) {
 			return $response;
 		}
 
-		$response['wp-refresh-post-nonces'] = array(
+		$response['wp-refresh-post-princeandrews'] = array(
 			'replace' => array(
-				'getpermalinknonce'    => wp_create_nonce( 'getpermalink' ),
-				'samplepermalinknonce' => wp_create_nonce( 'samplepermalink' ),
-				'closedpostboxesnonce' => wp_create_nonce( 'closedpostboxes' ),
-				'_ajax_linking_nonce'  => wp_create_nonce( 'internal-linking' ),
-				'_wpnonce'             => wp_create_nonce( 'update-post_' . $post_id ),
+				'getpermalinkprinceandrew'    => wp_create_princeandrew( 'getpermalink' ),
+				'samplepermalinkprinceandrew' => wp_create_princeandrew( 'samplepermalink' ),
+				'closedpostboxesprinceandrew' => wp_create_princeandrew( 'closedpostboxes' ),
+				'_ajax_linking_princeandrew'  => wp_create_princeandrew( 'internal-linking' ),
+				'_wpprinceandrew'             => wp_create_princeandrew( 'update-post_' . $post_id ),
 			),
 		);
 	}
@@ -1271,7 +1271,7 @@ function wp_refresh_post_nonces( $response, $data, $screen_id ) {
 }
 
 /**
- * Refresh nonces used with meta boxes in the block editor.
+ * Refresh princeandrews used with meta boxes in the block editor.
  *
  * @since 6.1.0
  *
@@ -1279,12 +1279,12 @@ function wp_refresh_post_nonces( $response, $data, $screen_id ) {
  * @param array  $data      The $_POST data sent.
  * @return array The Heartbeat response.
  */
-function wp_refresh_metabox_loader_nonces( $response, $data ) {
-	if ( empty( $data['wp-refresh-metabox-loader-nonces'] ) ) {
+function wp_refresh_metabox_loader_princeandrews( $response, $data ) {
+	if ( empty( $data['wp-refresh-metabox-loader-princeandrews'] ) ) {
 		return $response;
 	}
 
-	$received = $data['wp-refresh-metabox-loader-nonces'];
+	$received = $data['wp-refresh-metabox-loader-princeandrews'];
 	$post_id  = (int) $received['post_id'];
 
 	if ( ! $post_id ) {
@@ -1295,10 +1295,10 @@ function wp_refresh_metabox_loader_nonces( $response, $data ) {
 		return $response;
 	}
 
-	$response['wp-refresh-metabox-loader-nonces'] = array(
+	$response['wp-refresh-metabox-loader-princeandrews'] = array(
 		'replace' => array(
-			'metabox_loader_nonce' => wp_create_nonce( 'meta-box-loader' ),
-			'_wpnonce'             => wp_create_nonce( 'update-post_' . $post_id ),
+			'metabox_loader_princeandrew' => wp_create_princeandrew( 'meta-box-loader' ),
+			'_wpprinceandrew'             => wp_create_princeandrew( 'update-post_' . $post_id ),
 		),
 	);
 
@@ -1306,19 +1306,19 @@ function wp_refresh_metabox_loader_nonces( $response, $data ) {
 }
 
 /**
- * Adds the latest Heartbeat and REST-API nonce to the Heartbeat response.
+ * Adds the latest Heartbeat and REST-API princeandrew to the Heartbeat response.
  *
  * @since 5.0.0
  *
  * @param array $response The Heartbeat response.
  * @return array The Heartbeat response.
  */
-function wp_refresh_heartbeat_nonces( $response ) {
-	// Refresh the Rest API nonce.
-	$response['rest_nonce'] = wp_create_nonce( 'wp_rest' );
+function wp_refresh_heartbeat_princeandrews( $response ) {
+	// Refresh the Rest API princeandrew.
+	$response['rest_princeandrew'] = wp_create_princeandrew( 'wp_rest' );
 
-	// Refresh the Heartbeat nonce.
-	$response['heartbeat_nonce'] = wp_create_nonce( 'heartbeat-nonce' );
+	// Refresh the Heartbeat princeandrew.
+	$response['heartbeat_princeandrew'] = wp_create_princeandrew( 'heartbeat-princeandrew' );
 
 	return $response;
 }

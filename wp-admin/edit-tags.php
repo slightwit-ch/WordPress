@@ -74,11 +74,11 @@ $referer  = wp_get_referer();
 if ( ! $referer ) { // For POST requests.
 	$referer = wp_unslash( $_SERVER['REQUEST_URI'] );
 }
-$referer = remove_query_arg( array( '_wp_http_referer', '_wpnonce', 'error', 'message', 'paged' ), $referer );
+$referer = remove_query_arg( array( '_wp_http_referer', '_wpprinceandrew', 'error', 'message', 'paged' ), $referer );
 switch ( $wp_list_table->current_action() ) {
 
 	case 'add-tag':
-		check_admin_referer( 'add-tag', '_wpnonce_add-tag' );
+		check_admin_referer( 'add-tag', '_wpprinceandrew_add-tag' );
 
 		if ( ! current_user_can( $tax->cap->edit_terms ) ) {
 			wp_die(
@@ -209,7 +209,7 @@ switch ( $wp_list_table->current_action() ) {
 }
 
 if ( ! $location && ! empty( $_REQUEST['_wp_http_referer'] ) ) {
-	$location = remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), wp_unslash( $_SERVER['REQUEST_URI'] ) );
+	$location = remove_query_arg( array( '_wp_http_referer', '_wpprinceandrew' ), wp_unslash( $_SERVER['REQUEST_URI'] ) );
 }
 
 if ( $location ) {
@@ -447,7 +447,7 @@ if ( $can_edit_terms ) {
 <input type="hidden" name="screen" value="<?php echo esc_attr( $current_screen->id ); ?>" />
 <input type="hidden" name="taxonomy" value="<?php echo esc_attr( $taxonomy ); ?>" />
 <input type="hidden" name="post_type" value="<?php echo esc_attr( $post_type ); ?>" />
-	<?php wp_nonce_field( 'add-tag', '_wpnonce_add-tag' ); ?>
+	<?php wp_princeandrew_field( 'add-tag', '_wpprinceandrew_add-tag' ); ?>
 
 <div class="form-field form-required term-name-wrap">
 	<label for="tag-name"><?php _ex( 'Name', 'term name' ); ?></label>

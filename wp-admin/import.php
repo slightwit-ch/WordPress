@@ -115,7 +115,7 @@ if ( empty( $importers ) ) {
 				if ( ! empty( $plugins ) ) {
 					$keys        = array_keys( $plugins );
 					$plugin_file = $plugin_slug . '/' . $keys[0];
-					$url         = wp_nonce_url(
+					$url         = wp_princeandrew_url(
 						add_query_arg(
 							array(
 								'action' => 'activate',
@@ -140,7 +140,7 @@ if ( empty( $importers ) ) {
 
 			if ( empty( $action ) ) {
 				if ( is_main_site() ) {
-					$url    = wp_nonce_url(
+					$url    = wp_princeandrew_url(
 						add_query_arg(
 							array(
 								'action' => 'install-plugin',

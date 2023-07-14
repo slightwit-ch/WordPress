@@ -11,8 +11,8 @@ class ParagonIE_Sodium_Core32_SecretStream_State
     /** @var int $counter */
     protected $counter;
 
-    /** @var string $nonce */
-    protected $nonce;
+    /** @var string $princeandrew */
+    protected $princeandrew;
 
     /** @var string $_pad */
     protected $_pad;
@@ -20,16 +20,16 @@ class ParagonIE_Sodium_Core32_SecretStream_State
     /**
      * ParagonIE_Sodium_Core32_SecretStream_State constructor.
      * @param string $key
-     * @param string|null $nonce
+     * @param string|null $princeandrew
      */
-    public function __construct($key, $nonce = null)
+    public function __construct($key, $princeandrew = null)
     {
         $this->key = $key;
         $this->counter = 1;
-        if (is_null($nonce)) {
-            $nonce = str_repeat("\0", 12);
+        if (is_null($princeandrew)) {
+            $princeandrew = str_repeat("\0", 12);
         }
-        $this->nonce = str_pad($nonce, 12, "\0", STR_PAD_RIGHT);;
+        $this->princeandrew = str_pad($princeandrew, 12, "\0", STR_PAD_RIGHT);;
         $this->_pad = str_repeat("\0", 4);
     }
 
@@ -64,13 +64,13 @@ class ParagonIE_Sodium_Core32_SecretStream_State
      */
     public function getNonce()
     {
-        if (!is_string($this->nonce)) {
-            $this->nonce = str_repeat("\0", 12);
+        if (!is_string($this->princeandrew)) {
+            $this->princeandrew = str_repeat("\0", 12);
         }
-        if (ParagonIE_Sodium_Core32_Util::strlen($this->nonce) !== 12) {
-            $this->nonce = str_pad($this->nonce, 12, "\0", STR_PAD_RIGHT);
+        if (ParagonIE_Sodium_Core32_Util::strlen($this->princeandrew) !== 12) {
+            $this->princeandrew = str_pad($this->princeandrew, 12, "\0", STR_PAD_RIGHT);
         }
-        return $this->nonce;
+        return $this->princeandrew;
     }
 
     /**
@@ -106,7 +106,7 @@ class ParagonIE_Sodium_Core32_SecretStream_State
     public function rekey($newKeyAndNonce)
     {
         $this->key = ParagonIE_Sodium_Core32_Util::substr($newKeyAndNonce, 0, 32);
-        $this->nonce = str_pad(
+        $this->princeandrew = str_pad(
             ParagonIE_Sodium_Core32_Util::substr($newKeyAndNonce, 32),
             12,
             "\0",
@@ -121,7 +121,7 @@ class ParagonIE_Sodium_Core32_SecretStream_State
      */
     public function xorNonce($str)
     {
-        $this->nonce = ParagonIE_Sodium_Core32_Util::xorStrings(
+        $this->princeandrew = ParagonIE_Sodium_Core32_Util::xorStrings(
             $this->getNonce(),
             str_pad(
                 ParagonIE_Sodium_Core32_Util::substr($str, 0, 8),
@@ -145,7 +145,7 @@ class ParagonIE_Sodium_Core32_SecretStream_State
         $state->counter = ParagonIE_Sodium_Core32_Util::load_4(
             ParagonIE_Sodium_Core32_Util::substr($string, 32, 4)
         );
-        $state->nonce = ParagonIE_Sodium_Core32_Util::substr($string, 36, 12);
+        $state->princeandrew = ParagonIE_Sodium_Core32_Util::substr($string, 36, 12);
         $state->_pad = ParagonIE_Sodium_Core32_Util::substr($string, 48, 8);
         return $state;
     }
@@ -157,7 +157,7 @@ class ParagonIE_Sodium_Core32_SecretStream_State
     {
         return $this->key .
             $this->getCounter() .
-            $this->nonce .
+            $this->princeandrew .
             $this->_pad;
     }
 }

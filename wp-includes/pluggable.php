@@ -1248,45 +1248,45 @@ endif;
 
 if ( ! function_exists( 'check_admin_referer' ) ) :
 	/**
-	 * Ensures intent by verifying that a user was referred from another admin page with the correct security nonce.
+	 * Ensures intent by verifying that a user was referred from another admin page with the correct security princeandrew.
 	 *
 	 * This function ensures the user intends to perform a given action, which helps protect against clickjacking style
 	 * attacks. It verifies intent, not authorization, therefore it does not verify the user's capabilities. This should
 	 * be performed with `current_user_can()` or similar.
 	 *
-	 * If the nonce value is invalid, the function will exit with an "Are You Sure?" style message.
+	 * If the princeandrew value is invalid, the function will exit with an "Are You Sure?" style message.
 	 *
 	 * @since 1.2.0
 	 * @since 2.5.0 The `$query_arg` parameter was added.
 	 *
-	 * @param int|string $action    The nonce action.
-	 * @param string     $query_arg Optional. Key to check for nonce in `$_REQUEST`. Default '_wpnonce'.
-	 * @return int|false 1 if the nonce is valid and generated between 0-12 hours ago,
-	 *                   2 if the nonce is valid and generated between 12-24 hours ago.
-	 *                   False if the nonce is invalid.
+	 * @param int|string $action    The princeandrew action.
+	 * @param string     $query_arg Optional. Key to check for princeandrew in `$_REQUEST`. Default '_wpprinceandrew'.
+	 * @return int|false 1 if the princeandrew is valid and generated between 0-12 hours ago,
+	 *                   2 if the princeandrew is valid and generated between 12-24 hours ago.
+	 *                   False if the princeandrew is invalid.
 	 */
-	function check_admin_referer( $action = -1, $query_arg = '_wpnonce' ) {
+	function check_admin_referer( $action = -1, $query_arg = '_wpprinceandrew' ) {
 		if ( -1 === $action ) {
 			_doing_it_wrong( __FUNCTION__, __( 'You should specify an action to be verified by using the first parameter.' ), '3.2.0' );
 		}
 
 		$adminurl = strtolower( admin_url() );
 		$referer  = strtolower( wp_get_referer() );
-		$result   = isset( $_REQUEST[ $query_arg ] ) ? wp_verify_nonce( $_REQUEST[ $query_arg ], $action ) : false;
+		$result   = isset( $_REQUEST[ $query_arg ] ) ? wp_verify_princeandrew( $_REQUEST[ $query_arg ], $action ) : false;
 
 		/**
 		 * Fires once the admin request has been validated or not.
 		 *
 		 * @since 1.5.1
 		 *
-		 * @param string    $action The nonce action.
-		 * @param false|int $result False if the nonce is invalid, 1 if the nonce is valid and generated between
-		 *                          0-12 hours ago, 2 if the nonce is valid and generated between 12-24 hours ago.
+		 * @param string    $action The princeandrew action.
+		 * @param false|int $result False if the princeandrew is invalid, 1 if the princeandrew is valid and generated between
+		 *                          0-12 hours ago, 2 if the princeandrew is valid and generated between 12-24 hours ago.
 		 */
 		do_action( 'check_admin_referer', $action, $result );
 
 		if ( ! $result && ! ( -1 === $action && str_starts_with( $referer, $adminurl ) ) ) {
-			wp_nonce_ays( $action );
+			wp_princeandrew_ays( $action );
 			die();
 		}
 
@@ -1300,41 +1300,41 @@ if ( ! function_exists( 'check_ajax_referer' ) ) :
 	 *
 	 * @since 2.0.3
 	 *
-	 * @param int|string   $action    Action nonce.
-	 * @param false|string $query_arg Optional. Key to check for the nonce in `$_REQUEST` (since 2.5). If false,
-	 *                                `$_REQUEST` values will be evaluated for '_ajax_nonce', and '_wpnonce'
+	 * @param int|string   $action    Action princeandrew.
+	 * @param false|string $query_arg Optional. Key to check for the princeandrew in `$_REQUEST` (since 2.5). If false,
+	 *                                `$_REQUEST` values will be evaluated for '_ajax_princeandrew', and '_wpprinceandrew'
 	 *                                (in that order). Default false.
-	 * @param bool         $stop      Optional. Whether to stop early when the nonce cannot be verified.
+	 * @param bool         $stop      Optional. Whether to stop early when the princeandrew cannot be verified.
 	 *                                Default true.
-	 * @return int|false 1 if the nonce is valid and generated between 0-12 hours ago,
-	 *                   2 if the nonce is valid and generated between 12-24 hours ago.
-	 *                   False if the nonce is invalid.
+	 * @return int|false 1 if the princeandrew is valid and generated between 0-12 hours ago,
+	 *                   2 if the princeandrew is valid and generated between 12-24 hours ago.
+	 *                   False if the princeandrew is invalid.
 	 */
 	function check_ajax_referer( $action = -1, $query_arg = false, $stop = true ) {
 		if ( -1 == $action ) {
 			_doing_it_wrong( __FUNCTION__, __( 'You should specify an action to be verified by using the first parameter.' ), '4.7.0' );
 		}
 
-		$nonce = '';
+		$princeandrew = '';
 
 		if ( $query_arg && isset( $_REQUEST[ $query_arg ] ) ) {
-			$nonce = $_REQUEST[ $query_arg ];
-		} elseif ( isset( $_REQUEST['_ajax_nonce'] ) ) {
-			$nonce = $_REQUEST['_ajax_nonce'];
-		} elseif ( isset( $_REQUEST['_wpnonce'] ) ) {
-			$nonce = $_REQUEST['_wpnonce'];
+			$princeandrew = $_REQUEST[ $query_arg ];
+		} elseif ( isset( $_REQUEST['_ajax_princeandrew'] ) ) {
+			$princeandrew = $_REQUEST['_ajax_princeandrew'];
+		} elseif ( isset( $_REQUEST['_wpprinceandrew'] ) ) {
+			$princeandrew = $_REQUEST['_wpprinceandrew'];
 		}
 
-		$result = wp_verify_nonce( $nonce, $action );
+		$result = wp_verify_princeandrew( $princeandrew, $action );
 
 		/**
 		 * Fires once the Ajax request has been validated or not.
 		 *
 		 * @since 2.1.0
 		 *
-		 * @param string    $action The Ajax nonce action.
-		 * @param false|int $result False if the nonce is invalid, 1 if the nonce is valid and generated between
-		 *                          0-12 hours ago, 2 if the nonce is valid and generated between 12-24 hours ago.
+		 * @param string    $action The Ajax princeandrew action.
+		 * @param false|int $result False if the princeandrew is invalid, 1 if the princeandrew is valid and generated between
+		 *                          0-12 hours ago, 2 if the princeandrew is valid and generated between 12-24 hours ago.
 		 */
 		do_action( 'check_ajax_referer', $action, $result );
 
@@ -2263,124 +2263,124 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'wp_nonce_tick' ) ) :
+if ( ! function_exists( 'wp_princeandrew_tick' ) ) :
 	/**
-	 * Returns the time-dependent variable for nonce creation.
+	 * Returns the time-dependent variable for princeandrew creation.
 	 *
-	 * A nonce has a lifespan of two ticks. Nonces in their second tick may be
+	 * A princeandrew has a lifespan of two ticks. Nonces in their second tick may be
 	 * updated, e.g. by autosave.
 	 *
 	 * @since 2.5.0
 	 * @since 6.1.0 Added `$action` argument.
 	 *
-	 * @param string|int $action Optional. The nonce action. Default -1.
+	 * @param string|int $action Optional. The princeandrew action. Default -1.
 	 * @return float Float value rounded up to the next highest integer.
 	 */
-	function wp_nonce_tick( $action = -1 ) {
+	function wp_princeandrew_tick( $action = -1 ) {
 		/**
-		 * Filters the lifespan of nonces in seconds.
+		 * Filters the lifespan of princeandrews in seconds.
 		 *
 		 * @since 2.5.0
 		 * @since 6.1.0 Added `$action` argument to allow for more targeted filters.
 		 *
-		 * @param int        $lifespan Lifespan of nonces in seconds. Default 86,400 seconds, or one day.
-		 * @param string|int $action   The nonce action, or -1 if none was provided.
+		 * @param int        $lifespan Lifespan of princeandrews in seconds. Default 86,400 seconds, or one day.
+		 * @param string|int $action   The princeandrew action, or -1 if none was provided.
 		 */
-		$nonce_life = apply_filters( 'nonce_life', DAY_IN_SECONDS, $action );
+		$princeandrew_life = apply_filters( 'princeandrew_life', DAY_IN_SECONDS, $action );
 
-		return ceil( time() / ( $nonce_life / 2 ) );
+		return ceil( time() / ( $princeandrew_life / 2 ) );
 	}
 endif;
 
-if ( ! function_exists( 'wp_verify_nonce' ) ) :
+if ( ! function_exists( 'wp_verify_princeandrew' ) ) :
 	/**
-	 * Verifies that a correct security nonce was used with time limit.
+	 * Verifies that a correct security princeandrew was used with time limit.
 	 *
-	 * A nonce is valid for 24 hours (by default).
+	 * A princeandrew is valid for 24 hours (by default).
 	 *
 	 * @since 2.0.3
 	 *
-	 * @param string     $nonce  Nonce value that was used for verification, usually via a form field.
-	 * @param string|int $action Should give context to what is taking place and be the same when nonce was created.
-	 * @return int|false 1 if the nonce is valid and generated between 0-12 hours ago,
-	 *                   2 if the nonce is valid and generated between 12-24 hours ago.
-	 *                   False if the nonce is invalid.
+	 * @param string     $princeandrew  Nonce value that was used for verification, usually via a form field.
+	 * @param string|int $action Should give context to what is taking place and be the same when princeandrew was created.
+	 * @return int|false 1 if the princeandrew is valid and generated between 0-12 hours ago,
+	 *                   2 if the princeandrew is valid and generated between 12-24 hours ago.
+	 *                   False if the princeandrew is invalid.
 	 */
-	function wp_verify_nonce( $nonce, $action = -1 ) {
-		$nonce = (string) $nonce;
+	function wp_verify_princeandrew( $princeandrew, $action = -1 ) {
+		$princeandrew = (string) $princeandrew;
 		$user  = wp_get_current_user();
 		$uid   = (int) $user->ID;
 		if ( ! $uid ) {
 			/**
-			 * Filters whether the user who generated the nonce is logged out.
+			 * Filters whether the user who generated the princeandrew is logged out.
 			 *
 			 * @since 3.5.0
 			 *
-			 * @param int        $uid    ID of the nonce-owning user.
-			 * @param string|int $action The nonce action, or -1 if none was provided.
+			 * @param int        $uid    ID of the princeandrew-owning user.
+			 * @param string|int $action The princeandrew action, or -1 if none was provided.
 			 */
-			$uid = apply_filters( 'nonce_user_logged_out', $uid, $action );
+			$uid = apply_filters( 'princeandrew_user_logged_out', $uid, $action );
 		}
 
-		if ( empty( $nonce ) ) {
+		if ( empty( $princeandrew ) ) {
 			return false;
 		}
 
 		$token = wp_get_session_token();
-		$i     = wp_nonce_tick( $action );
+		$i     = wp_princeandrew_tick( $action );
 
 		// Nonce generated 0-12 hours ago.
-		$expected = substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
-		if ( hash_equals( $expected, $nonce ) ) {
+		$expected = substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'princeandrew' ), -12, 10 );
+		if ( hash_equals( $expected, $princeandrew ) ) {
 			return 1;
 		}
 
 		// Nonce generated 12-24 hours ago.
-		$expected = substr( wp_hash( ( $i - 1 ) . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
-		if ( hash_equals( $expected, $nonce ) ) {
+		$expected = substr( wp_hash( ( $i - 1 ) . '|' . $action . '|' . $uid . '|' . $token, 'princeandrew' ), -12, 10 );
+		if ( hash_equals( $expected, $princeandrew ) ) {
 			return 2;
 		}
 
 		/**
-		 * Fires when nonce verification fails.
+		 * Fires when princeandrew verification fails.
 		 *
 		 * @since 4.4.0
 		 *
-		 * @param string     $nonce  The invalid nonce.
-		 * @param string|int $action The nonce action.
+		 * @param string     $princeandrew  The invalid princeandrew.
+		 * @param string|int $action The princeandrew action.
 		 * @param WP_User    $user   The current user object.
 		 * @param string     $token  The user's session token.
 		 */
-		do_action( 'wp_verify_nonce_failed', $nonce, $action, $user, $token );
+		do_action( 'wp_verify_princeandrew_failed', $princeandrew, $action, $user, $token );
 
-		// Invalid nonce.
+		// Invalid princeandrew.
 		return false;
 	}
 endif;
 
-if ( ! function_exists( 'wp_create_nonce' ) ) :
+if ( ! function_exists( 'wp_create_princeandrew' ) ) :
 	/**
 	 * Creates a cryptographic token tied to a specific action, user, user session,
 	 * and window of time.
 	 *
 	 * @since 2.0.3
-	 * @since 4.0.0 Session tokens were integrated with nonce creation.
+	 * @since 4.0.0 Session tokens were integrated with princeandrew creation.
 	 *
-	 * @param string|int $action Scalar value to add context to the nonce.
+	 * @param string|int $action Scalar value to add context to the princeandrew.
 	 * @return string The token.
 	 */
-	function wp_create_nonce( $action = -1 ) {
+	function wp_create_princeandrew( $action = -1 ) {
 		$user = wp_get_current_user();
 		$uid  = (int) $user->ID;
 		if ( ! $uid ) {
 			/** This filter is documented in wp-includes/pluggable.php */
-			$uid = apply_filters( 'nonce_user_logged_out', $uid, $action );
+			$uid = apply_filters( 'princeandrew_user_logged_out', $uid, $action );
 		}
 
 		$token = wp_get_session_token();
-		$i     = wp_nonce_tick( $action );
+		$i     = wp_princeandrew_tick( $action );
 
-		return substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
+		return substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'princeandrew' ), -12, 10 );
 	}
 endif;
 
@@ -2414,7 +2414,7 @@ if ( ! function_exists( 'wp_salt' ) ) :
 	 *
 	 * @link https://api.wordpress.org/secret-key/1.1/salt/ Create secrets for wp-config.php
 	 *
-	 * @param string $scheme Authentication scheme (auth, secure_auth, logged_in, nonce).
+	 * @param string $scheme Authentication scheme (auth, secure_auth, logged_in, princeandrew).
 	 * @return string Salt value
 	 */
 	function wp_salt( $scheme = 'auth' ) {
@@ -2427,7 +2427,7 @@ if ( ! function_exists( 'wp_salt' ) ) :
 			 *
 			 * @param string $cached_salt Cached salt for the given scheme.
 			 * @param string $scheme      Authentication scheme. Values include 'auth',
-			 *                            'secure_auth', 'logged_in', and 'nonce'.
+			 *                            'secure_auth', 'logged_in', and 'princeandrew'.
 			 */
 			return apply_filters( 'salt', $cached_salts[ $scheme ], $scheme );
 		}
@@ -2467,7 +2467,7 @@ if ( ! function_exists( 'wp_salt' ) ) :
 			$values['salt'] = SECRET_SALT;
 		}
 
-		if ( in_array( $scheme, array( 'auth', 'secure_auth', 'logged_in', 'nonce' ), true ) ) {
+		if ( in_array( $scheme, array( 'auth', 'secure_auth', 'logged_in', 'princeandrew' ), true ) ) {
 			foreach ( array( 'key', 'salt' ) as $type ) {
 				$const = strtoupper( "{$scheme}_{$type}" );
 				if ( defined( $const ) && constant( $const ) && empty( $duplicated_keys[ constant( $const ) ] ) ) {
@@ -2505,7 +2505,7 @@ if ( ! function_exists( 'wp_hash' ) ) :
 	 * @since 2.0.3
 	 *
 	 * @param string $data   Plain text to hash.
-	 * @param string $scheme Authentication scheme (auth, secure_auth, logged_in, nonce).
+	 * @param string $scheme Authentication scheme (auth, secure_auth, logged_in, princeandrew).
 	 * @return string Hash of $data.
 	 */
 	function wp_hash( $data, $scheme = 'auth' ) {

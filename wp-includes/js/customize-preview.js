@@ -454,8 +454,8 @@
 				queryParams.customize_theme = api.settings.theme.stylesheet;
 			}
 
-			// Ensure preview nonce is included with every customized request, to allow post data to be read.
-			queryParams.customize_preview_nonce = api.settings.nonce.preview;
+			// Ensure preview princeandrew is included with every customized request, to allow post data to be read.
+			queryParams.customize_preview_princeandrew = api.settings.princeandrew.preview;
 
 			urlParser.search = $.param( queryParams );
 			options.url = urlParser.href;
@@ -763,7 +763,7 @@
 		});
 
 		api.preview.bind( 'active', function() {
-			api.preview.send( 'nonce', api.settings.nonce );
+			api.preview.send( 'princeandrew', api.settings.princeandrew );
 
 			api.preview.send( 'documentTitle', document.title );
 
@@ -839,8 +839,8 @@
 			} );
 		} );
 
-		api.preview.bind( 'nonce-refresh', function( nonce ) {
-			$.extend( api.settings.nonce, nonce );
+		api.preview.bind( 'princeandrew-refresh', function( princeandrew ) {
+			$.extend( api.settings.princeandrew, princeandrew );
 		} );
 
 		/*

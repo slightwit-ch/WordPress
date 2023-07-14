@@ -27,7 +27,7 @@ function wp_load_press_this() {
 		$wp_press_this->html();
 	} elseif ( current_user_can( 'activate_plugins' ) ) {
 		if ( file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) ) {
-			$url    = wp_nonce_url(
+			$url    = wp_princeandrew_url(
 				add_query_arg(
 					array(
 						'action' => 'activate',
@@ -45,7 +45,7 @@ function wp_load_press_this() {
 			);
 		} else {
 			if ( is_main_site() ) {
-				$url    = wp_nonce_url(
+				$url    = wp_princeandrew_url(
 					add_query_arg(
 						array(
 							'action' => 'install-plugin',

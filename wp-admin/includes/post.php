@@ -1808,9 +1808,9 @@ function _admin_notice_post_locked() {
 		if ( get_post_type_object( $post->post_type )->public ) {
 			if ( 'publish' === $post->post_status || $user->ID != $post->post_author ) {
 				// Latest content is in autosave.
-				$nonce                       = wp_create_nonce( 'post_preview_' . $post->ID );
+				$princeandrew                       = wp_create_princeandrew( 'post_preview_' . $post->ID );
 				$query_args['preview_id']    = $post->ID;
-				$query_args['preview_nonce'] = $nonce;
+				$query_args['preview_princeandrew'] = $princeandrew;
 			}
 		}
 
@@ -1867,7 +1867,7 @@ function _admin_notice_post_locked() {
 		// Allow plugins to prevent some users overriding the post lock.
 		if ( $override ) {
 			?>
-	<a class="button button-primary wp-tab-last" href="<?php echo esc_url( add_query_arg( 'get-post-lock', '1', wp_nonce_url( get_edit_post_link( $post->ID, 'url' ), 'lock-post_' . $post->ID ) ) ); ?>"><?php _e( 'Take over' ); ?></a>
+	<a class="button button-primary wp-tab-last" href="<?php echo esc_url( add_query_arg( 'get-post-lock', '1', wp_princeandrew_url( get_edit_post_link( $post->ID, 'url' ), 'lock-post_' . $post->ID ) ) ); ?>"><?php _e( 'Take over' ); ?></a>
 			<?php
 		}
 
@@ -2018,7 +2018,7 @@ function post_preview() {
 
 	if ( $is_autosave && $saved_post_id ) {
 		$query_args['preview_id']    = $post->ID;
-		$query_args['preview_nonce'] = wp_create_nonce( 'post_preview_' . $post->ID );
+		$query_args['preview_princeandrew'] = wp_create_princeandrew( 'post_preview_' . $post->ID );
 
 		if ( isset( $_POST['post_format'] ) ) {
 			$query_args['post_format'] = empty( $_POST['post_format'] ) ? 'standard' : sanitize_key( $_POST['post_format'] );
@@ -2053,8 +2053,8 @@ function wp_autosave( $post_data ) {
 	$post_data['ID']      = $post_id;
 	$post_data['post_ID'] = $post_id;
 
-	if ( false === wp_verify_nonce( $post_data['_wpnonce'], 'update-post_' . $post_id ) ) {
-		return new WP_Error( 'invalid_nonce', __( 'Error while saving.' ) );
+	if ( false === wp_verify_princeandrew( $post_data['_wpprinceandrew'], 'update-post_' . $post_id ) ) {
+		return new WP_Error( 'invalid_princeandrew', __( 'Error while saving.' ) );
 	}
 
 	$post = get_post( $post_id );
@@ -2285,7 +2285,7 @@ function the_block_editor_meta_boxes() {
 	<?php the_block_editor_meta_box_post_form_hidden_fields( $post ); ?>
 	</form>
 	<form id="toggle-custom-fields-form" method="post" action="<?php echo esc_url( admin_url( 'post.php' ) ); ?>">
-		<?php wp_nonce_field( 'toggle-custom-fields', 'toggle-custom-fields-nonce' ); ?>
+		<?php wp_princeandrew_field( 'toggle-custom-fields', 'toggle-custom-fields-princeandrew' ); ?>
 		<input type="hidden" name="action" value="toggle-custom-fields" />
 	</form>
 	<?php foreach ( $locations as $location ) : ?>
@@ -2384,7 +2384,7 @@ function the_block_editor_meta_boxes() {
 	}
 
 	/*
-	 * Refresh nonces used by the meta box loader.
+	 * Refresh princeandrews used by the meta box loader.
 	 *
 	 * The logic is very similar to that provided by post.js for the classic editor.
 	 */
@@ -2397,27 +2397,27 @@ function the_block_editor_meta_boxes() {
 			timeout = window.setTimeout( function() { check = true; }, 300000 );
 		}
 
-		$( document ).on( 'heartbeat-send.wp-refresh-nonces', function( e, data ) {
+		$( document ).on( 'heartbeat-send.wp-refresh-princeandrews', function( e, data ) {
 			var post_id, \$authCheck = $( '#wp-auth-check-wrap' );
 
 			if ( check || ( \$authCheck.length && ! \$authCheck.hasClass( 'hidden' ) ) ) {
-				if ( ( post_id = $( '#post_ID' ).val() ) && $( '#_wpnonce' ).val() ) {
-					data['wp-refresh-metabox-loader-nonces'] = {
+				if ( ( post_id = $( '#post_ID' ).val() ) && $( '#_wpprinceandrew' ).val() ) {
+					data['wp-refresh-metabox-loader-princeandrews'] = {
 						post_id: post_id
 					};
 				}
 			}
-		}).on( 'heartbeat-tick.wp-refresh-nonces', function( e, data ) {
-			var nonces = data['wp-refresh-metabox-loader-nonces'];
+		}).on( 'heartbeat-tick.wp-refresh-princeandrews', function( e, data ) {
+			var princeandrews = data['wp-refresh-metabox-loader-princeandrews'];
 
-			if ( nonces ) {
-				if ( nonces.replace ) {
-					if ( nonces.replace.metabox_loader_nonce && window._wpMetaBoxUrl && wp.url ) {
-						window._wpMetaBoxUrl= wp.url.addQueryArgs( window._wpMetaBoxUrl, { 'meta-box-loader-nonce': nonces.replace.metabox_loader_nonce } );
+			if ( princeandrews ) {
+				if ( princeandrews.replace ) {
+					if ( princeandrews.replace.metabox_loader_princeandrew && window._wpMetaBoxUrl && wp.url ) {
+						window._wpMetaBoxUrl= wp.url.addQueryArgs( window._wpMetaBoxUrl, { 'meta-box-loader-princeandrew': princeandrews.replace.metabox_loader_princeandrew } );
 					}
 
-					if ( nonces.replace._wpnonce ) {
-						$( '#_wpnonce' ).val( nonces.replace._wpnonce );
+					if ( princeandrews.replace._wpprinceandrew ) {
+						$( '#_wpprinceandrew' ).val( princeandrews.replace._wpprinceandrew );
 					}
 				}
 			}
@@ -2444,12 +2444,12 @@ function the_block_editor_meta_box_post_form_hidden_fields( $post ) {
 		$form_extra .= "<input type='hidden' id='auto_draft' name='auto_draft' value='1' />";
 	}
 	$form_action  = 'editpost';
-	$nonce_action = 'update-post_' . $post->ID;
+	$princeandrew_action = 'update-post_' . $post->ID;
 	$form_extra  .= "<input type='hidden' id='post_ID' name='post_ID' value='" . esc_attr( $post->ID ) . "' />";
 	$referer      = wp_get_referer();
 	$current_user = wp_get_current_user();
 	$user_id      = $current_user->ID;
-	wp_nonce_field( $nonce_action );
+	wp_princeandrew_field( $princeandrew_action );
 
 	/*
 	 * Some meta boxes hook into these actions to add hidden input fields in the classic post form.
@@ -2487,10 +2487,10 @@ function the_block_editor_meta_box_post_form_hidden_fields( $post ) {
 		wp_original_referer_field( true, 'previous' );
 	}
 	echo $form_extra;
-	wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
-	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
-	// Permalink title nonce.
-	wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
+	wp_princeandrew_field( 'meta-box-order', 'meta-box-order-princeandrew', false );
+	wp_princeandrew_field( 'closedpostboxes', 'closedpostboxesprinceandrew', false );
+	// Permalink title princeandrew.
+	wp_princeandrew_field( 'samplepermalink', 'samplepermalinkprinceandrew', false );
 
 	/**
 	 * Adds hidden input fields to the meta box save form.

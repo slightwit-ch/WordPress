@@ -256,7 +256,7 @@ switch ( $action ) {
 				do_action( 'user_edit_form_tag' );
 				?>
 				>
-				<?php wp_nonce_field( 'update-user_' . $user_id ); ?>
+				<?php wp_princeandrew_field( 'update-user_' . $user_id ); ?>
 				<?php if ( $wp_http_referer ) : ?>
 					<input type="hidden" name="wp_http_referer" value="<?php echo esc_url( $wp_http_referer ); ?>" />
 				<?php endif; ?>
@@ -536,7 +536,7 @@ switch ( $action ) {
 									);
 									printf(
 										' <a href="%1$s">%2$s</a>',
-										esc_url( wp_nonce_url( self_admin_url( 'profile.php?dismiss=' . $current_user->ID . '_new_email' ), 'dismiss-' . $current_user->ID . '_new_email' ) ),
+										esc_url( wp_princeandrew_url( self_admin_url( 'profile.php?dismiss=' . $current_user->ID . '_new_email' ), 'dismiss-' . $current_user->ID . '_new_email' ) ),
 										__( 'Cancel' )
 									);
 									?>

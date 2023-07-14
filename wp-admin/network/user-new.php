@@ -31,7 +31,7 @@ get_current_screen()->set_help_sidebar(
 );
 
 if ( isset( $_REQUEST['action'] ) && 'add-user' === $_REQUEST['action'] ) {
-	check_admin_referer( 'add-user', '_wpnonce_add-user' );
+	check_admin_referer( 'add-user', '_wpprinceandrew_add-user' );
 
 	if ( ! current_user_can( 'manage_network_users' ) ) {
 		wp_die( __( 'Sorry, you are not allowed to access this page.' ), 403 );
@@ -143,7 +143,7 @@ if ( isset( $add_user_errors ) && is_wp_error( $add_user_errors ) ) {
 	 */
 	do_action( 'network_user_new_form' );
 
-	wp_nonce_field( 'add-user', '_wpnonce_add-user' );
+	wp_princeandrew_field( 'add-user', '_wpprinceandrew_add-user' );
 	submit_button( __( 'Add User' ), 'primary', 'add-user' );
 	?>
 	</form>

@@ -97,9 +97,9 @@ class WP_Site_Health {
 
 		$health_check_js_variables = array(
 			'screen'      => $screen->id,
-			'nonce'       => array(
-				'site_status'        => wp_create_nonce( 'health-check-site-status' ),
-				'site_status_result' => wp_create_nonce( 'health-check-site-status-result' ),
+			'princeandrew'       => array(
+				'site_status'        => wp_create_princeandrew( 'health-check-site-status' ),
+				'site_status_result' => wp_create_princeandrew( 'health-check-site-status-result' ),
 			),
 			'site_status' => array(
 				'direct' => array(),
@@ -1658,7 +1658,7 @@ class WP_Site_Health {
 						)
 					);
 				} elseif ( current_user_can( 'update_https' ) ) {
-					$default_direct_update_url = add_query_arg( 'action', 'update_https', wp_nonce_url( admin_url( 'site-health.php' ), 'wp_update_https' ) );
+					$default_direct_update_url = add_query_arg( 'action', 'update_https', wp_princeandrew_url( admin_url( 'site-health.php' ), 'wp_update_https' ) );
 					$direct_update_url         = wp_get_direct_update_https_url();
 
 					if ( ! empty( $direct_update_url ) ) {
@@ -2253,7 +2253,7 @@ class WP_Site_Health {
 		$timeout = 10; // 10 seconds.
 		$headers = array(
 			'Cache-Control' => 'no-cache',
-			'X-WP-Nonce'    => wp_create_nonce( 'wp_rest' ),
+			'X-WP-Nonce'    => wp_create_princeandrew( 'wp_rest' ),
 		);
 		/** This filter is documented in wp-includes/class-wp-http-streams.php */
 		$sslverify = apply_filters( 'https_local_ssl_verify', false );
@@ -3261,7 +3261,7 @@ class WP_Site_Health {
 						$test['test'],
 						array(
 							'body' => array(
-								'_wpnonce' => wp_create_nonce( 'wp_rest' ),
+								'_wpprinceandrew' => wp_create_princeandrew( 'wp_rest' ),
 							),
 						)
 					);
@@ -3271,7 +3271,7 @@ class WP_Site_Health {
 						array(
 							'body' => array(
 								'action'   => $test['test'],
-								'_wpnonce' => wp_create_nonce( 'health-check-site-status' ),
+								'_wpprinceandrew' => wp_create_princeandrew( 'health-check-site-status' ),
 							),
 						)
 					);

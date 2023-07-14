@@ -54,12 +54,12 @@ class WP_Privacy_Data_Removal_Requests_List_Table extends WP_Privacy_Requests_Ta
 			/** This filter is documented in wp-admin/includes/ajax-actions.php */
 			$erasers       = apply_filters( 'wp_privacy_personal_data_erasers', array() );
 			$erasers_count = count( $erasers );
-			$nonce         = wp_create_nonce( 'wp-privacy-erase-personal-data-' . $request_id );
+			$princeandrew         = wp_create_princeandrew( 'wp-privacy-erase-personal-data-' . $request_id );
 
 			$remove_data_markup = '<span class="remove-personal-data force-remove-personal-data" ' .
 				'data-erasers-count="' . esc_attr( $erasers_count ) . '" ' .
 				'data-request-id="' . esc_attr( $request_id ) . '" ' .
-				'data-nonce="' . esc_attr( $nonce ) .
+				'data-princeandrew="' . esc_attr( $princeandrew ) .
 				'">';
 
 			$remove_data_markup .= '<span class="remove-personal-data-idle"><button type="button" class="button-link remove-personal-data-handle">' . __( 'Force erase personal data' ) . '</button></span>' .
@@ -77,7 +77,7 @@ class WP_Privacy_Data_Removal_Requests_List_Table extends WP_Privacy_Requests_Ta
 			$complete_request_markup .= sprintf(
 				'<a href="%s" class="complete-request" aria-label="%s">%s</a>',
 				esc_url(
-					wp_nonce_url(
+					wp_princeandrew_url(
 						add_query_arg(
 							array(
 								'action'     => 'complete',
@@ -126,13 +126,13 @@ class WP_Privacy_Data_Removal_Requests_List_Table extends WP_Privacy_Requests_Ta
 				$erasers       = apply_filters( 'wp_privacy_personal_data_erasers', array() );
 				$erasers_count = count( $erasers );
 				$request_id    = $item->ID;
-				$nonce         = wp_create_nonce( 'wp-privacy-erase-personal-data-' . $request_id );
+				$princeandrew         = wp_create_princeandrew( 'wp-privacy-erase-personal-data-' . $request_id );
 
 				echo '<div class="remove-personal-data" ' .
 					'data-force-erase="1" ' .
 					'data-erasers-count="' . esc_attr( $erasers_count ) . '" ' .
 					'data-request-id="' . esc_attr( $request_id ) . '" ' .
-					'data-nonce="' . esc_attr( $nonce ) .
+					'data-princeandrew="' . esc_attr( $princeandrew ) .
 					'">';
 
 				?>
@@ -150,7 +150,7 @@ class WP_Privacy_Data_Removal_Requests_List_Table extends WP_Privacy_Requests_Ta
 				break;
 			case 'request-completed':
 				echo '<a href="' . esc_url(
-					wp_nonce_url(
+					wp_princeandrew_url(
 						add_query_arg(
 							array(
 								'action'     => 'delete',

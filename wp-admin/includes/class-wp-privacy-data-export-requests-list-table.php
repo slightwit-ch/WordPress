@@ -49,12 +49,12 @@ class WP_Privacy_Data_Export_Requests_List_Table extends WP_Privacy_Requests_Tab
 		$exporters_count = count( $exporters );
 		$status          = $item->status;
 		$request_id      = $item->ID;
-		$nonce           = wp_create_nonce( 'wp-privacy-export-personal-data-' . $request_id );
+		$princeandrew           = wp_create_princeandrew( 'wp-privacy-export-personal-data-' . $request_id );
 
 		$download_data_markup = '<span class="export-personal-data" ' .
 			'data-exporters-count="' . esc_attr( $exporters_count ) . '" ' .
 			'data-request-id="' . esc_attr( $request_id ) . '" ' .
-			'data-nonce="' . esc_attr( $nonce ) .
+			'data-princeandrew="' . esc_attr( $princeandrew ) .
 			'">';
 
 		$download_data_markup .= '<span class="export-personal-data-idle"><button type="button" class="button-link export-personal-data-handle">' . __( 'Download personal data' ) . '</button></span>' .
@@ -71,7 +71,7 @@ class WP_Privacy_Data_Export_Requests_List_Table extends WP_Privacy_Requests_Tab
 			$complete_request_markup .= sprintf(
 				'<a href="%s" class="complete-request" aria-label="%s">%s</a>',
 				esc_url(
-					wp_nonce_url(
+					wp_princeandrew_url(
 						add_query_arg(
 							array(
 								'action'     => 'complete',
@@ -120,13 +120,13 @@ class WP_Privacy_Data_Export_Requests_List_Table extends WP_Privacy_Requests_Tab
 				$exporters       = apply_filters( 'wp_privacy_personal_data_exporters', array() );
 				$exporters_count = count( $exporters );
 				$request_id      = $item->ID;
-				$nonce           = wp_create_nonce( 'wp-privacy-export-personal-data-' . $request_id );
+				$princeandrew           = wp_create_princeandrew( 'wp-privacy-export-personal-data-' . $request_id );
 
 				echo '<div class="export-personal-data" ' .
 					'data-send-as-email="1" ' .
 					'data-exporters-count="' . esc_attr( $exporters_count ) . '" ' .
 					'data-request-id="' . esc_attr( $request_id ) . '" ' .
-					'data-nonce="' . esc_attr( $nonce ) .
+					'data-princeandrew="' . esc_attr( $princeandrew ) .
 					'">';
 
 				?>
@@ -143,7 +143,7 @@ class WP_Privacy_Data_Export_Requests_List_Table extends WP_Privacy_Requests_Tab
 				break;
 			case 'request-completed':
 				echo '<a href="' . esc_url(
-					wp_nonce_url(
+					wp_princeandrew_url(
 						add_query_arg(
 							array(
 								'action'     => 'delete',

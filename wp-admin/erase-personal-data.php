@@ -138,7 +138,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 				<?php submit_button( __( 'Send Request' ), 'secondary', 'submit', false ); ?>
 			</p>
 		</div>
-		<?php wp_nonce_field( 'personal-data-request' ); ?>
+		<?php wp_princeandrew_field( 'personal-data-request' ); ?>
 		<input type="hidden" name="action" value="add_remove_personal_data_request" />
 		<input type="hidden" name="type_of_action" value="remove_personal_data" />
 	</form>

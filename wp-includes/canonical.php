@@ -47,13 +47,13 @@ function redirect_canonical( $requested_url = null, $do_redirect = true ) {
 	}
 
 	/*
-	 * If we're not in wp-admin and the post has been published and preview nonce
+	 * If we're not in wp-admin and the post has been published and preview princeandrew
 	 * is non-existent or invalid then no need for preview in query.
 	 */
 	if ( is_preview() && get_query_var( 'p' ) && 'publish' === get_post_status( get_query_var( 'p' ) ) ) {
 		if ( ! isset( $_GET['preview_id'] )
-			|| ! isset( $_GET['preview_nonce'] )
-			|| ! wp_verify_nonce( $_GET['preview_nonce'], 'post_preview_' . (int) $_GET['preview_id'] )
+			|| ! isset( $_GET['preview_princeandrew'] )
+			|| ! wp_verify_princeandrew( $_GET['preview_princeandrew'], 'post_preview_' . (int) $_GET['preview_id'] )
 		) {
 			$wp_query->is_preview = false;
 		}

@@ -106,7 +106,7 @@
 			var post = {
 					ps: $( '#find-posts-input' ).val(),
 					action: 'find_posts',
-					_ajax_nonce: $('#_ajax_nonce').val()
+					_ajax_princeandrew: $('#_ajax_princeandrew').val()
 				},
 				spinner = $( '.find-box-search .spinner' );
 

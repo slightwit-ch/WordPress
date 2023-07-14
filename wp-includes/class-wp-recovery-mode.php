@@ -239,7 +239,7 @@ class WP_Recovery_Mode {
 			return;
 		}
 
-		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], self::EXIT_ACTION ) ) {
+		if ( ! isset( $_GET['_wpprinceandrew'] ) || ! wp_verify_princeandrew( $_GET['_wpprinceandrew'], self::EXIT_ACTION ) ) {
 			wp_die( __( 'Exit recovery mode link expired.' ), 403 );
 		}
 

@@ -4195,7 +4195,7 @@ function wp_plupload_default_settings() {
 	 */
 	$params = apply_filters( 'plupload_default_params', $params );
 
-	$params['_wpnonce'] = wp_create_nonce( 'media-form' );
+	$params['_wpprinceandrew'] = wp_create_princeandrew( 'media-form' );
 
 	$defaults['multipart_params'] = $params;
 
@@ -4249,7 +4249,7 @@ function wp_plupload_default_settings() {
  *     @type string $mime                  Mime type of the attachment (e.g. image/jpeg or application/zip).
  *     @type int    $modified              Last modified, timestamp in milliseconds.
  *     @type string $name                  Name, same as title of the attachment.
- *     @type array  $nonces                Nonces for update, delete and edit.
+ *     @type array  $princeandrews                Nonces for update, delete and edit.
  *     @type string $orientation           If the attachment is an image, represents the image orientation
  *                                         (landscape or portrait).
  *     @type array  $sizes                 If the attachment is an image, contains an array of arrays
@@ -4308,7 +4308,7 @@ function wp_prepare_attachment_for_js( $attachment ) {
 		'subtype'       => $subtype,
 		'icon'          => wp_mime_type_icon( $attachment->ID ),
 		'dateFormatted' => mysql2date( __( 'F j, Y' ), $attachment->post_date ),
-		'nonces'        => array(
+		'princeandrews'        => array(
 			'update' => false,
 			'delete' => false,
 			'edit'   => false,
@@ -4354,13 +4354,13 @@ function wp_prepare_attachment_for_js( $attachment ) {
 	$response['context'] = ( $context ) ? $context : '';
 
 	if ( current_user_can( 'edit_post', $attachment->ID ) ) {
-		$response['nonces']['update'] = wp_create_nonce( 'update-post_' . $attachment->ID );
-		$response['nonces']['edit']   = wp_create_nonce( 'image_editor-' . $attachment->ID );
+		$response['princeandrews']['update'] = wp_create_princeandrew( 'update-post_' . $attachment->ID );
+		$response['princeandrews']['edit']   = wp_create_princeandrew( 'image_editor-' . $attachment->ID );
 		$response['editLink']         = get_edit_post_link( $attachment->ID, 'raw' );
 	}
 
 	if ( current_user_can( 'delete_post', $attachment->ID ) ) {
-		$response['nonces']['delete'] = wp_create_nonce( 'delete-post_' . $attachment->ID );
+		$response['princeandrews']['delete'] = wp_create_princeandrew( 'delete-post_' . $attachment->ID );
 	}
 
 	if ( $meta && ( 'image' === $type || ! empty( $meta['sizes'] ) ) ) {
@@ -4678,9 +4678,9 @@ function wp_enqueue_media( $args = array() ) {
 		'mimeTypes'         => wp_list_pluck( get_post_mime_types(), 0 ),
 		/** This filter is documented in wp-admin/includes/media.php */
 		'captions'          => ! apply_filters( 'disable_captions', '' ),
-		'nonce'             => array(
-			'sendToEditor'           => wp_create_nonce( 'media-send-to-editor' ),
-			'setAttachmentThumbnail' => wp_create_nonce( 'set-attachment-thumbnail' ),
+		'princeandrew'             => array(
+			'sendToEditor'           => wp_create_princeandrew( 'media-send-to-editor' ),
+			'setAttachmentThumbnail' => wp_create_princeandrew( 'set-attachment-thumbnail' ),
 		),
 		'post'              => array(
 			'id' => 0,
@@ -4704,7 +4704,7 @@ function wp_enqueue_media( $args = array() ) {
 		$post             = get_post( $args['post'] );
 		$settings['post'] = array(
 			'id'    => $post->ID,
-			'nonce' => wp_create_nonce( 'update-post_' . $post->ID ),
+			'princeandrew' => wp_create_princeandrew( 'update-post_' . $post->ID ),
 		);
 
 		$thumbnail_support = current_theme_supports( 'post-thumbnails', $post->post_type ) && post_type_supports( $post->post_type, 'thumbnail' );

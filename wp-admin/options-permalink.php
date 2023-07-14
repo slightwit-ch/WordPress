@@ -217,7 +217,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 <h1><?php echo esc_html( $title ); ?></h1>
 
 <form name="form" action="options-permalink.php" method="post">
-<?php wp_nonce_field( 'update-permalink' ); ?>
+<?php wp_princeandrew_field( 'update-permalink' ); ?>
 
 <p>
 <?php
@@ -473,7 +473,7 @@ printf(
 				?>
 				</p>
 				<form action="options-permalink.php" method="post">
-					<?php wp_nonce_field( 'update-permalink' ); ?>
+					<?php wp_princeandrew_field( 'update-permalink' ); ?>
 					<p>
 						<label for="rules"><?php _e( 'Rewrite rules:' ); ?></label><br />
 						<textarea rows="9" class="large-text readonly"
@@ -505,7 +505,7 @@ printf(
 				?>
 				</p>
 				<form action="options-permalink.php" method="post">
-					<?php wp_nonce_field( 'update-permalink' ); ?>
+					<?php wp_princeandrew_field( 'update-permalink' ); ?>
 					<p>
 						<label for="rules"><?php _e( 'Rewrite rules:' ); ?></label><br />
 						<textarea rows="18" class="large-text readonly"
@@ -540,7 +540,7 @@ printf(
 			?>
 			</p>
 			<form action="options-permalink.php" method="post">
-				<?php wp_nonce_field( 'update-permalink' ); ?>
+				<?php wp_princeandrew_field( 'update-permalink' ); ?>
 				<p>
 					<label for="rules"><?php _e( 'Rewrite rules:' ); ?></label><br />
 					<textarea rows="8" class="large-text readonly"

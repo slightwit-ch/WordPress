@@ -190,7 +190,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 
 			case 'favorites':
 				$action = 'save_wporg_username_' . get_current_user_id();
-				if ( isset( $_GET['_wpnonce'] ) && wp_verify_nonce( wp_unslash( $_GET['_wpnonce'] ), $action ) ) {
+				if ( isset( $_GET['_wpprinceandrew'] ) && wp_verify_princeandrew( wp_unslash( $_GET['_wpprinceandrew'] ), $action ) ) {
 					$user = isset( $_GET['user'] ) ? wp_unslash( $_GET['user'] ) : get_user_option( 'wporg_favorites' );
 
 					// If the save url parameter is passed with a falsey value, don't save the favorite user.
@@ -609,7 +609,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 								$button_label = _x( 'Activate %s', 'plugin' );
 								$activate_url = add_query_arg(
 									array(
-										'_wpnonce' => wp_create_nonce( 'activate-plugin_' . $status['file'] ),
+										'_wpprinceandrew' => wp_create_princeandrew( 'activate-plugin_' . $status['file'] ),
 										'action'   => 'activate',
 										'plugin'   => $status['file'],
 									),

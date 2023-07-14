@@ -82,7 +82,7 @@ function wp_ajax_nopriv_heartbeat() {
  */
 function wp_ajax_fetch_list() {
 	$list_class = $_GET['list_args']['class'];
-	check_ajax_referer( "fetch-list-$list_class", '_ajax_fetch_list_nonce' );
+	check_ajax_referer( "fetch-list-$list_class", '_ajax_fetch_list_princeandrew' );
 
 	$wp_list_table = _get_list_table( $list_class, array( 'screen' => $_GET['list_args']['screen']['id'] ) );
 	if ( ! $wp_list_table ) {
@@ -590,7 +590,7 @@ function _wp_ajax_delete_comment_response( $comment_id, $delta = -1 ) {
 function _wp_ajax_add_hierarchical_term() {
 	$action   = $_POST['action'];
 	$taxonomy = get_taxonomy( substr( $action, 4 ) );
-	check_ajax_referer( $action, '_ajax_nonce-add-' . $taxonomy->name );
+	check_ajax_referer( $action, '_ajax_princeandrew-add-' . $taxonomy->name );
 
 	if ( ! current_user_can( $taxonomy->cap->edit_terms ) ) {
 		wp_die( -1 );
@@ -1086,7 +1086,7 @@ function wp_ajax_add_link_category( $action ) {
  * @since 3.1.0
  */
 function wp_ajax_add_tag() {
-	check_ajax_referer( 'add-tag', '_wpnonce_add-tag' );
+	check_ajax_referer( 'add-tag', '_wpprinceandrew_add-tag' );
 
 	$taxonomy        = ! empty( $_POST['taxonomy'] ) ? $_POST['taxonomy'] : 'post_tag';
 	$taxonomy_object = get_taxonomy( $taxonomy );
@@ -1307,7 +1307,7 @@ function wp_ajax_replyto_comment( $action ) {
 		$action = 'replyto-comment';
 	}
 
-	check_ajax_referer( $action, '_ajax_nonce-replyto-comment' );
+	check_ajax_referer( $action, '_ajax_princeandrew-replyto-comment' );
 
 	$comment_post_id = (int) $_POST['comment_post_ID'];
 	$post            = get_post( $comment_post_id );
@@ -1339,7 +1339,7 @@ function wp_ajax_replyto_comment( $action ) {
 				$_POST['_wp_unfiltered_html_comment'] = '';
 			}
 
-			if ( wp_create_nonce( 'unfiltered-html-comment' ) != $_POST['_wp_unfiltered_html_comment'] ) {
+			if ( wp_create_princeandrew( 'unfiltered-html-comment' ) != $_POST['_wp_unfiltered_html_comment'] ) {
 				kses_remove_filters(); // Start with a clean slate.
 				kses_init_filters();   // Set up the filters.
 				remove_filter( 'pre_comment_content', 'wp_filter_post_kses' );
@@ -1461,7 +1461,7 @@ function wp_ajax_replyto_comment( $action ) {
  * @since 3.1.0
  */
 function wp_ajax_edit_comment() {
-	check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment' );
+	check_ajax_referer( 'replyto-comment', '_ajax_princeandrew-replyto-comment' );
 
 	$comment_id = (int) $_POST['comment_ID'];
 
@@ -1516,7 +1516,7 @@ function wp_ajax_edit_comment() {
  * @since 3.1.0
  */
 function wp_ajax_add_menu_item() {
-	check_ajax_referer( 'add-menu_item', 'menu-settings-column-nonce' );
+	check_ajax_referer( 'add-menu_item', 'menu-settings-column-princeandrew' );
 
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
 		wp_die( -1 );
@@ -1606,7 +1606,7 @@ function wp_ajax_add_menu_item() {
  * @since 3.1.0
  */
 function wp_ajax_add_meta() {
-	check_ajax_referer( 'add-meta', '_ajax_nonce-add-meta' );
+	check_ajax_referer( 'add-meta', '_ajax_princeandrew-add-meta' );
 	$c    = 0;
 	$pid  = (int) $_POST['post_id'];
 	$post = get_post( $pid );
@@ -1783,7 +1783,7 @@ function wp_ajax_add_user( $action ) {
  * @since 3.1.0
  */
 function wp_ajax_closed_postboxes() {
-	check_ajax_referer( 'closedpostboxes', 'closedpostboxesnonce' );
+	check_ajax_referer( 'closedpostboxes', 'closedpostboxesprinceandrew' );
 	$closed = isset( $_POST['closed'] ) ? explode( ',', $_POST['closed'] ) : array();
 	$closed = array_filter( $closed );
 
@@ -1820,7 +1820,7 @@ function wp_ajax_closed_postboxes() {
  * @since 3.1.0
  */
 function wp_ajax_hidden_columns() {
-	check_ajax_referer( 'screen-options-nonce', 'screenoptionnonce' );
+	check_ajax_referer( 'screen-options-princeandrew', 'screenoptionprinceandrew' );
 	$page = isset( $_POST['page'] ) ? $_POST['page'] : '';
 
 	if ( sanitize_key( $page ) != $page ) {
@@ -1844,7 +1844,7 @@ function wp_ajax_hidden_columns() {
  * @since 3.1.0
  */
 function wp_ajax_update_welcome_panel() {
-	check_ajax_referer( 'welcome-panel-nonce', 'welcomepanelnonce' );
+	check_ajax_referer( 'welcome-panel-princeandrew', 'welcomepanelprinceandrew' );
 
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
 		wp_die( -1 );
@@ -1912,7 +1912,7 @@ function wp_ajax_menu_get_metabox() {
  * @since 3.1.0
  */
 function wp_ajax_wp_link_ajax() {
-	check_ajax_referer( 'internal-linking', '_ajax_linking_nonce' );
+	check_ajax_referer( 'internal-linking', '_ajax_linking_princeandrew' );
 
 	$args = array();
 
@@ -1952,7 +1952,7 @@ function wp_ajax_menu_locations_save() {
 		wp_die( -1 );
 	}
 
-	check_ajax_referer( 'add-menu_item', 'menu-settings-column-nonce' );
+	check_ajax_referer( 'add-menu_item', 'menu-settings-column-princeandrew' );
 
 	if ( ! isset( $_POST['menu-locations'] ) ) {
 		wp_die( 0 );
@@ -2021,7 +2021,7 @@ function wp_ajax_menu_quick_search() {
  * @since 3.1.0
  */
 function wp_ajax_get_permalink() {
-	check_ajax_referer( 'getpermalink', 'getpermalinknonce' );
+	check_ajax_referer( 'getpermalink', 'getpermalinkprinceandrew' );
 	$post_id = isset( $_POST['post_id'] ) ? (int) $_POST['post_id'] : 0;
 	wp_die( get_preview_post_link( $post_id ) );
 }
@@ -2032,7 +2032,7 @@ function wp_ajax_get_permalink() {
  * @since 3.1.0
  */
 function wp_ajax_sample_permalink() {
-	check_ajax_referer( 'samplepermalink', 'samplepermalinknonce' );
+	check_ajax_referer( 'samplepermalink', 'samplepermalinkprinceandrew' );
 	$post_id = isset( $_POST['post_id'] ) ? (int) $_POST['post_id'] : 0;
 	$title   = isset( $_POST['new_title'] ) ? $_POST['new_title'] : '';
 	$slug    = isset( $_POST['new_slug'] ) ? $_POST['new_slug'] : null;
@@ -2049,7 +2049,7 @@ function wp_ajax_sample_permalink() {
 function wp_ajax_inline_save() {
 	global $mode;
 
-	check_ajax_referer( 'inlineeditnonce', '_inline_edit' );
+	check_ajax_referer( 'inlineeditprinceandrew', '_inline_edit' );
 
 	if ( ! isset( $_POST['post_ID'] ) || ! (int) $_POST['post_ID'] ) {
 		wp_die();
@@ -2164,7 +2164,7 @@ function wp_ajax_inline_save() {
  * @since 3.1.0
  */
 function wp_ajax_inline_save_tax() {
-	check_ajax_referer( 'taxinlineeditnonce', '_inline_edit' );
+	check_ajax_referer( 'taxinlineeditprinceandrew', '_inline_edit' );
 
 	$taxonomy        = sanitize_key( $_POST['taxonomy'] );
 	$taxonomy_object = get_taxonomy( $taxonomy );
@@ -2796,7 +2796,7 @@ function wp_ajax_set_attachment_thumbnail() {
 		wp_send_json_error();
 	}
 
-	if ( false === check_ajax_referer( 'set-attachment-thumbnail', '_ajax_nonce', false ) ) {
+	if ( false === check_ajax_referer( 'set-attachment-thumbnail', '_ajax_princeandrew', false ) ) {
 		wp_send_json_error();
 	}
 
@@ -2867,7 +2867,7 @@ function wp_ajax_wp_fullscreen_save_post() {
 		$post = get_post( $post_id );
 	}
 
-	check_ajax_referer( 'update-post_' . $post_id, '_wpnonce' );
+	check_ajax_referer( 'update-post_' . $post_id, '_wpprinceandrew' );
 
 	$post_id = edit_post();
 
@@ -3107,7 +3107,7 @@ function wp_ajax_save_attachment() {
 		wp_send_json_error();
 	}
 
-	check_ajax_referer( 'update-post_' . $id, 'nonce' );
+	check_ajax_referer( 'update-post_' . $id, 'princeandrew' );
 
 	if ( ! current_user_can( 'edit_post', $id ) ) {
 		wp_send_json_error();
@@ -3199,7 +3199,7 @@ function wp_ajax_save_attachment_compat() {
 
 	$attachment_data = $_REQUEST['attachments'][ $id ];
 
-	check_ajax_referer( 'update-post_' . $id, 'nonce' );
+	check_ajax_referer( 'update-post_' . $id, 'princeandrew' );
 
 	if ( ! current_user_can( 'edit_post', $id ) ) {
 		wp_send_json_error();
@@ -3255,7 +3255,7 @@ function wp_ajax_save_attachment_order() {
 		wp_send_json_error();
 	}
 
-	check_ajax_referer( 'update-post_' . $post_id, 'nonce' );
+	check_ajax_referer( 'update-post_' . $post_id, 'princeandrew' );
 
 	$attachments = $_REQUEST['attachments'];
 
@@ -3299,7 +3299,7 @@ function wp_ajax_save_attachment_order() {
  * @since 3.5.0
  */
 function wp_ajax_send_attachment_to_editor() {
-	check_ajax_referer( 'media-send-to-editor', 'nonce' );
+	check_ajax_referer( 'media-send-to-editor', 'princeandrew' );
 
 	$attachment = wp_unslash( $_POST['attachment'] );
 
@@ -3381,7 +3381,7 @@ function wp_ajax_send_attachment_to_editor() {
 function wp_ajax_send_link_to_editor() {
 	global $post, $wp_embed;
 
-	check_ajax_referer( 'media-send-to-editor', 'nonce' );
+	check_ajax_referer( 'media-send-to-editor', 'princeandrew' );
 
 	$src = wp_unslash( $_POST['src'] );
 	if ( ! $src ) {
@@ -3443,13 +3443,13 @@ function wp_ajax_send_link_to_editor() {
  * @since 3.6.0
  */
 function wp_ajax_heartbeat() {
-	if ( empty( $_POST['_nonce'] ) ) {
+	if ( empty( $_POST['_princeandrew'] ) ) {
 		wp_send_json_error();
 	}
 
 	$response    = array();
 	$data        = array();
-	$nonce_state = wp_verify_nonce( $_POST['_nonce'], 'heartbeat-nonce' );
+	$princeandrew_state = wp_verify_princeandrew( $_POST['_princeandrew'], 'heartbeat-princeandrew' );
 
 	// 'screen_id' is the same as $current_screen->id and the JS global 'pagenow'.
 	if ( ! empty( $_POST['screen_id'] ) ) {
@@ -3462,9 +3462,9 @@ function wp_ajax_heartbeat() {
 		$data = wp_unslash( (array) $_POST['data'] );
 	}
 
-	if ( 1 !== $nonce_state ) {
+	if ( 1 !== $princeandrew_state ) {
 		/**
-		 * Filters the nonces to send to the New/Edit Post screen.
+		 * Filters the princeandrews to send to the New/Edit Post screen.
 		 *
 		 * @since 4.3.0
 		 *
@@ -3472,11 +3472,11 @@ function wp_ajax_heartbeat() {
 		 * @param array  $data      The $_POST data sent.
 		 * @param string $screen_id The screen ID.
 		 */
-		$response = apply_filters( 'wp_refresh_nonces', $response, $data, $screen_id );
+		$response = apply_filters( 'wp_refresh_princeandrews', $response, $data, $screen_id );
 
-		if ( false === $nonce_state ) {
-			// User is logged in but nonces have expired.
-			$response['nonces_expired'] = true;
+		if ( false === $princeandrew_state ) {
+			// User is logged in but princeandrews have expired.
+			$response['princeandrews_expired'] = true;
 			wp_send_json( $response );
 		}
 	}
@@ -3573,7 +3573,7 @@ function wp_ajax_get_revision_diffs() {
 function wp_ajax_save_user_color_scheme() {
 	global $_wp_admin_css_colors;
 
-	check_ajax_referer( 'save-color-scheme', 'nonce' );
+	check_ajax_referer( 'save-color-scheme', 'princeandrew' );
 
 	$color_scheme = sanitize_key( $_POST['color_scheme'] );
 
@@ -3657,7 +3657,7 @@ function wp_ajax_query_themes() {
 		$theme->install_url = add_query_arg(
 			array(
 				'theme'    => $theme->slug,
-				'_wpnonce' => wp_create_nonce( 'install-theme_' . $theme->slug ),
+				'_wpprinceandrew' => wp_create_princeandrew( 'install-theme_' . $theme->slug ),
 			),
 			$update_php
 		);
@@ -3667,7 +3667,7 @@ function wp_ajax_query_themes() {
 				$theme->activate_url = add_query_arg(
 					array(
 						'action'   => 'enable',
-						'_wpnonce' => wp_create_nonce( 'enable-theme_' . $theme->slug ),
+						'_wpprinceandrew' => wp_create_princeandrew( 'enable-theme_' . $theme->slug ),
 						'theme'    => $theme->slug,
 					),
 					network_admin_url( 'themes.php' )
@@ -3676,7 +3676,7 @@ function wp_ajax_query_themes() {
 				$theme->activate_url = add_query_arg(
 					array(
 						'action'     => 'activate',
-						'_wpnonce'   => wp_create_nonce( 'switch-theme_' . $theme->slug ),
+						'_wpprinceandrew'   => wp_create_princeandrew( 'switch-theme_' . $theme->slug ),
 						'stylesheet' => $theme->slug,
 					),
 					admin_url( 'themes.php' )
@@ -3948,7 +3948,7 @@ function wp_ajax_destroy_sessions() {
 	if ( $user ) {
 		if ( ! current_user_can( 'edit_user', $user->ID ) ) {
 			$user = false;
-		} elseif ( ! wp_verify_nonce( $_POST['nonce'], 'update-user_' . $user->ID ) ) {
+		} elseif ( ! wp_verify_princeandrew( $_POST['princeandrew'], 'update-user_' . $user->ID ) ) {
 			$user = false;
 		}
 	}
@@ -3983,7 +3983,7 @@ function wp_ajax_destroy_sessions() {
 function wp_ajax_crop_image() {
 	$attachment_id = absint( $_POST['id'] );
 
-	check_ajax_referer( 'image_editor-' . $attachment_id, 'nonce' );
+	check_ajax_referer( 'image_editor-' . $attachment_id, 'princeandrew' );
 
 	if ( empty( $attachment_id ) || ! current_user_can( 'edit_post', $attachment_id ) ) {
 		wp_send_json_error();
@@ -4243,7 +4243,7 @@ function wp_ajax_install_theme() {
 			$status['activateUrl'] = add_query_arg(
 				array(
 					'action'   => 'enable',
-					'_wpnonce' => wp_create_nonce( 'enable-theme_' . $slug ),
+					'_wpprinceandrew' => wp_create_princeandrew( 'enable-theme_' . $slug ),
 					'theme'    => $slug,
 				),
 				network_admin_url( 'themes.php' )
@@ -4252,7 +4252,7 @@ function wp_ajax_install_theme() {
 			$status['activateUrl'] = add_query_arg(
 				array(
 					'action'     => 'activate',
-					'_wpnonce'   => wp_create_nonce( 'switch-theme_' . $slug ),
+					'_wpprinceandrew'   => wp_create_princeandrew( 'switch-theme_' . $slug ),
 					'stylesheet' => $slug,
 				),
 				admin_url( 'themes.php' )
@@ -4413,7 +4413,7 @@ function wp_ajax_delete_theme() {
 	}
 
 	// Check filesystem credentials. `delete_theme()` will bail otherwise.
-	$url = wp_nonce_url( 'themes.php?action=delete&stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet );
+	$url = wp_princeandrew_url( 'themes.php?action=delete&stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet );
 
 	ob_start();
 	$credentials = request_filesystem_credentials( $url );
@@ -4542,7 +4542,7 @@ function wp_ajax_install_plugin() {
 	if ( current_user_can( 'activate_plugin', $install_status['file'] ) && is_plugin_inactive( $install_status['file'] ) ) {
 		$status['activateUrl'] = add_query_arg(
 			array(
-				'_wpnonce' => wp_create_nonce( 'activate-plugin_' . $install_status['file'] ),
+				'_wpprinceandrew' => wp_create_princeandrew( 'activate-plugin_' . $install_status['file'] ),
 				'action'   => 'activate',
 				'plugin'   => $install_status['file'],
 			),
@@ -4709,7 +4709,7 @@ function wp_ajax_delete_plugin() {
 	}
 
 	// Check filesystem credentials. `delete_plugins()` will bail otherwise.
-	$url = wp_nonce_url( 'plugins.php?action=delete-selected&verify-delete=1&checked[]=' . $plugin, 'bulk-plugins' );
+	$url = wp_princeandrew_url( 'plugins.php?action=delete-selected&verify-delete=1&checked[]=' . $plugin, 'bulk-plugins' );
 
 	ob_start();
 	$credentials = request_filesystem_credentials( $url );
@@ -4780,7 +4780,7 @@ function wp_ajax_search_plugins() {
 		array_diff_key(
 			$_POST,
 			array(
-				'_ajax_nonce' => null,
+				'_ajax_princeandrew' => null,
 				'action'      => null,
 			)
 		),
@@ -4832,7 +4832,7 @@ function wp_ajax_search_install_plugins() {
 		array_diff_key(
 			$_POST,
 			array(
-				'_ajax_nonce' => null,
+				'_ajax_princeandrew' => null,
 				'action'      => null,
 			)
 		),
@@ -5480,12 +5480,12 @@ function wp_ajax_health_check_get_sizes() {
 }
 
 /**
- * Handles renewing the REST API nonce via AJAX.
+ * Handles renewing the REST API princeandrew via AJAX.
  *
  * @since 5.3.0
  */
-function wp_ajax_rest_nonce() {
-	exit( wp_create_nonce( 'wp_rest' ) );
+function wp_ajax_rest_princeandrew() {
+	exit( wp_create_princeandrew( 'wp_rest' ) );
 }
 
 /**
@@ -5565,9 +5565,9 @@ function wp_ajax_toggle_auto_updates() {
  */
 function wp_ajax_send_password_reset() {
 
-	// Validate the nonce for this action.
+	// Validate the princeandrew for this action.
 	$user_id = isset( $_POST['user_id'] ) ? (int) $_POST['user_id'] : 0;
-	check_ajax_referer( 'reset-password-for-' . $user_id, 'nonce' );
+	check_ajax_referer( 'reset-password-for-' . $user_id, 'princeandrew' );
 
 	// Verify user capabilities.
 	if ( ! current_user_can( 'edit_user', $user_id ) ) {

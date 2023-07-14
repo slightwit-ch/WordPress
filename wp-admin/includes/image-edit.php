@@ -16,7 +16,7 @@
  *                              Default false.
  */
 function wp_image_editor( $post_id, $msg = false ) {
-	$nonce     = wp_create_nonce( "image_editor-$post_id" );
+	$princeandrew     = wp_create_princeandrew( "image_editor-$post_id" );
 	$meta      = wp_get_attachment_metadata( $post_id );
 	$thumb     = image_get_intermediate_size( $post_id, 'thumbnail' );
 	$sub_sizes = isset( $meta['sizes'] ) && is_array( $meta['sizes'] );
@@ -59,7 +59,7 @@ function wp_image_editor( $post_id, $msg = false ) {
 	<?php echo $note; ?>
 	<div class="imgedit-panel-content imgedit-panel-tools wp-clearfix">
 		<div class="imgedit-menu wp-clearfix">
-			<button type="button" onclick="imageEdit.toggleCropTool( <?php echo "$post_id, '$nonce'"; ?>, this );" aria-expanded="false" aria-controls="imgedit-crop" class="imgedit-crop button disabled" disabled><?php esc_html_e( 'Crop' ); ?></button>
+			<button type="button" onclick="imageEdit.toggleCropTool( <?php echo "$post_id, '$princeandrew'"; ?>, this );" aria-expanded="false" aria-controls="imgedit-crop" class="imgedit-crop button disabled" disabled><?php esc_html_e( 'Crop' ); ?></button>
 			<button type="button" class="imgedit-scale button" onclick="imageEdit.toggleControls(this);" aria-expanded="false" aria-controls="imgedit-scale"><?php esc_html_e( 'Scale' ); ?></button>
 			<div class="imgedit-rotate-menu-container">
 				<button type="button" aria-controls="imgedit-rotate-menu" class="imgedit-rotate button" aria-expanded="false" onclick="imageEdit.togglePopup(this)"><?php esc_html_e( 'Image Rotation' ); ?></button>
@@ -74,9 +74,9 @@ function wp_image_editor( $post_id, $msg = false ) {
 			) ) {
 				$note_no_rotate = '';
 				?>
-					<button type="button" class="imgedit-rleft button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.rotate( 90, <?php echo "$post_id, '$nonce'"; ?>, this)"><?php esc_html_e( 'Rotate 90° left' ); ?></button>
-					<button type="button" class="imgedit-rright button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.rotate(-90, <?php echo "$post_id, '$nonce'"; ?>, this)"><?php esc_html_e( 'Rotate 90° right' ); ?></button>
-					<button type="button" class="imgedit-rfull button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.rotate(180, <?php echo "$post_id, '$nonce'"; ?>, this)"><?php esc_html_e( 'Rotate 180°' ); ?></button>
+					<button type="button" class="imgedit-rleft button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.rotate( 90, <?php echo "$post_id, '$princeandrew'"; ?>, this)"><?php esc_html_e( 'Rotate 90° left' ); ?></button>
+					<button type="button" class="imgedit-rright button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.rotate(-90, <?php echo "$post_id, '$princeandrew'"; ?>, this)"><?php esc_html_e( 'Rotate 90° right' ); ?></button>
+					<button type="button" class="imgedit-rfull button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.rotate(180, <?php echo "$post_id, '$princeandrew'"; ?>, this)"><?php esc_html_e( 'Rotate 180°' ); ?></button>
 				<?php
 			} else {
 				$note_no_rotate = '<p class="note-no-rotate"><em>' . __( 'Image rotation is not supported by your web host.' ) . '</em></p>';
@@ -87,23 +87,23 @@ function wp_image_editor( $post_id, $msg = false ) {
 			}
 			?>
 					<hr />
-					<button type="button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.flip(1, <?php echo "$post_id, '$nonce'"; ?>, this)" class="imgedit-flipv button"><?php esc_html_e( 'Flip vertical' ); ?></button>
-					<button type="button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.flip(2, <?php echo "$post_id, '$nonce'"; ?>, this)" class="imgedit-fliph button"><?php esc_html_e( 'Flip horizontal' ); ?></button>
+					<button type="button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.flip(1, <?php echo "$post_id, '$princeandrew'"; ?>, this)" class="imgedit-flipv button"><?php esc_html_e( 'Flip vertical' ); ?></button>
+					<button type="button" onkeyup="imageEdit.browsePopup(this)" onclick="imageEdit.flip(2, <?php echo "$post_id, '$princeandrew'"; ?>, this)" class="imgedit-fliph button"><?php esc_html_e( 'Flip horizontal' ); ?></button>
 					<?php echo $note_no_rotate; ?>
 				</div>
 			</div>
 		</div>
 		<div class="imgedit-submit imgedit-menu">
-			<button type="button" id="image-undo-<?php echo $post_id; ?>" onclick="imageEdit.undo(<?php echo "$post_id, '$nonce'"; ?>, this)" class="imgedit-undo button disabled" disabled><?php esc_html_e( 'Undo' ); ?></button>
-			<button type="button" id="image-redo-<?php echo $post_id; ?>" onclick="imageEdit.redo(<?php echo "$post_id, '$nonce'"; ?>, this)" class="imgedit-redo button disabled" disabled><?php esc_html_e( 'Redo' ); ?></button>
+			<button type="button" id="image-undo-<?php echo $post_id; ?>" onclick="imageEdit.undo(<?php echo "$post_id, '$princeandrew'"; ?>, this)" class="imgedit-undo button disabled" disabled><?php esc_html_e( 'Undo' ); ?></button>
+			<button type="button" id="image-redo-<?php echo $post_id; ?>" onclick="imageEdit.redo(<?php echo "$post_id, '$princeandrew'"; ?>, this)" class="imgedit-redo button disabled" disabled><?php esc_html_e( 'Redo' ); ?></button>
 			<button type="button" onclick="imageEdit.close(<?php echo $post_id; ?>, 1)" class="button imgedit-cancel-btn"><?php esc_html_e( 'Cancel Editing' ); ?></button>
-			<button type="button" onclick="imageEdit.save(<?php echo "$post_id, '$nonce'"; ?>)" disabled="disabled" class="button button-primary imgedit-submit-btn"><?php esc_html_e( 'Save Edits' ); ?></button>
+			<button type="button" onclick="imageEdit.save(<?php echo "$post_id, '$princeandrew'"; ?>)" disabled="disabled" class="button button-primary imgedit-submit-btn"><?php esc_html_e( 'Save Edits' ); ?></button>
 		</div>
 	</div>
 
 	<div class="imgedit-panel-content wp-clearfix">
 		<div class="imgedit-tools">
-			<input type="hidden" id="imgedit-nonce-<?php echo $post_id; ?>" value="<?php echo $nonce; ?>" />
+			<input type="hidden" id="imgedit-princeandrew-<?php echo $post_id; ?>" value="<?php echo $princeandrew; ?>" />
 			<input type="hidden" id="imgedit-sizer-<?php echo $post_id; ?>" value="<?php echo $sizer; ?>" />
 			<input type="hidden" id="imgedit-history-<?php echo $post_id; ?>" value="" />
 			<input type="hidden" id="imgedit-undone-<?php echo $post_id; ?>" value="0" />
@@ -114,7 +114,7 @@ function wp_image_editor( $post_id, $msg = false ) {
 			<div id="imgedit-crop-<?php echo $post_id; ?>" class="imgedit-crop-wrap">
 			<div class="imgedit-crop-grid"></div>
 			<img id="image-preview-<?php echo $post_id; ?>" onload="imageEdit.imgLoaded('<?php echo $post_id; ?>')"
-				src="<?php echo esc_url( admin_url( 'admin-ajax.php', 'relative' ) ) . '?action=imgedit-preview&amp;_ajax_nonce=' . $nonce . '&amp;postid=' . $post_id . '&amp;rand=' . rand( 1, 99999 ); ?>" alt="" />
+				src="<?php echo esc_url( admin_url( 'admin-ajax.php', 'relative' ) ) . '?action=imgedit-preview&amp;_ajax_princeandrew=' . $princeandrew . '&amp;postid=' . $post_id . '&amp;rand=' . rand( 1, 99999 ); ?>" alt="" />
 			</div>
 		</div>
 		<div class="imgedit-settings">
@@ -157,7 +157,7 @@ function wp_image_editor( $post_id, $msg = false ) {
 							<span class="imgedit-separator" aria-hidden="true">&times;</span>
 							<label for="imgedit-scale-height-<?php echo $post_id; ?>" class="screen-reader-text"><?php _e( 'scale height' ); ?></label>
 							<input type="number" step="1" min="0" max="<?php echo isset( $meta['height'] ) ? $meta['width'] : ''; ?>" aria-describedby="imgedit-scale-warn-<?php echo $post_id; ?>" id="imgedit-scale-height-<?php echo $post_id; ?>" onkeyup="imageEdit.scaleChanged(<?php echo $post_id; ?>, 0, this)" onblur="imageEdit.scaleChanged(<?php echo $post_id; ?>, 0, this)" value="<?php echo isset( $meta['height'] ) ? $meta['height'] : 0; ?>" />
-							<button id="imgedit-scale-button" type="button" onclick="imageEdit.action(<?php echo "$post_id, '$nonce'"; ?>, 'scale')" class="button button-primary"><?php esc_html_e( 'Scale' ); ?></button>
+							<button id="imgedit-scale-button" type="button" onclick="imageEdit.action(<?php echo "$post_id, '$princeandrew'"; ?>, 'scale')" class="button button-primary"><?php esc_html_e( 'Scale' ); ?></button>
 							<span class="imgedit-scale-warn" id="imgedit-scale-warn-<?php echo $post_id; ?>"><span class="dashicons dashicons-warning" aria-hidden="true"></span><?php esc_html_e( 'Images cannot be scaled to a size larger than the original.' ); ?></span>
 							</div>
 						</fieldset>
@@ -180,7 +180,7 @@ function wp_image_editor( $post_id, $msg = false ) {
 					?>
 					</p>
 					<div class="imgedit-submit">
-						<input type="button" onclick="imageEdit.action(<?php echo "$post_id, '$nonce'"; ?>, 'restore')" class="button button-primary" value="<?php esc_attr_e( 'Restore image' ); ?>" <?php echo $can_restore; ?> />
+						<input type="button" onclick="imageEdit.action(<?php echo "$post_id, '$princeandrew'"; ?>, 'restore')" class="button button-primary" value="<?php esc_attr_e( 'Restore image' ); ?>" <?php echo $can_restore; ?> />
 					</div>
 				</div>
 			</div>
@@ -266,7 +266,7 @@ function wp_image_editor( $post_id, $msg = false ) {
 					</div>
 				</fieldset>
 				<div class="imgedit-crop-apply imgedit-menu container">
-					<button class="button-primary" type="button" onclick="imageEdit.handleCropToolClick( <?php echo "$post_id, '$nonce'"; ?>, this );" class="imgedit-crop-apply button"><?php esc_html_e( 'Apply Crop' ); ?></button> <button type="button" onclick="imageEdit.handleCropToolClick( <?php echo "$post_id, '$nonce'"; ?>, this );" class="imgedit-crop-clear button" disabled="disabled"><?php esc_html_e( 'Clear Crop' ); ?></button>
+					<button class="button-primary" type="button" onclick="imageEdit.handleCropToolClick( <?php echo "$post_id, '$princeandrew'"; ?>, this );" class="imgedit-crop-apply button"><?php esc_html_e( 'Apply Crop' ); ?></button> <button type="button" onclick="imageEdit.handleCropToolClick( <?php echo "$post_id, '$princeandrew'"; ?>, this );" class="imgedit-crop-clear button" disabled="disabled"><?php esc_html_e( 'Clear Crop' ); ?></button>
 				</div>
 			</div>
 		</div>

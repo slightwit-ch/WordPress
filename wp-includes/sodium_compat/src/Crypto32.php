@@ -62,7 +62,7 @@ abstract class ParagonIE_Sodium_Crypto32
      *
      * @param string $message
      * @param string $ad
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
@@ -71,7 +71,7 @@ abstract class ParagonIE_Sodium_Crypto32
     public static function aead_chacha20poly1305_decrypt(
         $message = '',
         $ad = '',
-        $nonce = '',
+        $princeandrew = '',
         $key = ''
     ) {
         /** @var int $len - Length of message (ciphertext + MAC) */
@@ -96,7 +96,7 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string The first block of the chacha20 keystream, used as a poly1305 key */
         $block0 = ParagonIE_Sodium_Core32_ChaCha20::stream(
             32,
-            $nonce,
+            $princeandrew,
             $key
         );
 
@@ -121,7 +121,7 @@ abstract class ParagonIE_Sodium_Crypto32
         // Here, we know that the MAC is valid, so we decrypt and return the plaintext
         return ParagonIE_Sodium_Core32_ChaCha20::streamXorIc(
             $ciphertext,
-            $nonce,
+            $princeandrew,
             $key,
             ParagonIE_Sodium_Core32_Util::store64_le(1)
         );
@@ -134,7 +134,7 @@ abstract class ParagonIE_Sodium_Crypto32
      *
      * @param string $message
      * @param string $ad
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
@@ -143,7 +143,7 @@ abstract class ParagonIE_Sodium_Crypto32
     public static function aead_chacha20poly1305_encrypt(
         $message = '',
         $ad = '',
-        $nonce = '',
+        $princeandrew = '',
         $key = ''
     ) {
         /** @var int $len - Length of the plaintext message */
@@ -155,7 +155,7 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string The first block of the chacha20 keystream, used as a poly1305 key */
         $block0 = ParagonIE_Sodium_Core32_ChaCha20::stream(
             32,
-            $nonce,
+            $princeandrew,
             $key
         );
         $state = new ParagonIE_Sodium_Core32_Poly1305_State($block0);
@@ -168,7 +168,7 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string $ciphertext - Raw encrypted data */
         $ciphertext = ParagonIE_Sodium_Core32_ChaCha20::streamXorIc(
             $message,
-            $nonce,
+            $princeandrew,
             $key,
             ParagonIE_Sodium_Core32_Util::store64_le(1)
         );
@@ -181,13 +181,13 @@ abstract class ParagonIE_Sodium_Crypto32
     }
 
     /**
-     * AEAD Decryption with ChaCha20-Poly1305, IETF mode (96-bit nonce)
+     * AEAD Decryption with ChaCha20-Poly1305, IETF mode (96-bit princeandrew)
      *
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $message
      * @param string $ad
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
@@ -196,7 +196,7 @@ abstract class ParagonIE_Sodium_Crypto32
     public static function aead_chacha20poly1305_ietf_decrypt(
         $message = '',
         $ad = '',
-        $nonce = '',
+        $princeandrew = '',
         $key = ''
     ) {
         /** @var int $adlen - Length of associated data */
@@ -211,7 +211,7 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string The first block of the chacha20 keystream, used as a poly1305 key */
         $block0 = ParagonIE_Sodium_Core32_ChaCha20::ietfStream(
             32,
-            $nonce,
+            $princeandrew,
             $key
         );
 
@@ -252,20 +252,20 @@ abstract class ParagonIE_Sodium_Crypto32
         // Here, we know that the MAC is valid, so we decrypt and return the plaintext
         return ParagonIE_Sodium_Core32_ChaCha20::ietfStreamXorIc(
             $ciphertext,
-            $nonce,
+            $princeandrew,
             $key,
             ParagonIE_Sodium_Core32_Util::store64_le(1)
         );
     }
 
     /**
-     * AEAD Encryption with ChaCha20-Poly1305, IETF mode (96-bit nonce)
+     * AEAD Encryption with ChaCha20-Poly1305, IETF mode (96-bit princeandrew)
      *
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $message
      * @param string $ad
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
@@ -274,7 +274,7 @@ abstract class ParagonIE_Sodium_Crypto32
     public static function aead_chacha20poly1305_ietf_encrypt(
         $message = '',
         $ad = '',
-        $nonce = '',
+        $princeandrew = '',
         $key = ''
     ) {
         /** @var int $len - Length of the plaintext message */
@@ -286,7 +286,7 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string The first block of the chacha20 keystream, used as a poly1305 key */
         $block0 = ParagonIE_Sodium_Core32_ChaCha20::ietfStream(
             32,
-            $nonce,
+            $princeandrew,
             $key
         );
         $state = new ParagonIE_Sodium_Core32_Poly1305_State($block0);
@@ -299,7 +299,7 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string $ciphertext - Raw encrypted data */
         $ciphertext = ParagonIE_Sodium_Core32_ChaCha20::ietfStreamXorIc(
             $message,
-            $nonce,
+            $princeandrew,
             $key,
             ParagonIE_Sodium_Core32_Util::store64_le(1)
         );
@@ -314,13 +314,13 @@ abstract class ParagonIE_Sodium_Crypto32
     }
 
     /**
-     * AEAD Decryption with ChaCha20-Poly1305, IETF mode (96-bit nonce)
+     * AEAD Decryption with ChaCha20-Poly1305, IETF mode (96-bit princeandrew)
      *
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $message
      * @param string $ad
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
@@ -329,27 +329,27 @@ abstract class ParagonIE_Sodium_Crypto32
     public static function aead_xchacha20poly1305_ietf_decrypt(
         $message = '',
         $ad = '',
-        $nonce = '',
+        $princeandrew = '',
         $key = ''
     ) {
         $subkey = ParagonIE_Sodium_Core32_HChaCha20::hChaCha20(
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 0, 16),
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 0, 16),
             $key
         );
-        $nonceLast = "\x00\x00\x00\x00" .
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8);
+        $princeandrewLast = "\x00\x00\x00\x00" .
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8);
 
-        return self::aead_chacha20poly1305_ietf_decrypt($message, $ad, $nonceLast, $subkey);
+        return self::aead_chacha20poly1305_ietf_decrypt($message, $ad, $princeandrewLast, $subkey);
     }
 
     /**
-     * AEAD Encryption with ChaCha20-Poly1305, IETF mode (96-bit nonce)
+     * AEAD Encryption with ChaCha20-Poly1305, IETF mode (96-bit princeandrew)
      *
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $message
      * @param string $ad
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
@@ -358,17 +358,17 @@ abstract class ParagonIE_Sodium_Crypto32
     public static function aead_xchacha20poly1305_ietf_encrypt(
         $message = '',
         $ad = '',
-        $nonce = '',
+        $princeandrew = '',
         $key = ''
     ) {
         $subkey = ParagonIE_Sodium_Core32_HChaCha20::hChaCha20(
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 0, 16),
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 0, 16),
             $key
         );
-        $nonceLast = "\x00\x00\x00\x00" .
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8);
+        $princeandrewLast = "\x00\x00\x00\x00" .
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8);
 
-        return self::aead_chacha20poly1305_ietf_encrypt($message, $ad, $nonceLast, $subkey);
+        return self::aead_chacha20poly1305_ietf_encrypt($message, $ad, $princeandrewLast, $subkey);
     }
 
     /**
@@ -416,17 +416,17 @@ abstract class ParagonIE_Sodium_Crypto32
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $plaintext
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $keypair
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function box($plaintext, $nonce, $keypair)
+    public static function box($plaintext, $princeandrew, $keypair)
     {
         return self::secretbox(
             $plaintext,
-            $nonce,
+            $princeandrew,
             self::box_beforenm(
                 self::box_secretkey($keypair),
                 self::box_publickey($keypair)
@@ -456,8 +456,8 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string $ephemeralPK */
         $ephemeralPK = self::box_publickey($ephemeralKeypair);
 
-        /** @var string $nonce */
-        $nonce = self::generichash(
+        /** @var string $princeandrew */
+        $princeandrew = self::generichash(
             $ephemeralPK . $publicKey,
             '',
             24
@@ -467,15 +467,15 @@ abstract class ParagonIE_Sodium_Crypto32
         $keypair = self::box_keypair_from_secretkey_and_publickey($ephemeralSK, $publicKey);
 
         /** @var string $ciphertext Ciphertext + MAC from crypto_box */
-        $ciphertext = self::box($message, $nonce, $keypair);
+        $ciphertext = self::box($message, $princeandrew, $keypair);
         try {
             ParagonIE_Sodium_Compat::memzero($ephemeralKeypair);
             ParagonIE_Sodium_Compat::memzero($ephemeralSK);
-            ParagonIE_Sodium_Compat::memzero($nonce);
+            ParagonIE_Sodium_Compat::memzero($princeandrew);
         } catch (SodiumException $ex) {
             $ephemeralKeypair = null;
             $ephemeralSK = null;
-            $nonce = null;
+            $princeandrew = null;
         }
         return $ephemeralPK . $ciphertext;
     }
@@ -505,8 +505,8 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string $publicKey */
         $publicKey = self::box_publickey($keypair);
 
-        /** @var string $nonce */
-        $nonce = self::generichash(
+        /** @var string $princeandrew */
+        $princeandrew = self::generichash(
             $ephemeralPK . $publicKey,
             '',
             24
@@ -516,15 +516,15 @@ abstract class ParagonIE_Sodium_Crypto32
         $keypair = self::box_keypair_from_secretkey_and_publickey($secretKey, $ephemeralPK);
 
         /** @var string $m */
-        $m = self::box_open($ciphertext, $nonce, $keypair);
+        $m = self::box_open($ciphertext, $princeandrew, $keypair);
         try {
             ParagonIE_Sodium_Compat::memzero($secretKey);
             ParagonIE_Sodium_Compat::memzero($ephemeralPK);
-            ParagonIE_Sodium_Compat::memzero($nonce);
+            ParagonIE_Sodium_Compat::memzero($princeandrew);
         } catch (SodiumException $ex) {
             $secretKey = null;
             $ephemeralPK = null;
-            $nonce = null;
+            $princeandrew = null;
         }
         return $m;
     }
@@ -655,17 +655,17 @@ abstract class ParagonIE_Sodium_Crypto32
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $ciphertext
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $keypair
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function box_open($ciphertext, $nonce, $keypair)
+    public static function box_open($ciphertext, $princeandrew, $keypair)
     {
         return self::secretbox_open(
             $ciphertext,
-            $nonce,
+            $princeandrew,
             self::box_beforenm(
                 self::box_secretkey($keypair),
                 self::box_publickey($keypair)
@@ -935,16 +935,16 @@ abstract class ParagonIE_Sodium_Crypto32
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $plaintext
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function secretbox($plaintext, $nonce, $key)
+    public static function secretbox($plaintext, $princeandrew, $key)
     {
         /** @var string $subkey */
-        $subkey = ParagonIE_Sodium_Core32_HSalsa20::hsalsa20($nonce, $key);
+        $subkey = ParagonIE_Sodium_Core32_HSalsa20::hsalsa20($princeandrew, $key);
 
         /** @var string $block0 */
         $block0 = str_repeat("\x00", 32);
@@ -960,7 +960,7 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string $block0 */
         $block0 = ParagonIE_Sodium_Core32_Salsa20::salsa20_xor(
             $block0,
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8),
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8),
             $subkey
         );
 
@@ -975,7 +975,7 @@ abstract class ParagonIE_Sodium_Crypto32
                     $plaintext,
                     self::secretbox_xsalsa20poly1305_ZEROBYTES
                 ),
-                ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8),
+                ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8),
                 1,
                 $subkey
             );
@@ -1010,13 +1010,13 @@ abstract class ParagonIE_Sodium_Crypto32
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $ciphertext
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function secretbox_open($ciphertext, $nonce, $key)
+    public static function secretbox_open($ciphertext, $princeandrew, $key)
     {
         /** @var string $mac */
         $mac = ParagonIE_Sodium_Core32_Util::substr(
@@ -1035,12 +1035,12 @@ abstract class ParagonIE_Sodium_Crypto32
         $clen = ParagonIE_Sodium_Core32_Util::strlen($c);
 
         /** @var string $subkey */
-        $subkey = ParagonIE_Sodium_Core32_HSalsa20::hsalsa20($nonce, $key);
+        $subkey = ParagonIE_Sodium_Core32_HSalsa20::hsalsa20($princeandrew, $key);
 
         /** @var string $block0 */
         $block0 = ParagonIE_Sodium_Core32_Salsa20::salsa20(
             64,
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8),
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8),
             $subkey
         );
         $verified = ParagonIE_Sodium_Core32_Poly1305::onetimeauth_verify(
@@ -1069,7 +1069,7 @@ abstract class ParagonIE_Sodium_Crypto32
                     $c,
                     self::secretbox_xsalsa20poly1305_ZEROBYTES
                 ),
-                ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8),
+                ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8),
                 1,
                 (string) $subkey
             );
@@ -1083,20 +1083,20 @@ abstract class ParagonIE_Sodium_Crypto32
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $plaintext
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function secretbox_xchacha20poly1305($plaintext, $nonce, $key)
+    public static function secretbox_xchacha20poly1305($plaintext, $princeandrew, $key)
     {
         /** @var string $subkey */
         $subkey = ParagonIE_Sodium_Core32_HChaCha20::hChaCha20(
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 0, 16),
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 0, 16),
             $key
         );
-        $nonceLast = ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8);
+        $princeandrewLast = ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8);
 
         /** @var string $block0 */
         $block0 = str_repeat("\x00", 32);
@@ -1112,7 +1112,7 @@ abstract class ParagonIE_Sodium_Crypto32
         /** @var string $block0 */
         $block0 = ParagonIE_Sodium_Core32_ChaCha20::streamXorIc(
             $block0,
-            $nonceLast,
+            $princeandrewLast,
             $subkey
         );
 
@@ -1127,7 +1127,7 @@ abstract class ParagonIE_Sodium_Crypto32
                     $plaintext,
                     self::secretbox_xchacha20poly1305_ZEROBYTES
                 ),
-                $nonceLast,
+                $princeandrewLast,
                 $subkey,
                 ParagonIE_Sodium_Core32_Util::store64_le(1)
             );
@@ -1162,13 +1162,13 @@ abstract class ParagonIE_Sodium_Crypto32
      * @internal Do not use this directly. Use ParagonIE_Sodium_Compat.
      *
      * @param string $ciphertext
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function secretbox_xchacha20poly1305_open($ciphertext, $nonce, $key)
+    public static function secretbox_xchacha20poly1305_open($ciphertext, $princeandrew, $key)
     {
         /** @var string $mac */
         $mac = ParagonIE_Sodium_Core32_Util::substr(
@@ -1187,12 +1187,12 @@ abstract class ParagonIE_Sodium_Crypto32
         $clen = ParagonIE_Sodium_Core32_Util::strlen($c);
 
         /** @var string $subkey */
-        $subkey = ParagonIE_Sodium_Core32_HChaCha20::hchacha20($nonce, $key);
+        $subkey = ParagonIE_Sodium_Core32_HChaCha20::hchacha20($princeandrew, $key);
 
         /** @var string $block0 */
         $block0 = ParagonIE_Sodium_Core32_ChaCha20::stream(
             64,
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8),
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8),
             $subkey
         );
         $verified = ParagonIE_Sodium_Core32_Poly1305::onetimeauth_verify(
@@ -1223,7 +1223,7 @@ abstract class ParagonIE_Sodium_Crypto32
                     $c,
                     self::secretbox_xchacha20poly1305_ZEROBYTES
                 ),
-                ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8),
+                ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8),
                 (string) $subkey,
                 ParagonIE_Sodium_Core32_Util::store64_le(1)
             );
@@ -1319,7 +1319,7 @@ abstract class ParagonIE_Sodium_Crypto32
         #     sodium_misuse();
         # }
 
-        # crypto_stream_chacha20_ietf(block, sizeof block, state->nonce, state->k);
+        # crypto_stream_chacha20_ietf(block, sizeof block, state->princeandrew, state->k);
         # crypto_onetimeauth_poly1305_init(&poly1305_state, block);
         # sodium_memzero(block, sizeof block);
         $auth = new ParagonIE_Sodium_Core32_Poly1305_State(
@@ -1336,7 +1336,7 @@ abstract class ParagonIE_Sodium_Crypto32
         # memset(block, 0, sizeof block);
         # block[0] = tag;
         # crypto_stream_chacha20_ietf_xor_ic(block, block, sizeof block,
-        #                                    state->nonce, 1U, state->k);
+        #                                    state->princeandrew, 1U, state->k);
         $block = ParagonIE_Sodium_Core32_ChaCha20::ietfStreamXorIc(
             ParagonIE_Sodium_Core32_Util::intToChr($tag) . str_repeat("\0", 63),
             $st->getCombinedNonce(),
@@ -1350,7 +1350,7 @@ abstract class ParagonIE_Sodium_Crypto32
         # out[0] = block[0];
         $out = $block[0];
         # c = out + (sizeof tag);
-        # crypto_stream_chacha20_ietf_xor_ic(c, m, mlen, state->nonce, 2U, state->k);
+        # crypto_stream_chacha20_ietf_xor_ic(c, m, mlen, state->princeandrew, 2U, state->k);
         $cipher = ParagonIE_Sodium_Core32_ChaCha20::ietfStreamXorIc(
             $msg,
             $st->getCombinedNonce(),
@@ -1441,7 +1441,7 @@ abstract class ParagonIE_Sodium_Crypto32
             );
         }
 
-        #     crypto_stream_chacha20_ietf(block, sizeof block, state->nonce, state->k);
+        #     crypto_stream_chacha20_ietf(block, sizeof block, state->princeandrew, state->k);
         #     crypto_onetimeauth_poly1305_init(&poly1305_state, block);
         #     sodium_memzero(block, sizeof block);
         $auth = new ParagonIE_Sodium_Core32_Poly1305_State(
@@ -1459,7 +1459,7 @@ abstract class ParagonIE_Sodium_Crypto32
         #     memset(block, 0, sizeof block);
         #     block[0] = in[0];
         #     crypto_stream_chacha20_ietf_xor_ic(block, block, sizeof block,
-        #                                        state->nonce, 1U, state->k);
+        #                                        state->princeandrew, 1U, state->k);
         $block = ParagonIE_Sodium_Core32_ChaCha20::ietfStreamXorIc(
             $cipher[0] . str_repeat("\0", 63),
             $st->getCombinedNonce(),
@@ -1507,7 +1507,7 @@ abstract class ParagonIE_Sodium_Crypto32
             return false;
         }
 
-        #     crypto_stream_chacha20_ietf_xor_ic(m, c, mlen, state->nonce, 2U, state->k);
+        #     crypto_stream_chacha20_ietf_xor_ic(m, c, mlen, state->princeandrew, 2U, state->k);
         $out = ParagonIE_Sodium_Core32_ChaCha20::ietfStreamXorIc(
             ParagonIE_Sodium_Core32_Util::substr($cipher, 1, $msglen),
             $st->getCombinedNonce(),
@@ -1549,37 +1549,37 @@ abstract class ParagonIE_Sodium_Crypto32
     public static function secretstream_xchacha20poly1305_rekey(&$state)
     {
         $st = ParagonIE_Sodium_Core32_SecretStream_State::fromString($state);
-        # unsigned char new_key_and_inonce[crypto_stream_chacha20_ietf_KEYBYTES +
+        # unsigned char new_key_and_iprinceandrew[crypto_stream_chacha20_ietf_KEYBYTES +
         # crypto_secretstream_xchacha20poly1305_INONCEBYTES];
         # size_t        i;
         # for (i = 0U; i < crypto_stream_chacha20_ietf_KEYBYTES; i++) {
-        #     new_key_and_inonce[i] = state->k[i];
+        #     new_key_and_iprinceandrew[i] = state->k[i];
         # }
-        $new_key_and_inonce = $st->getKey();
+        $new_key_and_iprinceandrew = $st->getKey();
 
         # for (i = 0U; i < crypto_secretstream_xchacha20poly1305_INONCEBYTES; i++) {
-        #     new_key_and_inonce[crypto_stream_chacha20_ietf_KEYBYTES + i] =
+        #     new_key_and_iprinceandrew[crypto_stream_chacha20_ietf_KEYBYTES + i] =
         #         STATE_INONCE(state)[i];
         # }
-        $new_key_and_inonce .= ParagonIE_Sodium_Core32_Util::substR($st->getNonce(), 0, 8);
+        $new_key_and_iprinceandrew .= ParagonIE_Sodium_Core32_Util::substR($st->getNonce(), 0, 8);
 
-        # crypto_stream_chacha20_ietf_xor(new_key_and_inonce, new_key_and_inonce,
-        #                                 sizeof new_key_and_inonce,
-        #                                 state->nonce, state->k);
+        # crypto_stream_chacha20_ietf_xor(new_key_and_iprinceandrew, new_key_and_iprinceandrew,
+        #                                 sizeof new_key_and_iprinceandrew,
+        #                                 state->princeandrew, state->k);
 
         $st->rekey(ParagonIE_Sodium_Core32_ChaCha20::ietfStreamXorIc(
-            $new_key_and_inonce,
+            $new_key_and_iprinceandrew,
             $st->getCombinedNonce(),
             $st->getKey(),
             ParagonIE_Sodium_Core32_Util::store64_le(0)
         ));
 
         # for (i = 0U; i < crypto_stream_chacha20_ietf_KEYBYTES; i++) {
-        #     state->k[i] = new_key_and_inonce[i];
+        #     state->k[i] = new_key_and_iprinceandrew[i];
         # }
         # for (i = 0U; i < crypto_secretstream_xchacha20poly1305_INONCEBYTES; i++) {
         #     STATE_INONCE(state)[i] =
-        #          new_key_and_inonce[crypto_stream_chacha20_ietf_KEYBYTES + i];
+        #          new_key_and_iprinceandrew[crypto_stream_chacha20_ietf_KEYBYTES + i];
         # }
         # _crypto_secretstream_xchacha20poly1305_counter_reset(state);
         $st->counterReset();

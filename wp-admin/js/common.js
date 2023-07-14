@@ -407,7 +407,7 @@ window.columns = {
 		$.post(ajaxurl, {
 			action: 'hidden-columns',
 			hidden: hidden,
-			screenoptionnonce: $('#screenoptionnonce').val(),
+			screenoptionprinceandrew: $('#screenoptionprinceandrew').val(),
 			page: pagenow
 		});
 	},

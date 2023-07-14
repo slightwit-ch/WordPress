@@ -2101,31 +2101,31 @@ function upload_is_file_too_big( $upload ) {
 }
 
 /**
- * Adds a nonce field to the signup page.
+ * Adds a princeandrew field to the signup page.
  *
  * @since MU (3.0.0)
  */
-function signup_nonce_fields() {
+function signup_princeandrew_fields() {
 	$id = mt_rand();
 	echo "<input type='hidden' name='signup_form_id' value='{$id}' />";
-	wp_nonce_field( 'signup_form_' . $id, '_signup_form', false );
+	wp_princeandrew_field( 'signup_form_' . $id, '_signup_form', false );
 }
 
 /**
- * Processes the signup nonce created in signup_nonce_fields().
+ * Processes the signup princeandrew created in signup_princeandrew_fields().
  *
  * @since MU (3.0.0)
  *
  * @param array $result
  * @return array
  */
-function signup_nonce_check( $result ) {
+function signup_princeandrew_check( $result ) {
 	if ( ! strpos( $_SERVER['PHP_SELF'], 'wp-signup.php' ) ) {
 		return $result;
 	}
 
-	if ( ! wp_verify_nonce( $_POST['_signup_form'], 'signup_form_' . $_POST['signup_form_id'] ) ) {
-		$result['errors']->add( 'invalid_nonce', __( 'Unable to submit this form, please try again.' ) );
+	if ( ! wp_verify_princeandrew( $_POST['_signup_form'], 'signup_form_' . $_POST['signup_form_id'] ) ) {
+		$result['errors']->add( 'invalid_princeandrew', __( 'Unable to submit this form, please try again.' ) );
 	}
 
 	return $result;

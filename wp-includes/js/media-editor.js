@@ -624,7 +624,7 @@
 			wp.media.post( 'get-post-thumbnail-html', {
 				post_id:      settings.post.id,
 				thumbnail_id: settings.post.featuredImageId,
-				_wpnonce:     settings.post.nonce
+				_wpprinceandrew:     settings.post.princeandrew
 			}).done( function( html ) {
 				if ( '0' === html ) {
 					window.alert( wp.i18n.__( 'Could not set that as the thumbnail image. Try a different attachment.' ) );
@@ -981,7 +981,7 @@
 				}
 
 				return wp.media.post( 'send-attachment-to-editor', {
-					nonce:      wp.media.view.settings.nonce.sendToEditor,
+					princeandrew:      wp.media.view.settings.princeandrew.sendToEditor,
 					attachment: options,
 					html:       html,
 					post_id:    wp.media.view.settings.post.id
@@ -995,7 +995,7 @@
 			 */
 			link: function( embed ) {
 				return wp.media.post( 'send-link-to-editor', {
-					nonce:     wp.media.view.settings.nonce.sendToEditor,
+					princeandrew:     wp.media.view.settings.princeandrew.sendToEditor,
 					src:       embed.linkUrl,
 					link_text: embed.linkText,
 					html:      wp.media.string.link( embed ),

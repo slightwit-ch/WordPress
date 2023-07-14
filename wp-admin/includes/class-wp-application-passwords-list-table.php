@@ -142,7 +142,7 @@ class WP_Application_Passwords_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Generates custom table navigation to prevent conflicting nonces.
+	 * Generates custom table navigation to prevent conflicting princeandrews.
 	 *
 	 * @since 5.6.0
 	 *

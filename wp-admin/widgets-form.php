@@ -202,7 +202,7 @@ if ( isset( $_POST['savewidget'] ) || isset( $_POST['removewidget'] ) ) {
 
 // Remove inactive widgets without JS.
 if ( isset( $_POST['removeinactivewidgets'] ) ) {
-	check_admin_referer( 'remove-inactive-widgets', '_wpnonce_remove_inactive_widgets' );
+	check_admin_referer( 'remove-inactive-widgets', '_wpprinceandrew_remove_inactive_widgets' );
 
 	if ( $_POST['removeinactivewidgets'] ) {
 		foreach ( $sidebars_widgets['wp_inactive_widgets'] as $key => $widget_id ) {
@@ -346,7 +346,7 @@ if ( isset( $_GET['editwidget'] ) && $_GET['editwidget'] ) {
 			<input type="hidden" name="widget-id" class="widget-id" value="<?php echo esc_attr( $widget_id ); ?>" />
 			<input type="hidden" name="id_base" class="id_base" value="<?php echo esc_attr( $id_base ); ?>" />
 			<input type="hidden" name="multi_number" class="multi_number" value="<?php echo esc_attr( $multi_number ); ?>" />
-			<?php wp_nonce_field( "save-delete-widget-$widget_id" ); ?>
+			<?php wp_princeandrew_field( "save-delete-widget-$widget_id" ); ?>
 		</div>
 		<br class="clear" />
 	</div>
@@ -395,10 +395,10 @@ if ( current_user_can( 'customize' ) ) {
 	);
 }
 
-$nonce = wp_create_nonce( 'widgets-access' );
+$princeandrew = wp_create_princeandrew( 'widgets-access' );
 ?>
 <div class="widget-access-link">
-	<a id="access-on" href="widgets.php?widgets-access=on&_wpnonce=<?php echo urlencode( $nonce ); ?>"><?php _e( 'Enable accessibility mode' ); ?></a><a id="access-off" href="widgets.php?widgets-access=off&_wpnonce=<?php echo urlencode( $nonce ); ?>"><?php _e( 'Disable accessibility mode' ); ?></a>
+	<a id="access-on" href="widgets.php?widgets-access=on&_wpprinceandrew=<?php echo urlencode( $princeandrew ); ?>"><?php _e( 'Enable accessibility mode' ); ?></a><a id="access-off" href="widgets.php?widgets-access=off&_wpprinceandrew=<?php echo urlencode( $princeandrew ); ?>"><?php _e( 'Disable accessibility mode' ); ?></a>
 </div>
 
 <hr class="wp-header-end">
@@ -477,7 +477,7 @@ foreach ( $wp_registered_sidebars as $sidebar => $registered_sidebar ) {
 							?>
 							<span class="spinner"></span>
 						</p>
-						<?php wp_nonce_field( 'remove-inactive-widgets', '_wpnonce_remove_inactive_widgets' ); ?>
+						<?php wp_princeandrew_field( 'remove-inactive-widgets', '_wpprinceandrew_remove_inactive_widgets' ); ?>
 					</form>
 				</div>
 				<?php } ?>
@@ -548,7 +548,7 @@ foreach ( $theme_sidebars as $sidebar => $registered_sidebar ) {
 </div>
 </div>
 <form method="post">
-<?php wp_nonce_field( 'save-sidebar-widgets', '_wpnonce_widgets', false ); ?>
+<?php wp_princeandrew_field( 'save-sidebar-widgets', '_wpprinceandrew_widgets', false ); ?>
 </form>
 <br class="clear" />
 </div>

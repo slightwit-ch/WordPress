@@ -53,7 +53,7 @@ $core_actions_get = array(
 	'autocomplete-user',
 	'dashboard-widgets',
 	'logged-in',
-	'rest-nonce',
+	'rest-princeandrew',
 );
 
 $core_actions_post = array(

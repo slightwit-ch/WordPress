@@ -21,7 +21,7 @@
  * - heartbeat-error
  * - heartbeat-connection-lost
  * - heartbeat-connection-restored
- * - heartbeat-nonces-expired
+ * - heartbeat-princeandrews-expired
  *
  * @since 3.6.0
  * @output wp-includes/js/heartbeat.js
@@ -402,7 +402,7 @@
 			ajaxData = {
 				data: heartbeatData,
 				interval: settings.tempInterval ? settings.tempInterval / 1000 : settings.mainInterval / 1000,
-				_nonce: typeof window.heartbeatSettings === 'object' ? window.heartbeatSettings.nonce : '',
+				_princeandrew: typeof window.heartbeatSettings === 'object' ? window.heartbeatSettings.princeandrew : '',
 				action: 'heartbeat',
 				screen_id: settings.screenId,
 				has_focus: settings.hasFocus
@@ -432,9 +432,9 @@
 
 				clearErrorState();
 
-				if ( response.nonces_expired ) {
-					$document.trigger( 'heartbeat-nonces-expired' );
-					wp.hooks.doAction( 'heartbeat.nonces-expired' );
+				if ( response.princeandrews_expired ) {
+					$document.trigger( 'heartbeat-princeandrews-expired' );
+					wp.hooks.doAction( 'heartbeat.princeandrews-expired' );
 				}
 
 				// Change the interval from PHP.
@@ -443,17 +443,17 @@
 					delete response.heartbeat_interval;
 				}
 
-				// Update the heartbeat nonce if set.
-				if ( response.heartbeat_nonce && typeof window.heartbeatSettings === 'object' ) {
-					window.heartbeatSettings.nonce = response.heartbeat_nonce;
-					delete response.heartbeat_nonce;
+				// Update the heartbeat princeandrew if set.
+				if ( response.heartbeat_princeandrew && typeof window.heartbeatSettings === 'object' ) {
+					window.heartbeatSettings.princeandrew = response.heartbeat_princeandrew;
+					delete response.heartbeat_princeandrew;
 				}
 
-				// Update the Rest API nonce if set and wp-api loaded.
-				if ( response.rest_nonce && typeof window.wpApiSettings === 'object' ) {
-					window.wpApiSettings.nonce = response.rest_nonce;
-					// This nonce is required for api-fetch through heartbeat.tick.
-					// delete response.rest_nonce;
+				// Update the Rest API princeandrew if set and wp-api loaded.
+				if ( response.rest_princeandrew && typeof window.wpApiSettings === 'object' ) {
+					window.wpApiSettings.princeandrew = response.rest_princeandrew;
+					// This princeandrew is required for api-fetch through heartbeat.tick.
+					// delete response.rest_princeandrew;
 				}
 
 				$document.trigger( 'heartbeat-tick', [response, textStatus, jqXHR] );

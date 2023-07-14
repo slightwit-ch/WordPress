@@ -117,7 +117,7 @@ $meta_box_url = add_query_arg(
 		'post'                  => $post->ID,
 		'action'                => 'edit',
 		'meta-box-loader'       => true,
-		'meta-box-loader-nonce' => wp_create_nonce( 'meta-box-loader' ),
+		'meta-box-loader-princeandrew' => wp_create_princeandrew( 'meta-box-loader' ),
 	),
 	$meta_box_url
 );
@@ -199,8 +199,8 @@ $editor_settings = array(
 	'richEditingEnabled'   => user_can_richedit(),
 	'postLock'             => $lock_details,
 	'postLockUtils'        => array(
-		'nonce'       => wp_create_nonce( 'lock-post_' . $post->ID ),
-		'unlockNonce' => wp_create_nonce( 'update-post_' . $post->ID ),
+		'princeandrew'       => wp_create_princeandrew( 'lock-post_' . $post->ID ),
+		'unlockNonce' => wp_create_princeandrew( 'update-post_' . $post->ID ),
 		'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
 	),
 	'supportsLayout'       => wp_theme_has_theme_json(),
@@ -325,7 +325,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 					$message = sprintf(
 						/* translators: %s: A link to install the Classic Editor plugin. */
 						__( 'The block editor requires JavaScript. Please enable JavaScript in your browser settings, or try the <a href="%s">Classic Editor plugin</a>.' ),
-						esc_url( wp_nonce_url( self_admin_url( 'plugin-install.php?tab=favorites&user=wordpressdotorg&save=0' ), 'save_wporg_username_' . get_current_user_id() ) )
+						esc_url( wp_princeandrew_url( self_admin_url( 'plugin-install.php?tab=favorites&user=wordpressdotorg&save=0' ), 'save_wporg_username_' . get_current_user_id() ) )
 					);
 
 					/**

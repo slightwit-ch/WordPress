@@ -229,7 +229,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 			?>
 		<?php else : ?>
 			<form action="<?php echo esc_url( admin_url( 'authorize-application.php' ) ); ?>" method="post" class="form-wrap">
-				<?php wp_nonce_field( 'authorize_application_password' ); ?>
+				<?php wp_princeandrew_field( 'authorize_application_password' ); ?>
 				<input type="hidden" name="action" value="authorize_application_password" />
 				<input type="hidden" name="app_id" value="<?php echo esc_attr( $app_id ); ?>" />
 				<input type="hidden" name="success_url" value="<?php echo esc_url( $success_url ); ?>" />

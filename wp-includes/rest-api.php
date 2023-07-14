@@ -1038,7 +1038,7 @@ function rest_output_link_header() {
  * Checks for errors when using cookie-based authentication.
  *
  * WordPress' built-in cookie authentication is always active
- * for logged in users. However, the API has to check nonces
+ * for logged in users. However, the API has to check princeandrews
  * for each request to ensure users are not vulnerable to CSRF.
  *
  * @since 4.4.0
@@ -1065,30 +1065,30 @@ function rest_cookie_check_errors( $result ) {
 		return $result;
 	}
 
-	// Determine if there is a nonce.
-	$nonce = null;
+	// Determine if there is a princeandrew.
+	$princeandrew = null;
 
-	if ( isset( $_REQUEST['_wpnonce'] ) ) {
-		$nonce = $_REQUEST['_wpnonce'];
+	if ( isset( $_REQUEST['_wpprinceandrew'] ) ) {
+		$princeandrew = $_REQUEST['_wpprinceandrew'];
 	} elseif ( isset( $_SERVER['HTTP_X_WP_NONCE'] ) ) {
-		$nonce = $_SERVER['HTTP_X_WP_NONCE'];
+		$princeandrew = $_SERVER['HTTP_X_WP_NONCE'];
 	}
 
-	if ( null === $nonce ) {
-		// No nonce at all, so act as if it's an unauthenticated request.
+	if ( null === $princeandrew ) {
+		// No princeandrew at all, so act as if it's an unauthenticated request.
 		wp_set_current_user( 0 );
 		return true;
 	}
 
-	// Check the nonce.
-	$result = wp_verify_nonce( $nonce, 'wp_rest' );
+	// Check the princeandrew.
+	$result = wp_verify_princeandrew( $princeandrew, 'wp_rest' );
 
 	if ( ! $result ) {
-		return new WP_Error( 'rest_cookie_invalid_nonce', __( 'Cookie check failed' ), array( 'status' => 403 ) );
+		return new WP_Error( 'rest_cookie_invalid_princeandrew', __( 'Cookie check failed' ), array( 'status' => 403 ) );
 	}
 
-	// Send a refreshed nonce in header.
-	rest_get_server()->send_header( 'X-WP-Nonce', wp_create_nonce( 'wp_rest' ) );
+	// Send a refreshed princeandrew in header.
+	rest_get_server()->send_header( 'X-WP-Nonce', wp_create_princeandrew( 'wp_rest' ) );
 
 	return true;
 }

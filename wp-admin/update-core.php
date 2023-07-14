@@ -157,7 +157,7 @@ function list_core_update( $update ) {
 	echo '</p>';
 
 	echo '<form method="post" action="' . esc_url( $form_action ) . '" name="upgrade" class="upgrade">';
-	wp_nonce_field( 'upgrade-core' );
+	wp_princeandrew_field( 'upgrade-core' );
 
 	echo '<p>';
 	echo '<input name="version" value="' . esc_attr( $update->current ) . '" type="hidden" />';
@@ -405,7 +405,7 @@ function core_auto_updates_settings() {
 				echo '<br />';
 				printf(
 					'<a href="%s" class="core-auto-update-settings-link core-auto-update-settings-link-disable">%s</a>',
-					wp_nonce_url( add_query_arg( 'value', 'disable', $action_url ), 'core-major-auto-updates-nonce' ),
+					wp_princeandrew_url( add_query_arg( 'value', 'disable', $action_url ), 'core-major-auto-updates-princeandrew' ),
 					__( 'Switch to automatic updates for maintenance and security releases only.' )
 				);
 			}
@@ -416,7 +416,7 @@ function core_auto_updates_settings() {
 				echo '<br />';
 				printf(
 					'<a href="%s" class="core-auto-update-settings-link core-auto-update-settings-link-enable">%s</a>',
-					wp_nonce_url( add_query_arg( 'value', 'enable', $action_url ), 'core-major-auto-updates-nonce' ),
+					wp_princeandrew_url( add_query_arg( 'value', 'enable', $action_url ), 'core-major-auto-updates-princeandrew' ),
 					__( 'Enable automatic updates for all new versions of WordPress.' )
 				);
 			}
@@ -481,7 +481,7 @@ function list_plugin_updates() {
 </h2>
 <p><?php _e( 'The following plugins have new versions available. Check the ones you want to update and then click &#8220;Update Plugins&#8221;.' ); ?></p>
 <form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-plugins" class="upgrade">
-	<?php wp_nonce_field( 'upgrade-core' ); ?>
+	<?php wp_princeandrew_field( 'upgrade-core' ); ?>
 <p><input id="upgrade-plugins" class="button" type="submit" value="<?php esc_attr_e( 'Update Plugins' ); ?>" name="upgrade" /></p>
 <table class="widefat updates-table" id="update-plugins-table">
 	<thead>
@@ -657,7 +657,7 @@ function list_theme_updates() {
 	?>
 </p>
 <form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-themes" class="upgrade">
-	<?php wp_nonce_field( 'upgrade-core' ); ?>
+	<?php wp_princeandrew_field( 'upgrade-core' ); ?>
 <p><input id="upgrade-themes" class="button" type="submit" value="<?php esc_attr_e( 'Update Themes' ); ?>" name="upgrade" /></p>
 <table class="widefat updates-table" id="update-themes-table">
 	<thead>
@@ -816,7 +816,7 @@ function list_translation_updates() {
 	<h2><?php _e( 'Translations' ); ?></h2>
 	<form method="post" action="<?php echo esc_url( $form_action ); ?>" name="upgrade-translations" class="upgrade">
 		<p><?php _e( 'New translations are available.' ); ?></p>
-		<?php wp_nonce_field( 'upgrade-translations' ); ?>
+		<?php wp_princeandrew_field( 'upgrade-translations' ); ?>
 		<p><input class="button" type="submit" value="<?php esc_attr_e( 'Update Translations' ); ?>" name="upgrade" /></p>
 	</form>
 	<?php
@@ -841,7 +841,7 @@ function do_core_upgrade( $reinstall = false ) {
 	} else {
 		$url = 'update-core.php?action=do-core-upgrade';
 	}
-	$url = wp_nonce_url( $url, 'upgrade-core' );
+	$url = wp_princeandrew_url( $url, 'upgrade-core' );
 
 	$version = isset( $_POST['version'] ) ? $_POST['version'] : false;
 	$locale  = isset( $_POST['locale'] ) ? $_POST['locale'] : 'en_US';
@@ -943,7 +943,7 @@ function do_dismiss_core_update() {
 		return;
 	}
 	dismiss_core_update( $update );
-	wp_redirect( wp_nonce_url( 'update-core.php?action=upgrade-core', 'upgrade-core' ) );
+	wp_redirect( wp_princeandrew_url( 'update-core.php?action=upgrade-core', 'upgrade-core' ) );
 	exit;
 }
 
@@ -960,7 +960,7 @@ function do_undismiss_core_update() {
 		return;
 	}
 	undismiss_core_update( $version, $locale );
-	wp_redirect( wp_nonce_url( 'update-core.php?action=upgrade-core', 'upgrade-core' ) );
+	wp_redirect( wp_princeandrew_url( 'update-core.php?action=upgrade-core', 'upgrade-core' ) );
 	exit;
 }
 
@@ -1179,7 +1179,7 @@ if ( 'upgrade-core' === $action ) {
 	}
 
 	$url = 'update.php?action=update-selected&plugins=' . urlencode( implode( ',', $plugins ) );
-	$url = wp_nonce_url( $url, 'bulk-update-plugins' );
+	$url = wp_princeandrew_url( $url, 'bulk-update-plugins' );
 
 	// Used in the HTML title tag.
 	$title = __( 'Update Plugins' );
@@ -1220,7 +1220,7 @@ if ( 'upgrade-core' === $action ) {
 	}
 
 	$url = 'update.php?action=update-selected-themes&themes=' . urlencode( implode( ',', $themes ) );
-	$url = wp_nonce_url( $url, 'bulk-update-themes' );
+	$url = wp_princeandrew_url( $url, 'bulk-update-themes' );
 
 	// Used in the HTML title tag.
 	$title = __( 'Update Themes' );
@@ -1255,11 +1255,11 @@ if ( 'upgrade-core' === $action ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 
 	$url     = 'update-core.php?action=do-translation-upgrade';
-	$nonce   = 'upgrade-translations';
+	$princeandrew   = 'upgrade-translations';
 	$title   = __( 'Update Translations' );
 	$context = WP_LANG_DIR;
 
-	$upgrader = new Language_Pack_Upgrader( new Language_Pack_Upgrader_Skin( compact( 'url', 'nonce', 'title', 'context' ) ) );
+	$upgrader = new Language_Pack_Upgrader( new Language_Pack_Upgrader_Skin( compact( 'url', 'princeandrew', 'title', 'context' ) ) );
 	$result   = $upgrader->bulk_upgrade();
 
 	wp_localize_script(
@@ -1281,7 +1281,7 @@ if ( 'upgrade-core' === $action ) {
 	$redirect_url = self_admin_url( 'update-core.php' );
 
 	if ( isset( $_GET['value'] ) ) {
-		check_admin_referer( 'core-major-auto-updates-nonce' );
+		check_admin_referer( 'core-major-auto-updates-princeandrew' );
 
 		if ( 'enable' === $_GET['value'] ) {
 			update_site_option( 'auto_update_core_major', 'enabled' );

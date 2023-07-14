@@ -238,7 +238,7 @@ jQuery( function( $ ) {
 				ajaxurl,
 				{
 					'action': 'health-check-site-status-result',
-					'_wpnonce': SiteHealth.nonce.site_status_result,
+					'_wpprinceandrew': SiteHealth.princeandrew.site_status_result,
 					'counts': SiteHealth.site_status.issues
 				}
 			);
@@ -262,7 +262,7 @@ jQuery( function( $ ) {
 			$.each( SiteHealth.site_status.async, function() {
 				var data = {
 					'action': 'health-check-' + this.test.replace( '_', '-' ),
-					'_wpnonce': SiteHealth.nonce.site_status
+					'_wpprinceandrew': SiteHealth.princeandrew.site_status
 				};
 
 				if ( this.completed ) {

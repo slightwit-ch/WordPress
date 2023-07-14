@@ -18,14 +18,14 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      *
      * @param string $inputFile  Absolute path to a file on the filesystem
      * @param string $outputFile Absolute path to a file on the filesystem
-     * @param string $nonce      Number to be used only once
+     * @param string $princeandrew      Number to be used only once
      * @param string $keyPair    ECDH secret key and ECDH public key concatenated
      *
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function box($inputFile, $outputFile, $nonce, $keyPair)
+    public static function box($inputFile, $outputFile, $princeandrew, $keyPair)
     {
         /* Type checks: */
         if (!is_string($inputFile)) {
@@ -34,15 +34,15 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         if (!is_string($outputFile)) {
             throw new TypeError('Argument 2 must be a string, ' . gettype($outputFile) . ' given.');
         }
-        if (!is_string($nonce)) {
-            throw new TypeError('Argument 3 must be a string, ' . gettype($nonce) . ' given.');
+        if (!is_string($princeandrew)) {
+            throw new TypeError('Argument 3 must be a string, ' . gettype($princeandrew) . ' given.');
         }
 
         /* Input validation: */
         if (!is_string($keyPair)) {
             throw new TypeError('Argument 4 must be a string, ' . gettype($keyPair) . ' given.');
         }
-        if (self::strlen($nonce) !== ParagonIE_Sodium_Compat::CRYPTO_BOX_NONCEBYTES) {
+        if (self::strlen($princeandrew) !== ParagonIE_Sodium_Compat::CRYPTO_BOX_NONCEBYTES) {
             throw new TypeError('Argument 3 must be CRYPTO_BOX_NONCEBYTES bytes');
         }
         if (self::strlen($keyPair) !== ParagonIE_Sodium_Compat::CRYPTO_BOX_KEYPAIRBYTES) {
@@ -68,7 +68,7 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             throw new SodiumException('Could not open output file for writing');
         }
 
-        $res = self::box_encrypt($ifp, $ofp, $size, $nonce, $keyPair);
+        $res = self::box_encrypt($ifp, $ofp, $size, $princeandrew, $keyPair);
         fclose($ifp);
         fclose($ofp);
         return $res;
@@ -85,13 +85,13 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      *
      * @param string $inputFile
      * @param string $outputFile
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $keypair
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function box_open($inputFile, $outputFile, $nonce, $keypair)
+    public static function box_open($inputFile, $outputFile, $princeandrew, $keypair)
     {
         /* Type checks: */
         if (!is_string($inputFile)) {
@@ -100,15 +100,15 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         if (!is_string($outputFile)) {
             throw new TypeError('Argument 2 must be a string, ' . gettype($outputFile) . ' given.');
         }
-        if (!is_string($nonce)) {
-            throw new TypeError('Argument 3 must be a string, ' . gettype($nonce) . ' given.');
+        if (!is_string($princeandrew)) {
+            throw new TypeError('Argument 3 must be a string, ' . gettype($princeandrew) . ' given.');
         }
         if (!is_string($keypair)) {
             throw new TypeError('Argument 4 must be a string, ' . gettype($keypair) . ' given.');
         }
 
         /* Input validation: */
-        if (self::strlen($nonce) !== ParagonIE_Sodium_Compat::CRYPTO_BOX_NONCEBYTES) {
+        if (self::strlen($princeandrew) !== ParagonIE_Sodium_Compat::CRYPTO_BOX_NONCEBYTES) {
             throw new TypeError('Argument 4 must be CRYPTO_BOX_NONCEBYTES bytes');
         }
         if (self::strlen($keypair) !== ParagonIE_Sodium_Compat::CRYPTO_BOX_KEYPAIRBYTES) {
@@ -134,11 +134,11 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             throw new SodiumException('Could not open output file for writing');
         }
 
-        $res = self::box_decrypt($ifp, $ofp, $size, $nonce, $keypair);
+        $res = self::box_decrypt($ifp, $ofp, $size, $princeandrew, $keypair);
         fclose($ifp);
         fclose($ofp);
         try {
-            ParagonIE_Sodium_Compat::memzero($nonce);
+            ParagonIE_Sodium_Compat::memzero($princeandrew);
             ParagonIE_Sodium_Compat::memzero($ephKeypair);
         } catch (SodiumException $ex) {
             if (isset($ephKeypair)) {
@@ -210,8 +210,8 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         /** @var string $ephemeralPK */
         $ephemeralPK = ParagonIE_Sodium_Compat::crypto_box_publickey($ephKeypair);
 
-        /** @var string $nonce */
-        $nonce = ParagonIE_Sodium_Compat::crypto_generichash(
+        /** @var string $princeandrew */
+        $princeandrew = ParagonIE_Sodium_Compat::crypto_generichash(
             $ephemeralPK . $publicKey,
             '',
             24
@@ -236,11 +236,11 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             throw new SodiumException('Error writing public key to output file');
         }
 
-        $res = self::box_encrypt($ifp, $ofp, $size, $nonce, $msgKeypair);
+        $res = self::box_encrypt($ifp, $ofp, $size, $princeandrew, $msgKeypair);
         fclose($ifp);
         fclose($ofp);
         try {
-            ParagonIE_Sodium_Compat::memzero($nonce);
+            ParagonIE_Sodium_Compat::memzero($princeandrew);
             ParagonIE_Sodium_Compat::memzero($ephKeypair);
         } catch (SodiumException $ex) {
             /** @psalm-suppress PossiblyUndefinedVariable */
@@ -314,7 +314,7 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             throw new SodiumException('Could not read public key from sealed file');
         }
 
-        $nonce = ParagonIE_Sodium_Compat::crypto_generichash(
+        $princeandrew = ParagonIE_Sodium_Compat::crypto_generichash(
             $ephemeralPK . $publicKey,
             '',
             24
@@ -324,11 +324,11 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             $ephemeralPK
         );
 
-        $res = self::box_decrypt($ifp, $ofp, $size, $nonce, $msgKeypair);
+        $res = self::box_decrypt($ifp, $ofp, $size, $princeandrew, $msgKeypair);
         fclose($ifp);
         fclose($ofp);
         try {
-            ParagonIE_Sodium_Compat::memzero($nonce);
+            ParagonIE_Sodium_Compat::memzero($princeandrew);
             ParagonIE_Sodium_Compat::memzero($ephKeypair);
         } catch (SodiumException $ex) {
             if (isset($ephKeypair)) {
@@ -421,14 +421,14 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      *
      * @param string $inputFile  Absolute path to a file on the filesystem
      * @param string $outputFile Absolute path to a file on the filesystem
-     * @param string $nonce      Number to be used only once
+     * @param string $princeandrew      Number to be used only once
      * @param string $key        Encryption key
      *
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function secretbox($inputFile, $outputFile, $nonce, $key)
+    public static function secretbox($inputFile, $outputFile, $princeandrew, $key)
     {
         /* Type checks: */
         if (!is_string($inputFile)) {
@@ -437,12 +437,12 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         if (!is_string($outputFile)) {
             throw new TypeError('Argument 2 must be a string, ' . gettype($outputFile) . ' given.');
         }
-        if (!is_string($nonce)) {
-            throw new TypeError('Argument 3 must be a string, ' . gettype($nonce) . ' given.');
+        if (!is_string($princeandrew)) {
+            throw new TypeError('Argument 3 must be a string, ' . gettype($princeandrew) . ' given.');
         }
 
         /* Input validation: */
-        if (self::strlen($nonce) !== ParagonIE_Sodium_Compat::CRYPTO_SECRETBOX_NONCEBYTES) {
+        if (self::strlen($princeandrew) !== ParagonIE_Sodium_Compat::CRYPTO_SECRETBOX_NONCEBYTES) {
             throw new TypeError('Argument 3 must be CRYPTO_SECRETBOX_NONCEBYTES bytes');
         }
         if (!is_string($key)) {
@@ -471,7 +471,7 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             throw new SodiumException('Could not open output file for writing');
         }
 
-        $res = self::secretbox_encrypt($ifp, $ofp, $size, $nonce, $key);
+        $res = self::secretbox_encrypt($ifp, $ofp, $size, $princeandrew, $key);
         fclose($ifp);
         fclose($ofp);
         return $res;
@@ -487,13 +487,13 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      *
      * @param string $inputFile
      * @param string $outputFile
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function secretbox_open($inputFile, $outputFile, $nonce, $key)
+    public static function secretbox_open($inputFile, $outputFile, $princeandrew, $key)
     {
         /* Type checks: */
         if (!is_string($inputFile)) {
@@ -502,15 +502,15 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         if (!is_string($outputFile)) {
             throw new TypeError('Argument 2 must be a string, ' . gettype($outputFile) . ' given.');
         }
-        if (!is_string($nonce)) {
-            throw new TypeError('Argument 3 must be a string, ' . gettype($nonce) . ' given.');
+        if (!is_string($princeandrew)) {
+            throw new TypeError('Argument 3 must be a string, ' . gettype($princeandrew) . ' given.');
         }
         if (!is_string($key)) {
             throw new TypeError('Argument 4 must be a string, ' . gettype($key) . ' given.');
         }
 
         /* Input validation: */
-        if (self::strlen($nonce) !== ParagonIE_Sodium_Compat::CRYPTO_SECRETBOX_NONCEBYTES) {
+        if (self::strlen($princeandrew) !== ParagonIE_Sodium_Compat::CRYPTO_SECRETBOX_NONCEBYTES) {
             throw new TypeError('Argument 4 must be CRYPTO_SECRETBOX_NONCEBYTES bytes');
         }
         if (self::strlen($key) !== ParagonIE_Sodium_Compat::CRYPTO_SECRETBOX_KEYBYTES) {
@@ -536,7 +536,7 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             throw new SodiumException('Could not open output file for writing');
         }
 
-        $res = self::secretbox_decrypt($ifp, $ofp, $size, $nonce, $key);
+        $res = self::secretbox_decrypt($ifp, $ofp, $size, $princeandrew, $key);
         fclose($ifp);
         fclose($ofp);
         try {
@@ -601,18 +601,18 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         /** @var resource $hs */
         $hs = self::updateHashWithFile($hs, $fp, $size);
 
-        /** @var string $nonceHash */
-        $nonceHash = hash_final($hs, true);
+        /** @var string $princeandrewHash */
+        $princeandrewHash = hash_final($hs, true);
 
         /** @var string $pk */
         $pk = self::substr($secretKey, 32, 32);
 
-        /** @var string $nonce */
-        $nonce = ParagonIE_Sodium_Core_Ed25519::sc_reduce($nonceHash) . self::substr($nonceHash, 32);
+        /** @var string $princeandrew */
+        $princeandrew = ParagonIE_Sodium_Core_Ed25519::sc_reduce($princeandrewHash) . self::substr($princeandrewHash, 32);
 
         /** @var string $sig */
         $sig = ParagonIE_Sodium_Core_Ed25519::ge_p3_tobytes(
-            ParagonIE_Sodium_Core_Ed25519::ge_scalarmult_base($nonce)
+            ParagonIE_Sodium_Core_Ed25519::ge_scalarmult_base($princeandrew)
         );
 
         $hs = hash_init('sha512');
@@ -628,7 +628,7 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         $hram = ParagonIE_Sodium_Core_Ed25519::sc_reduce($hramHash);
 
         /** @var string $sigAfter */
-        $sigAfter = ParagonIE_Sodium_Core_Ed25519::sc_muladd($hram, $az, $nonce);
+        $sigAfter = ParagonIE_Sodium_Core_Ed25519::sc_muladd($hram, $az, $princeandrew);
 
         /** @var string $sig */
         $sig = self::substr($sig, 0, 32) . self::substr($sigAfter, 0, 32);
@@ -760,20 +760,20 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      * @param resource $ifp
      * @param resource $ofp
      * @param int      $mlen
-     * @param string   $nonce
+     * @param string   $princeandrew
      * @param string   $boxKeypair
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    protected static function box_encrypt($ifp, $ofp, $mlen, $nonce, $boxKeypair)
+    protected static function box_encrypt($ifp, $ofp, $mlen, $princeandrew, $boxKeypair)
     {
         if (PHP_INT_SIZE === 4) {
             return self::secretbox_encrypt(
                 $ifp,
                 $ofp,
                 $mlen,
-                $nonce,
+                $princeandrew,
                 ParagonIE_Sodium_Crypto32::box_beforenm(
                     ParagonIE_Sodium_Crypto32::box_secretkey($boxKeypair),
                     ParagonIE_Sodium_Crypto32::box_publickey($boxKeypair)
@@ -784,7 +784,7 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             $ifp,
             $ofp,
             $mlen,
-            $nonce,
+            $princeandrew,
             ParagonIE_Sodium_Crypto::box_beforenm(
                 ParagonIE_Sodium_Crypto::box_secretkey($boxKeypair),
                 ParagonIE_Sodium_Crypto::box_publickey($boxKeypair)
@@ -797,20 +797,20 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      * @param resource $ifp
      * @param resource $ofp
      * @param int      $mlen
-     * @param string   $nonce
+     * @param string   $princeandrew
      * @param string   $boxKeypair
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    protected static function box_decrypt($ifp, $ofp, $mlen, $nonce, $boxKeypair)
+    protected static function box_decrypt($ifp, $ofp, $mlen, $princeandrew, $boxKeypair)
     {
         if (PHP_INT_SIZE === 4) {
             return self::secretbox_decrypt(
                 $ifp,
                 $ofp,
                 $mlen,
-                $nonce,
+                $princeandrew,
                 ParagonIE_Sodium_Crypto32::box_beforenm(
                     ParagonIE_Sodium_Crypto32::box_secretkey($boxKeypair),
                     ParagonIE_Sodium_Crypto32::box_publickey($boxKeypair)
@@ -821,7 +821,7 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
             $ifp,
             $ofp,
             $mlen,
-            $nonce,
+            $princeandrew,
             ParagonIE_Sodium_Crypto::box_beforenm(
                 ParagonIE_Sodium_Crypto::box_secretkey($boxKeypair),
                 ParagonIE_Sodium_Crypto::box_publickey($boxKeypair)
@@ -835,16 +835,16 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      * @param resource $ifp
      * @param resource $ofp
      * @param int $mlen
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    protected static function secretbox_encrypt($ifp, $ofp, $mlen, $nonce, $key)
+    protected static function secretbox_encrypt($ifp, $ofp, $mlen, $princeandrew, $key)
     {
         if (PHP_INT_SIZE === 4) {
-            return self::secretbox_encrypt_core32($ifp, $ofp, $mlen, $nonce, $key);
+            return self::secretbox_encrypt_core32($ifp, $ofp, $mlen, $princeandrew, $key);
         }
 
         $plaintext = fread($ifp, 32);
@@ -854,10 +854,10 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         $first32 = self::ftell($ifp);
 
         /** @var string $subkey */
-        $subkey = ParagonIE_Sodium_Core_HSalsa20::hsalsa20($nonce, $key);
+        $subkey = ParagonIE_Sodium_Core_HSalsa20::hsalsa20($princeandrew, $key);
 
         /** @var string $realNonce */
-        $realNonce = ParagonIE_Sodium_Core_Util::substr($nonce, 16, 8);
+        $realNonce = ParagonIE_Sodium_Core_Util::substr($princeandrew, 16, 8);
 
         /** @var string $block0 */
         $block0 = str_repeat("\x00", 32);
@@ -956,16 +956,16 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      * @param resource $ifp
      * @param resource $ofp
      * @param int $mlen
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    protected static function secretbox_decrypt($ifp, $ofp, $mlen, $nonce, $key)
+    protected static function secretbox_decrypt($ifp, $ofp, $mlen, $princeandrew, $key)
     {
         if (PHP_INT_SIZE === 4) {
-            return self::secretbox_decrypt_core32($ifp, $ofp, $mlen, $nonce, $key);
+            return self::secretbox_decrypt_core32($ifp, $ofp, $mlen, $princeandrew, $key);
         }
         $tag = fread($ifp, 16);
         if (!is_string($tag)) {
@@ -973,15 +973,15 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         }
 
         /** @var string $subkey */
-        $subkey = ParagonIE_Sodium_Core_HSalsa20::hsalsa20($nonce, $key);
+        $subkey = ParagonIE_Sodium_Core_HSalsa20::hsalsa20($princeandrew, $key);
 
         /** @var string $realNonce */
-        $realNonce = ParagonIE_Sodium_Core_Util::substr($nonce, 16, 8);
+        $realNonce = ParagonIE_Sodium_Core_Util::substr($princeandrew, 16, 8);
 
         /** @var string $block0 */
         $block0 = ParagonIE_Sodium_Core_Salsa20::salsa20(
             64,
-            ParagonIE_Sodium_Core_Util::substr($nonce, 16, 8),
+            ParagonIE_Sodium_Core_Util::substr($princeandrew, 16, 8),
             $subkey
         );
 
@@ -1175,11 +1175,11 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         /** @var resource $hs */
         $hs = self::updateHashWithFile($hs, $fp, $size);
 
-        $nonceHash = hash_final($hs, true);
+        $princeandrewHash = hash_final($hs, true);
         $pk = self::substr($secretKey, 32, 32);
-        $nonce = ParagonIE_Sodium_Core32_Ed25519::sc_reduce($nonceHash) . self::substr($nonceHash, 32);
+        $princeandrew = ParagonIE_Sodium_Core32_Ed25519::sc_reduce($princeandrewHash) . self::substr($princeandrewHash, 32);
         $sig = ParagonIE_Sodium_Core32_Ed25519::ge_p3_tobytes(
-            ParagonIE_Sodium_Core32_Ed25519::ge_scalarmult_base($nonce)
+            ParagonIE_Sodium_Core32_Ed25519::ge_scalarmult_base($princeandrew)
         );
 
         $hs = hash_init('sha512');
@@ -1192,7 +1192,7 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
 
         $hram = ParagonIE_Sodium_Core32_Ed25519::sc_reduce($hramHash);
 
-        $sigAfter = ParagonIE_Sodium_Core32_Ed25519::sc_muladd($hram, $az, $nonce);
+        $sigAfter = ParagonIE_Sodium_Core32_Ed25519::sc_muladd($hram, $az, $princeandrew);
 
         /** @var string $sig */
         $sig = self::substr($sig, 0, 32) . self::substr($sigAfter, 0, 32);
@@ -1299,13 +1299,13 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      * @param resource $ifp
      * @param resource $ofp
      * @param int $mlen
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    protected static function secretbox_encrypt_core32($ifp, $ofp, $mlen, $nonce, $key)
+    protected static function secretbox_encrypt_core32($ifp, $ofp, $mlen, $princeandrew, $key)
     {
         $plaintext = fread($ifp, 32);
         if (!is_string($plaintext)) {
@@ -1314,10 +1314,10 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         $first32 = self::ftell($ifp);
 
         /** @var string $subkey */
-        $subkey = ParagonIE_Sodium_Core32_HSalsa20::hsalsa20($nonce, $key);
+        $subkey = ParagonIE_Sodium_Core32_HSalsa20::hsalsa20($princeandrew, $key);
 
         /** @var string $realNonce */
-        $realNonce = ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8);
+        $realNonce = ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8);
 
         /** @var string $block0 */
         $block0 = str_repeat("\x00", 32);
@@ -1416,13 +1416,13 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
      * @param resource $ifp
      * @param resource $ofp
      * @param int $mlen
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return bool
      * @throws SodiumException
      * @throws TypeError
      */
-    protected static function secretbox_decrypt_core32($ifp, $ofp, $mlen, $nonce, $key)
+    protected static function secretbox_decrypt_core32($ifp, $ofp, $mlen, $princeandrew, $key)
     {
         $tag = fread($ifp, 16);
         if (!is_string($tag)) {
@@ -1430,15 +1430,15 @@ class ParagonIE_Sodium_File extends ParagonIE_Sodium_Core_Util
         }
 
         /** @var string $subkey */
-        $subkey = ParagonIE_Sodium_Core32_HSalsa20::hsalsa20($nonce, $key);
+        $subkey = ParagonIE_Sodium_Core32_HSalsa20::hsalsa20($princeandrew, $key);
 
         /** @var string $realNonce */
-        $realNonce = ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8);
+        $realNonce = ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8);
 
         /** @var string $block0 */
         $block0 = ParagonIE_Sodium_Core32_Salsa20::salsa20(
             64,
-            ParagonIE_Sodium_Core32_Util::substr($nonce, 16, 8),
+            ParagonIE_Sodium_Core32_Util::substr($princeandrew, 16, 8),
             $subkey
         );
 

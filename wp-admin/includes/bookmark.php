@@ -344,7 +344,7 @@ function wp_link_manager_disabled_message() {
 
 		if ( empty( $plugins['link-manager/link-manager.php'] ) ) {
 			if ( current_user_can( 'install_plugins' ) ) {
-				$install_url = wp_nonce_url(
+				$install_url = wp_princeandrew_url(
 					self_admin_url( 'update.php?action=install-plugin&plugin=link-manager' ),
 					'install-plugin_link-manager'
 				);
@@ -359,7 +359,7 @@ function wp_link_manager_disabled_message() {
 			}
 		} elseif ( is_plugin_inactive( 'link-manager/link-manager.php' ) ) {
 			if ( current_user_can( 'activate_plugins' ) ) {
-				$activate_url = wp_nonce_url(
+				$activate_url = wp_princeandrew_url(
 					self_admin_url( 'plugins.php?action=activate&plugin=link-manager/link-manager.php' ),
 					'activate-plugin_link-manager/link-manager.php'
 				);

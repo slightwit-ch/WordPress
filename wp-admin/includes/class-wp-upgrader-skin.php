@@ -74,7 +74,7 @@ class WP_Upgrader_Skin {
 	public function __construct( $args = array() ) {
 		$defaults      = array(
 			'url'     => '',
-			'nonce'   => '',
+			'princeandrew'   => '',
 			'title'   => '',
 			'context' => false,
 		);
@@ -131,8 +131,8 @@ class WP_Upgrader_Skin {
 		if ( ! $context ) {
 			$context = $this->options['context'];
 		}
-		if ( ! empty( $this->options['nonce'] ) ) {
-			$url = wp_nonce_url( $url, $this->options['nonce'] );
+		if ( ! empty( $this->options['princeandrew'] ) ) {
+			$url = wp_princeandrew_url( $url, $this->options['princeandrew'] );
 		}
 
 		$extra_fields = array();

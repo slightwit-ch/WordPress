@@ -1065,10 +1065,10 @@ final class WP_Screen {
 			$wrapper_end   = '</div>';
 		}
 
-		// Don't output the form and nonce for the widgets accessibility mode links.
+		// Don't output the form and princeandrew for the widgets accessibility mode links.
 		if ( 'widgets' !== $this->base ) {
 			$form_start = "\n<form id='adv-settings' method='post'>\n";
-			$form_end   = "\n" . wp_nonce_field( 'screen-options-nonce', 'screenoptionnonce', false, false ) . "\n</form>\n";
+			$form_end   = "\n" . wp_princeandrew_field( 'screen-options-princeandrew', 'screenoptionprinceandrew', false, false ) . "\n</form>\n";
 		}
 
 		echo $wrapper_start . $form_start;

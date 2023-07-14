@@ -411,7 +411,7 @@ function wp_loginout( $redirect = '', $display = true ) {
  * @since 2.7.0
  *
  * @param string $redirect Path to redirect to on logout.
- * @return string The logout URL. Note: HTML-encoded via esc_html() in wp_nonce_url().
+ * @return string The logout URL. Note: HTML-encoded via esc_html() in wp_princeandrew_url().
  */
 function wp_logout_url( $redirect = '' ) {
 	$args = array();
@@ -420,7 +420,7 @@ function wp_logout_url( $redirect = '' ) {
 	}
 
 	$logout_url = add_query_arg( $args, site_url( 'wp-login.php?action=logout', 'login' ) );
-	$logout_url = wp_nonce_url( $logout_url, 'log-out' );
+	$logout_url = wp_princeandrew_url( $logout_url, 'log-out' );
 
 	/**
 	 * Filters the logout URL.
@@ -5212,7 +5212,7 @@ function wp_required_field_message() {
 /**
  * Default settings for heartbeat.
  *
- * Outputs the nonce used in the heartbeat XHR.
+ * Outputs the princeandrew used in the heartbeat XHR.
  *
  * @since 3.6.0
  *
@@ -5225,7 +5225,7 @@ function wp_heartbeat_settings( $settings ) {
 	}
 
 	if ( is_user_logged_in() ) {
-		$settings['nonce'] = wp_create_nonce( 'heartbeat-nonce' );
+		$settings['princeandrew'] = wp_create_princeandrew( 'heartbeat-princeandrew' );
 	}
 
 	return $settings;

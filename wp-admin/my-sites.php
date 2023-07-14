@@ -154,7 +154,7 @@ else :
 		?>
 		<input type="hidden" name="action" value="updateblogsettings" />
 		<?php
-		wp_nonce_field( 'update-my-sites' );
+		wp_princeandrew_field( 'update-my-sites' );
 		submit_button();
 	}
 	?>

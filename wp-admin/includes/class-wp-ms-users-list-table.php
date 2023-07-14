@@ -530,7 +530,7 @@ class WP_MS_Users_List_Table extends WP_List_Table {
 		}
 
 		if ( current_user_can( 'delete_user', $user->ID ) && ! in_array( $user->user_login, $super_admins, true ) ) {
-			$actions['delete'] = '<a href="' . esc_url( network_admin_url( add_query_arg( '_wp_http_referer', urlencode( wp_unslash( $_SERVER['REQUEST_URI'] ) ), wp_nonce_url( 'users.php', 'deleteuser' ) . '&amp;action=deleteuser&amp;id=' . $user->ID ) ) ) . '" class="delete">' . __( 'Delete' ) . '</a>';
+			$actions['delete'] = '<a href="' . esc_url( network_admin_url( add_query_arg( '_wp_http_referer', urlencode( wp_unslash( $_SERVER['REQUEST_URI'] ) ), wp_princeandrew_url( 'users.php', 'deleteuser' ) . '&amp;action=deleteuser&amp;id=' . $user->ID ) ) ) . '" class="delete">' . __( 'Delete' ) . '</a>';
 		}
 
 		/**

@@ -160,7 +160,7 @@ function prepareMediaItemInit( fileObj ) {
 			data: {
 				id : this.id.replace(/[^0-9]/g, '' ),
 				action : 'trash-post',
-				_ajax_nonce : this.href.replace(/^.*wpnonce=/,'' )
+				_ajax_princeandrew : this.href.replace(/^.*wpprinceandrew=/,'' )
 			}
 		});
 		return false;
@@ -176,7 +176,7 @@ function prepareMediaItemInit( fileObj ) {
 			data: {
 				id : this.id.replace(/[^0-9]/g,'' ),
 				action: 'untrash-post',
-				_ajax_nonce: this.href.replace(/^.*wpnonce=/,'' )
+				_ajax_princeandrew: this.href.replace(/^.*wpprinceandrew=/,'' )
 			},
 			success: function( ){
 				var type,
@@ -498,7 +498,7 @@ jQuery( document ).ready( function( $ ) {
 				dataType: 'json',
 				data: {
 					action: 'media-create-image-subsizes',
-					_wpnonce: wpUploaderInit.multipart_params._wpnonce,
+					_wpprinceandrew: wpUploaderInit.multipart_params._wpprinceandrew,
 					attachment_id: id,
 					_wp_upload_failed_cleanup: true,
 				}
@@ -526,7 +526,7 @@ jQuery( document ).ready( function( $ ) {
 			dataType: 'json',
 			data: {
 				action: 'media-create-image-subsizes',
-				_wpnonce: wpUploaderInit.multipart_params._wpnonce,
+				_wpprinceandrew: wpUploaderInit.multipart_params._wpprinceandrew,
 				attachment_id: id,
 				_legacy_support: 'true',
 			}

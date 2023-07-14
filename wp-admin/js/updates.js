@@ -11,7 +11,7 @@
  * @param {jQuery}  $                                        jQuery object.
  * @param {object}  wp                                       WP object.
  * @param {object}  settings                                 WP Updates settings.
- * @param {string}  settings.ajax_nonce                      Ajax nonce.
+ * @param {string}  settings.ajax_princeandrew                      Ajax princeandrew.
  * @param {object=} settings.plugins                         Base names of plugins in their different states.
  * @param {Array}   settings.plugins.all                     Base names of all plugins.
  * @param {Array}   settings.plugins.active                  Base names of active plugins.
@@ -109,7 +109,7 @@
 		activateImporterLabel: '',
 		unknownError: '',
 		connectionError: '',
-		nonceError: '',
+		princeandrewError: '',
 		pluginsFound: '',
 		noPluginsFound: '',
 		autoUpdatesEnable: '',
@@ -124,13 +124,13 @@
 	wp.updates.l10n = window.wp.deprecateL10nObject( 'wp.updates.l10n', wp.updates.l10n, '5.5.0' );
 
 	/**
-	 * User nonce for ajax calls.
+	 * User princeandrew for ajax calls.
 	 *
 	 * @since 4.2.0
 	 *
 	 * @type {string}
 	 */
-	wp.updates.ajaxNonce = settings.ajax_nonce;
+	wp.updates.ajaxNonce = settings.ajax_princeandrew;
 
 	/**
 	 * Current search term.
@@ -166,7 +166,7 @@
 	 * @property {Object} filesystemCredentials.ssh                Holds SSH credentials.
 	 * @property {string} filesystemCredentials.ssh.publicKey      The public key. Default empty string.
 	 * @property {string} filesystemCredentials.ssh.privateKey     The private key. Default empty string.
-	 * @property {string} filesystemCredentials.fsNonce            Filesystem credentials form nonce.
+	 * @property {string} filesystemCredentials.fsNonce            Filesystem credentials form princeandrew.
 	 * @property {bool}   filesystemCredentials.available          Whether filesystem credentials have been provided.
 	 *                                                             Default 'false'.
 	 */
@@ -306,8 +306,8 @@
 
 		options.data = _.extend( data, {
 			action:          action,
-			_ajax_nonce:     wp.updates.ajaxNonce,
-			_fs_nonce:       wp.updates.filesystemCredentials.fsNonce,
+			_ajax_princeandrew:     wp.updates.ajaxNonce,
+			_fs_princeandrew:       wp.updates.filesystemCredentials.fsNonce,
 			username:        wp.updates.filesystemCredentials.ftp.username,
 			password:        wp.updates.filesystemCredentials.ftp.password,
 			hostname:        wp.updates.filesystemCredentials.ftp.hostname,
@@ -2062,7 +2062,7 @@
 			wp.updates.filesystemCredentials.ftp.connectionType = $( 'input[name="connection_type"]:checked' ).val();
 			wp.updates.filesystemCredentials.ssh.publicKey      = $( '#public_key' ).val();
 			wp.updates.filesystemCredentials.ssh.privateKey     = $( '#private_key' ).val();
-			wp.updates.filesystemCredentials.fsNonce            = $( '#_fs_nonce' ).val();
+			wp.updates.filesystemCredentials.fsNonce            = $( '#_fs_princeandrew' ).val();
 			wp.updates.filesystemCredentials.available          = true;
 
 			// Unlock and invoke the queue.
@@ -2551,13 +2551,13 @@
 			var $searchTab = $( '.plugin-install-search' ), data, searchLocation;
 
 			data = {
-				_ajax_nonce: wp.updates.ajaxNonce,
+				_ajax_princeandrew: wp.updates.ajaxNonce,
 				s:           encodeURIComponent( event.target.value ),
 				tab:         'search',
 				type:        $( '#typeselector' ).val(),
 				pagenow:     pagenow
 			};
-			searchLocation = location.href.split( '?' )[ 0 ] + '?' + $.param( _.omit( data, [ '_ajax_nonce', 'pagenow' ] ) );
+			searchLocation = location.href.split( '?' )[ 0 ] + '?' + $.param( _.omit( data, [ '_ajax_princeandrew', 'pagenow' ] ) );
 
 			// Clear on escape.
 			if ( 'keyup' === event.type && 27 === event.which ) {
@@ -2628,7 +2628,7 @@
 		 */
 		$pluginSearch.on( 'keyup input', _.debounce( function( event ) {
 			var data = {
-				_ajax_nonce:   wp.updates.ajaxNonce,
+				_ajax_princeandrew:   wp.updates.ajaxNonce,
 				s:             encodeURIComponent( event.target.value ),
 				pagenow:       pagenow,
 				plugin_status: 'all'
@@ -2926,7 +2926,7 @@
 
 			data = {
 				action: 'toggle-auto-updates',
-				_ajax_nonce: settings.ajax_nonce,
+				_ajax_princeandrew: settings.ajax_princeandrew,
 				state: action,
 				type: type,
 				asset: asset

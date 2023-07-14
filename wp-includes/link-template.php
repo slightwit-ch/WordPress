@@ -1588,7 +1588,7 @@ function get_delete_post_link( $post = 0, $deprecated = '', $force_delete = fals
 	 * @param int    $post_id      Post ID.
 	 * @param bool   $force_delete Whether to bypass the Trash and force deletion. Default false.
 	 */
-	return apply_filters( 'get_delete_post_link', wp_nonce_url( $delete_link, "$action-post_{$post->ID}" ), $post->ID, $force_delete );
+	return apply_filters( 'get_delete_post_link', wp_princeandrew_url( $delete_link, "$action-post_{$post->ID}" ), $post->ID, $force_delete );
 }
 
 /**

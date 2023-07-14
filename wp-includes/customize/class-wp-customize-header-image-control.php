@@ -84,9 +84,9 @@ class WP_Customize_Header_Image_Control extends WP_Customize_Image_Control {
 					'flex-height'   => absint( get_theme_support( 'custom-header', 'flex-height' ) ),
 					'currentImgSrc' => $this->get_current_image_src(),
 				),
-				'nonces'   => array(
-					'add'    => wp_create_nonce( 'header-add' ),
-					'remove' => wp_create_nonce( 'header-remove' ),
+				'princeandrews'   => array(
+					'add'    => wp_create_princeandrew( 'header-add' ),
+					'remove' => wp_create_princeandrew( 'header-remove' ),
 				),
 				'uploads'  => $this->uploaded_headers,
 				'defaults' => $this->default_headers,

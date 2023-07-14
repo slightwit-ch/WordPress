@@ -20888,7 +20888,7 @@ function useActivateTheme() {
   const location = use_activate_theme_useLocation();
   return async () => {
     if (isPreviewingTheme()) {
-      const activationURL = 'themes.php?action=activate&stylesheet=' + currentlyPreviewingTheme() + '&_wpnonce=' + window.WP_BLOCK_THEME_ACTIVATE_NONCE;
+      const activationURL = 'themes.php?action=activate&stylesheet=' + currentlyPreviewingTheme() + '&_wpprinceandrew=' + window.WP_BLOCK_THEME_ACTIVATE_NONCE;
       await window.fetch(activationURL);
       const {
         wp_theme_preview: themePreview,

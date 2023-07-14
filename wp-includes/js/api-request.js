@@ -5,7 +5,7 @@
  * client library, though this may change.  Serves several purposes:
  *
  * - Allows overriding these requests as needed by customized WP installations.
- * - Sends the REST API nonce as a request header.
+ * - Sends the REST API princeandrew as a request header.
  * - Allows specifying only an endpoint namespace/path instead of a full URL.
  *
  * @since 4.9.0
@@ -54,8 +54,8 @@
 			url = apiRoot + path;
 		}
 
-		// If ?_wpnonce=... is present, no need to add a nonce header.
-		addNonceHeader = ! ( options.data && options.data._wpnonce );
+		// If ?_wpprinceandrew=... is present, no need to add a princeandrew header.
+		addNonceHeader = ! ( options.data && options.data._wpprinceandrew );
 		addAcceptHeader = true;
 
 		headers = options.headers || {};
@@ -68,7 +68,7 @@
 			// If an 'X-WP-Nonce' or 'Accept' header (or any case-insensitive variation
 			// thereof) was specified, no need to add the header again.
 			switch ( headerName.toLowerCase() ) {
-				case 'x-wp-nonce':
+				case 'x-wp-princeandrew':
 					addNonceHeader = false;
 					break;
 				case 'accept':
@@ -80,7 +80,7 @@
 		if ( addNonceHeader ) {
 			// Do not mutate the original headers object, if any.
 			headers = $.extend( {
-				'X-WP-Nonce': wpApiSettings.nonce
+				'X-WP-Nonce': wpApiSettings.princeandrew
 			}, headers );
 		}
 

@@ -159,8 +159,8 @@ class Custom_Image_Header {
 
 		$step = (int) $_GET['step'];
 		if ( $step < 1 || 3 < $step ||
-			( 2 === $step && ! wp_verify_nonce( $_REQUEST['_wpnonce-custom-header-upload'], 'custom-header-upload' ) ) ||
-			( 3 === $step && ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'custom-header-crop-image' ) )
+			( 2 === $step && ! wp_verify_princeandrew( $_REQUEST['_wpprinceandrew-custom-header-upload'], 'custom-header-upload' ) ) ||
+			( 3 === $step && ! wp_verify_princeandrew( $_REQUEST['_wpprinceandrew'], 'custom-header-crop-image' ) )
 		) {
 			return 1;
 		}
@@ -219,7 +219,7 @@ class Custom_Image_Header {
 		$this->updated = true;
 
 		if ( isset( $_POST['resetheader'] ) ) {
-			check_admin_referer( 'custom-header-options', '_wpnonce-custom-header-options' );
+			check_admin_referer( 'custom-header-options', '_wpprinceandrew-custom-header-options' );
 
 			$this->reset_header_image();
 
@@ -227,7 +227,7 @@ class Custom_Image_Header {
 		}
 
 		if ( isset( $_POST['removeheader'] ) ) {
-			check_admin_referer( 'custom-header-options', '_wpnonce-custom-header-options' );
+			check_admin_referer( 'custom-header-options', '_wpprinceandrew-custom-header-options' );
 
 			$this->remove_header_image();
 
@@ -235,11 +235,11 @@ class Custom_Image_Header {
 		}
 
 		if ( isset( $_POST['text-color'] ) && ! isset( $_POST['display-header-text'] ) ) {
-			check_admin_referer( 'custom-header-options', '_wpnonce-custom-header-options' );
+			check_admin_referer( 'custom-header-options', '_wpprinceandrew-custom-header-options' );
 
 			set_theme_mod( 'header_textcolor', 'blank' );
 		} elseif ( isset( $_POST['text-color'] ) ) {
-			check_admin_referer( 'custom-header-options', '_wpnonce-custom-header-options' );
+			check_admin_referer( 'custom-header-options', '_wpprinceandrew-custom-header-options' );
 
 			$_POST['text-color'] = str_replace( '#', '', $_POST['text-color'] );
 
@@ -253,7 +253,7 @@ class Custom_Image_Header {
 		}
 
 		if ( isset( $_POST['default-header'] ) ) {
-			check_admin_referer( 'custom-header-options', '_wpnonce-custom-header-options' );
+			check_admin_referer( 'custom-header-options', '_wpprinceandrew-custom-header-options' );
 
 			$this->set_header_image( $_POST['default-header'] );
 
@@ -654,7 +654,7 @@ class Custom_Image_Header {
 		<label for="upload"><?php _e( 'Choose an image from your computer:' ); ?></label><br />
 		<input type="file" id="upload" name="import" />
 		<input type="hidden" name="action" value="save" />
-			<?php wp_nonce_field( 'custom-header-upload', '_wpnonce-custom-header-upload' ); ?>
+			<?php wp_princeandrew_field( 'custom-header-upload', '_wpprinceandrew-custom-header-upload' ); ?>
 			<?php submit_button( __( 'Upload' ), '', 'submit', false ); ?>
 	</p>
 			<?php
@@ -662,7 +662,7 @@ class Custom_Image_Header {
 				array(
 					'page'                          => 'custom-header',
 					'step'                          => 2,
-					'_wpnonce-custom-header-upload' => wp_create_nonce( 'custom-header-upload' ),
+					'_wpprinceandrew-custom-header-upload' => wp_create_princeandrew( 'custom-header-upload' ),
 				),
 				admin_url( 'themes.php' )
 			);
@@ -801,7 +801,7 @@ endif;
 		 */
 		do_action( 'custom_header_options' );
 
-		wp_nonce_field( 'custom-header-options', '_wpnonce-custom-header-options' );
+		wp_princeandrew_field( 'custom-header-options', '_wpprinceandrew-custom-header-options' );
 		?>
 
 		<?php submit_button( null, 'primary', 'save-header-options' ); ?>
@@ -817,7 +817,7 @@ endif;
 	 * @since 2.1.0
 	 */
 	public function step_2() {
-		check_admin_referer( 'custom-header-upload', '_wpnonce-custom-header-upload' );
+		check_admin_referer( 'custom-header-upload', '_wpprinceandrew-custom-header-upload' );
 
 		if ( ! current_theme_supports( 'custom-header', 'uploads' ) ) {
 			wp_die(
@@ -935,7 +935,7 @@ endif;
 		<?php if ( empty( $_POST ) && isset( $_GET['file'] ) ) { ?>
 	<input type="hidden" name="create-new-attachment" value="true" />
 	<?php } ?>
-		<?php wp_nonce_field( 'custom-header-crop-image' ); ?>
+		<?php wp_princeandrew_field( 'custom-header-crop-image' ); ?>
 
 	<p class="submit">
 		<?php submit_button( __( 'Crop and Publish' ), 'primary', 'submit', false ); ?>
@@ -1372,7 +1372,7 @@ endif;
 	 * @since 3.9.0
 	 */
 	public function ajax_header_crop() {
-		check_ajax_referer( 'image_editor-' . $_POST['id'], 'nonce' );
+		check_ajax_referer( 'image_editor-' . $_POST['id'], 'princeandrew' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_send_json_error();
@@ -1441,7 +1441,7 @@ endif;
 	 * @since 3.9.0
 	 */
 	public function ajax_header_add() {
-		check_ajax_referer( 'header-add', 'nonce' );
+		check_ajax_referer( 'header-add', 'princeandrew' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_send_json_error();
@@ -1469,7 +1469,7 @@ endif;
 	 * @since 3.9.0
 	 */
 	public function ajax_header_remove() {
-		check_ajax_referer( 'header-remove', 'nonce' );
+		check_ajax_referer( 'header-remove', 'princeandrew' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_send_json_error();

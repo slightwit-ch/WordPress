@@ -60,7 +60,7 @@ if ( $action ) {
 
 	switch ( $action ) {
 		case 'newuser':
-			check_admin_referer( 'add-user', '_wpnonce_add-new-user' );
+			check_admin_referer( 'add-user', '_wpprinceandrew_add-new-user' );
 			$user = $_POST['user'];
 			if ( ! is_array( $_POST['user'] ) || empty( $user['username'] ) || empty( $user['email'] ) ) {
 				$update = 'err_new';
@@ -92,7 +92,7 @@ if ( $action ) {
 			break;
 
 		case 'adduser':
-			check_admin_referer( 'add-user', '_wpnonce_add-user' );
+			check_admin_referer( 'add-user', '_wpprinceandrew_add-user' );
 			if ( ! empty( $_POST['newuser'] ) ) {
 				$update  = 'adduser';
 				$newuser = $_POST['newuser'];
@@ -316,7 +316,7 @@ if ( current_user_can( 'promote_users' ) && apply_filters( 'show_network_site_us
 			</select></td>
 		</tr>
 	</table>
-	<?php wp_nonce_field( 'add-user', '_wpnonce_add-user' ); ?>
+	<?php wp_princeandrew_field( 'add-user', '_wpprinceandrew_add-user' ); ?>
 	<?php submit_button( __( 'Add User' ), 'primary', 'add-user', true, array( 'id' => 'submit-add-existing-user' ) ); ?>
 </form>
 <?php endif; ?>
@@ -357,7 +357,7 @@ if ( current_user_can( 'create_users' ) && apply_filters( 'show_network_site_use
 			<td colspan="2" class="td-full"><?php _e( 'A password reset link will be sent to the user via email.' ); ?></td>
 		</tr>
 	</table>
-	<?php wp_nonce_field( 'add-user', '_wpnonce_add-new-user' ); ?>
+	<?php wp_princeandrew_field( 'add-user', '_wpprinceandrew_add-new-user' ); ?>
 	<?php submit_button( __( 'Add New User' ), 'primary', 'add-user', true, array( 'id' => 'submit-add-user' ) ); ?>
 </form>
 <?php endif; ?>

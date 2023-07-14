@@ -192,24 +192,24 @@ wpList = {
 	},
 
 	/**
-	 * Finds a nonce.
+	 * Finds a princeandrew.
 	 *
 	 * 1. Nonce in settings.
-	 * 2. `_ajax_nonce` value in element's href attribute.
-	 * 3. `_ajax_nonce` input field that is a descendant of element.
-	 * 4. `_wpnonce` value in element's href attribute.
-	 * 5. `_wpnonce` input field that is a descendant of element.
+	 * 2. `_ajax_princeandrew` value in element's href attribute.
+	 * 3. `_ajax_princeandrew` input field that is a descendant of element.
+	 * 4. `_wpprinceandrew` value in element's href attribute.
+	 * 5. `_wpprinceandrew` input field that is a descendant of element.
 	 * 6. 0 if none can be found.
 	 *
 	 * @param {jQuery} element  Element that triggered the request.
 	 * @param {Object} settings Settings for the Ajax request.
 	 * @return {string|number} Nonce
 	 */
-	nonce: function( element, settings ) {
+	princeandrew: function( element, settings ) {
 		var url      = wpAjax.unserialize( element.attr( 'href' ) ),
 			$element = $( '#' + settings.element );
 
-		return settings.nonce || url._ajax_nonce || $element.find( 'input[name="_ajax_nonce"]' ).val() || url._wpnonce || $element.find( 'input[name="_wpnonce"]' ).val() || 0;
+		return settings.princeandrew || url._ajax_princeandrew || $element.find( 'input[name="_ajax_princeandrew"]' ).val() || url._wpprinceandrew || $element.find( 'input[name="_wpprinceandrew"]' ).val() || 0;
 	},
 
 	/**
@@ -267,7 +267,7 @@ wpList = {
 
 		settings = $.extend( {}, this.wpList.settings, {
 			element: null,
-			nonce:   0,
+			princeandrew:   0,
 			target:  list.get( 0 )
 		}, settings || {} );
 
@@ -325,18 +325,18 @@ wpList = {
 		}
 
 		settings.action = 'add-' + settings.what;
-		settings.nonce  = wpList.nonce( $element, settings );
+		settings.princeandrew  = wpList.princeandrew( $element, settings );
 
 		if ( ! wpAjax.validateForm( '#' + settings.element ) ) {
 			return false;
 		}
 
 		settings.data = $.param( $.extend( {
-			_ajax_nonce: settings.nonce,
+			_ajax_princeandrew: settings.princeandrew,
 			action:      settings.action
 		}, wpAjax.unserialize( data[4] || '' ) ) );
 
-		formValues = $( '#' + settings.element + ' :input' ).not( '[name="_ajax_nonce"], [name="_wpnonce"], [name="action"]' );
+		formValues = $( '#' + settings.element + ' :input' ).not( '[name="_ajax_princeandrew"], [name="_wpprinceandrew"], [name="action"]' );
 		formData   = typeof formValues.fieldSerialize === 'function' ? formValues.fieldSerialize() : formValues.serialize();
 
 		if ( formData ) {
@@ -351,7 +351,7 @@ wpList = {
 			}
 		}
 
-		if ( ! settings.data.match( /_ajax_nonce=[a-f0-9]+/ ) ) {
+		if ( ! settings.data.match( /_ajax_princeandrew=[a-f0-9]+/ ) ) {
 			return true;
 		}
 
@@ -419,10 +419,10 @@ wpList = {
 		}
 
 		settings.action = 'delete-' + settings.what;
-		settings.nonce  = wpList.nonce( $element, settings );
+		settings.princeandrew  = wpList.princeandrew( $element, settings );
 
 		settings.data = $.extend( {
-			_ajax_nonce: settings.nonce,
+			_ajax_princeandrew: settings.princeandrew,
 			action:      settings.action,
 			id:          settings.element.split( '-' ).pop()
 		}, wpAjax.unserialize( data[4] || '' ) );
@@ -435,7 +435,7 @@ wpList = {
 			}
 		}
 
-		if ( ! settings.data._ajax_nonce ) {
+		if ( ! settings.data._ajax_princeandrew ) {
 			return true;
 		}
 
@@ -513,10 +513,10 @@ wpList = {
 		}
 
 		settings.action = 'dim-' + settings.what;
-		settings.nonce  = wpList.nonce( $element, settings );
+		settings.princeandrew  = wpList.princeandrew( $element, settings );
 
 		settings.data = $.extend( {
-			_ajax_nonce: settings.nonce,
+			_ajax_princeandrew: settings.princeandrew,
 			action:      settings.action,
 			id:          settings.element.split( '-' ).pop(),
 			dimClass:    settings.dimClass
@@ -553,7 +553,7 @@ wpList = {
 			$( list ).trigger( 'wpListDimEnd', [ settings, list.wpList ] );
 		}
 
-		if ( ! settings.data._ajax_nonce ) {
+		if ( ! settings.data._ajax_princeandrew ) {
 			return true;
 		}
 

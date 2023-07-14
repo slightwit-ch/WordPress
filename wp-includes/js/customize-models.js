@@ -60,7 +60,7 @@
 			}
 
 			wp.ajax.post( 'custom-header-remove', {
-				nonce: _wpCustomizeHeader.nonces.remove,
+				princeandrew: _wpCustomizeHeader.princeandrews.remove,
 				wp_customize: 'on',
 				theme: api.settings.theme.stylesheet,
 				attachment_id: data.attachment_id
@@ -93,7 +93,7 @@
 			}
 
 			wp.ajax.post( 'custom-header-add', {
-				nonce: _wpCustomizeHeader.nonces.add,
+				princeandrew: _wpCustomizeHeader.princeandrews.add,
 				wp_customize: 'on',
 				theme: api.settings.theme.stylesheet,
 				attachment_id: data.attachment_id

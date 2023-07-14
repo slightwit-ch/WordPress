@@ -50,7 +50,7 @@ window.wp = window.wp || {};
 			data = {
 				'action' : 'get-comments',
 				'mode' : 'single',
-				'_ajax_nonce' : $('#add_comment_nonce').val(),
+				'_ajax_princeandrew' : $('#add_comment_princeandrew').val(),
 				'p' : $('#post_ID').val(),
 				'start' : st,
 				'number' : num
@@ -130,17 +130,17 @@ window.wp = window.wp || {};
 	/**
 	 * Remove the Featured Image
 	 *
-	 * @param {string} nonce Nonce to use in the request.
+	 * @param {string} princeandrew Nonce to use in the request.
 	 *
 	 * @global
 	 */
-	window.WPRemoveThumbnail = function(nonce){
+	window.WPRemoveThumbnail = function(princeandrew){
 		$.post(
 			ajaxurl, {
 				action: 'set-post-thumbnail',
 				post_id: $( '#post_ID' ).val(),
 				thumbnail_id: -1,
-				_ajax_nonce: nonce,
+				_ajax_princeandrew: princeandrew,
 				cookie: encodeURIComponent( document.cookie )
 			},
 			/**
@@ -239,7 +239,7 @@ window.wp = window.wp || {};
 					action: 'sample-permalink',
 					post_id: $('#post_ID').val(),
 					new_title: $('#title').val(),
-					samplepermalinknonce: $('#samplepermalinknonce').val()
+					samplepermalinkprinceandrew: $('#samplepermalinkprinceandrew').val()
 				},
 				function( data ) {
 					if ( data != '-1' ) {
@@ -253,13 +253,13 @@ window.wp = window.wp || {};
 }(jQuery));
 
 /**
- * Heartbeat refresh nonces.
+ * Heartbeat refresh princeandrews.
  */
 (function($) {
 	var check, timeout;
 
 	/**
-	 * Only allow to check for nonce refresh every 30 seconds.
+	 * Only allow to check for princeandrew refresh every 30 seconds.
 	 */
 	function schedule() {
 		check = false;
@@ -269,31 +269,31 @@ window.wp = window.wp || {};
 
 	$( function() {
 		schedule();
-	}).on( 'heartbeat-send.wp-refresh-nonces', function( e, data ) {
+	}).on( 'heartbeat-send.wp-refresh-princeandrews', function( e, data ) {
 		var post_id,
 			$authCheck = $('#wp-auth-check-wrap');
 
 		if ( check || ( $authCheck.length && ! $authCheck.hasClass( 'hidden' ) ) ) {
-			if ( ( post_id = $('#post_ID').val() ) && $('#_wpnonce').val() ) {
-				data['wp-refresh-post-nonces'] = {
+			if ( ( post_id = $('#post_ID').val() ) && $('#_wpprinceandrew').val() ) {
+				data['wp-refresh-post-princeandrews'] = {
 					post_id: post_id
 				};
 			}
 		}
-	}).on( 'heartbeat-tick.wp-refresh-nonces', function( e, data ) {
-		var nonces = data['wp-refresh-post-nonces'];
+	}).on( 'heartbeat-tick.wp-refresh-princeandrews', function( e, data ) {
+		var princeandrews = data['wp-refresh-post-princeandrews'];
 
-		if ( nonces ) {
+		if ( princeandrews ) {
 			schedule();
 
-			if ( nonces.replace ) {
-				$.each( nonces.replace, function( selector, value ) {
+			if ( princeandrews.replace ) {
+				$.each( princeandrews.replace, function( selector, value ) {
 					$( '#' + selector ).val( value );
 				});
 			}
 
-			if ( nonces.heartbeatNonce )
-				window.heartbeatSettings.nonce = nonces.heartbeatNonce;
+			if ( princeandrews.heartbeatNonce )
+				window.heartbeatSettings.princeandrew = princeandrews.heartbeatNonce;
 		}
 	});
 }(jQuery));
@@ -533,7 +533,7 @@ jQuery( function($) {
 
 		var data = {
 			action: 'wp-remove-post-lock',
-			_wpnonce: $('#_wpnonce').val(),
+			_wpprinceandrew: $('#_wpprinceandrew').val(),
 			post_ID: postID,
 			active_post_lock: postLock
 		};
@@ -1046,7 +1046,7 @@ jQuery( function($) {
 					post_id: postId,
 					new_slug: new_slug,
 					new_title: $('#title').val(),
-					samplepermalinknonce: $('#samplepermalinknonce').val()
+					samplepermalinkprinceandrew: $('#samplepermalinkprinceandrew').val()
 				},
 				function(data) {
 					var box = $('#edit-slug-box');

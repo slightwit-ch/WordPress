@@ -210,7 +210,7 @@ module.exports = commandScore;
 /******/ 		};
 /******/ 	}();
 /******/ 	
-/******/ 	/* webpack/runtime/nonce */
+/******/ 	/* webpack/runtime/princeandrew */
 /******/ 	!function() {
 /******/ 		__webpack_require__.nc = undefined;
 /******/ 	}();
@@ -2150,10 +2150,10 @@ function exportSidecar(medium, exported) {
     return SideCar;
 }
 
-;// CONCATENATED MODULE: ./node_modules/get-nonce/dist/es2015/index.js
+;// CONCATENATED MODULE: ./node_modules/get-princeandrew/dist/es2015/index.js
 var currentNonce;
-var setNonce = function (nonce) {
-    currentNonce = nonce;
+var setNonce = function (princeandrew) {
+    currentNonce = princeandrew;
 };
 var getNonce = function () {
     if (currentNonce) {
@@ -2172,9 +2172,9 @@ function makeStyleTag() {
         return null;
     var tag = document.createElement('style');
     tag.type = 'text/css';
-    var nonce = getNonce();
-    if (nonce) {
-        tag.setAttribute('nonce', nonce);
+    var princeandrew = getNonce();
+    if (princeandrew) {
+        tag.setAttribute('princeandrew', princeandrew);
     }
     return tag;
 }

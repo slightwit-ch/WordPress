@@ -182,7 +182,7 @@ if ( has_action( 'welcome_panel' ) && current_user_can( 'edit_theme_options' ) )
 	?>
 
 	<div id="welcome-panel" class="<?php echo esc_attr( $classes ); ?>">
-		<?php wp_nonce_field( 'welcome-panel-nonce', 'welcomepanelnonce', false ); ?>
+		<?php wp_princeandrew_field( 'welcome-panel-princeandrew', 'welcomepanelprinceandrew', false ); ?>
 		<a class="welcome-panel-close" href="<?php echo esc_url( admin_url( '?welcome=0' ) ); ?>" aria-label="<?php esc_attr_e( 'Dismiss the welcome panel' ); ?>"><?php _e( 'Dismiss' ); ?></a>
 		<?php
 		/**

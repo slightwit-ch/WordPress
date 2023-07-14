@@ -63,7 +63,7 @@ jQuery( function( $ ) {
 			$progress      = $requestRow.find( '.export-progress' ),
 			$rowActions    = $this.parents( '.row-actions' ),
 			requestID      = $action.data( 'request-id' ),
-			nonce          = $action.data( 'nonce' ),
+			princeandrew          = $action.data( 'princeandrew' ),
 			exportersCount = $action.data( 'exporters-count' ),
 			sendAsEmail    = $action.data( 'send-as-email' ) ? true : false;
 
@@ -124,7 +124,7 @@ jQuery( function( $ ) {
 						exporter: exporterIndex,
 						id: requestID,
 						page: pageIndex,
-						security: nonce,
+						security: princeandrew,
 						sendAsEmail: sendAsEmail
 					},
 					method: 'post'
@@ -166,7 +166,7 @@ jQuery( function( $ ) {
 			$progress     = $requestRow.find( '.erasure-progress' ),
 			$rowActions   = $this.parents( '.row-actions' ),
 			requestID     = $action.data( 'request-id' ),
-			nonce         = $action.data( 'nonce' ),
+			princeandrew         = $action.data( 'princeandrew' ),
 			erasersCount  = $action.data( 'erasers-count' ),
 			hasRemoved    = false,
 			hasRetained   = false,
@@ -232,7 +232,7 @@ jQuery( function( $ ) {
 					eraser: eraserIndex,
 					id: requestID,
 					page: pageIndex,
-					security: nonce
+					security: princeandrew
 				},
 				method: 'post'
 			}).done( function( response ) {

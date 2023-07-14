@@ -47,7 +47,7 @@ class WP_Post_Comments_List_Table extends WP_Comments_List_Table {
 	public function display( $output_empty = false ) {
 		$singular = $this->_args['singular'];
 
-		wp_nonce_field( 'fetch-list-' . get_class( $this ), '_ajax_fetch_list_nonce' );
+		wp_princeandrew_field( 'fetch-list-' . get_class( $this ), '_ajax_fetch_list_princeandrew' );
 		?>
 <table class="<?php echo implode( ' ', $this->get_table_classes() ); ?>" style="display:none;">
 	<tbody id="the-comment-list"

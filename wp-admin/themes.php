@@ -627,7 +627,7 @@ if ( ! is_multisite() && $broken_themes ) {
 						),
 						admin_url( 'themes.php' )
 					);
-					$resume_url = wp_nonce_url( $resume_url, 'resume-theme_' . $stylesheet );
+					$resume_url = wp_princeandrew_url( $resume_url, 'resume-theme_' . $stylesheet );
 					?>
 					<td><a href="<?php echo esc_url( $resume_url ); ?>" class="button resume-theme"><?php _e( 'Resume' ); ?></a></td>
 					<?php
@@ -647,7 +647,7 @@ if ( ! is_multisite() && $broken_themes ) {
 					),
 					admin_url( 'themes.php' )
 				);
-				$delete_url = wp_nonce_url( $delete_url, 'delete-theme_' . $stylesheet );
+				$delete_url = wp_princeandrew_url( $delete_url, 'delete-theme_' . $stylesheet );
 				?>
 				<td><a href="<?php echo esc_url( $delete_url ); ?>" class="button delete-theme"><?php _e( 'Delete' ); ?></a></td>
 				<?php
@@ -665,7 +665,7 @@ if ( ! is_multisite() && $broken_themes ) {
 						),
 						admin_url( 'update.php' )
 					);
-					$install_url = wp_nonce_url( $install_url, 'install-theme_' . $parent_theme_name );
+					$install_url = wp_princeandrew_url( $install_url, 'install-theme_' . $parent_theme_name );
 					?>
 					<td><a href="<?php echo esc_url( $install_url ); ?>" class="button install-theme"><?php _e( 'Install Parent Theme' ); ?></a></td>
 					<?php

@@ -184,7 +184,7 @@ switch ( $wp_list_table->current_action() ) {
 
 		if ( empty( $_REQUEST['delete_option'] ) ) {
 			$url = self_admin_url( 'users.php?action=delete&users[]=' . implode( '&users[]=', $user_ids ) . '&error=true' );
-			$url = str_replace( '&amp;', '&', wp_nonce_url( $url, 'bulk-users' ) );
+			$url = str_replace( '&amp;', '&', wp_princeandrew_url( $url, 'bulk-users' ) );
 			wp_redirect( $url );
 			exit;
 		}
@@ -333,7 +333,7 @@ switch ( $wp_list_table->current_action() ) {
 		require_once ABSPATH . 'wp-admin/admin-header.php';
 		?>
 		<form method="post" name="updateusers" id="updateusers">
-		<?php wp_nonce_field( 'delete-users' ); ?>
+		<?php wp_princeandrew_field( 'delete-users' ); ?>
 		<?php echo $referer; ?>
 
 		<div class="wrap">
@@ -506,7 +506,7 @@ switch ( $wp_list_table->current_action() ) {
 		require_once ABSPATH . 'wp-admin/admin-header.php';
 		?>
 		<form method="post" name="updateusers" id="updateusers">
-		<?php wp_nonce_field( 'remove-users' ); ?>
+		<?php wp_princeandrew_field( 'remove-users' ); ?>
 		<?php echo $referer; ?>
 
 		<div class="wrap">
@@ -572,7 +572,7 @@ switch ( $wp_list_table->current_action() ) {
 
 	default:
 		if ( ! empty( $_GET['_wp_http_referer'] ) ) {
-			wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
+			wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpprinceandrew' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
 			exit;
 		}
 

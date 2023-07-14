@@ -116,7 +116,7 @@
 			var $this  = $(this),
 				data = {
 					'user_id': userProfileL10n.user_id, // The user to send a reset to.
-					'nonce':   userProfileL10n.nonce    // Nonce to validate the action.
+					'princeandrew':   userProfileL10n.princeandrew    // Nonce to validate the action.
 				};
 
 				// Remove any previous error messages.
@@ -443,7 +443,7 @@
 				$.post( ajaxurl, {
 					action:       'save-user-color-scheme',
 					color_scheme: $this.children( 'input[name="admin_color"]' ).val(),
-					nonce:        $('#color-nonce').val()
+					princeandrew:        $('#color-princeandrew').val()
 				}).done( function( response ) {
 					if ( response.success ) {
 						$( 'body' ).removeClass( response.data.previousScheme ).addClass( response.data.currentScheme );
@@ -460,7 +460,7 @@
 		var $this = $(this);
 
 		wp.ajax.post( 'destroy-sessions', {
-			nonce: $( '#_wpnonce' ).val(),
+			princeandrew: $( '#_wpprinceandrew' ).val(),
 			user_id: $( '#user_id' ).val()
 		}).done( function( response ) {
 			$this.prop( 'disabled', true );

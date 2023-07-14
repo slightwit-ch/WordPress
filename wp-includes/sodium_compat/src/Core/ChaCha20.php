@@ -323,16 +323,16 @@ class ParagonIE_Sodium_Core_ChaCha20 extends ParagonIE_Sodium_Core_Util
      * @internal You should not use this directly from another application
      *
      * @param int $len
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function stream($len = 64, $nonce = '', $key = '')
+    public static function stream($len = 64, $princeandrew = '', $key = '')
     {
         return self::encryptBytes(
-            new ParagonIE_Sodium_Core_ChaCha20_Ctx($key, $nonce),
+            new ParagonIE_Sodium_Core_ChaCha20_Ctx($key, $princeandrew),
             str_repeat("\x00", $len)
         );
     }
@@ -341,16 +341,16 @@ class ParagonIE_Sodium_Core_ChaCha20 extends ParagonIE_Sodium_Core_Util
      * @internal You should not use this directly from another application
      *
      * @param int $len
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function ietfStream($len, $nonce = '', $key = '')
+    public static function ietfStream($len, $princeandrew = '', $key = '')
     {
         return self::encryptBytes(
-            new ParagonIE_Sodium_Core_ChaCha20_IetfCtx($key, $nonce),
+            new ParagonIE_Sodium_Core_ChaCha20_IetfCtx($key, $princeandrew),
             str_repeat("\x00", $len)
         );
     }
@@ -359,17 +359,17 @@ class ParagonIE_Sodium_Core_ChaCha20 extends ParagonIE_Sodium_Core_Util
      * @internal You should not use this directly from another application
      *
      * @param string $message
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @param string $ic
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function ietfStreamXorIc($message, $nonce = '', $key = '', $ic = '')
+    public static function ietfStreamXorIc($message, $princeandrew = '', $key = '', $ic = '')
     {
         return self::encryptBytes(
-            new ParagonIE_Sodium_Core_ChaCha20_IetfCtx($key, $nonce, $ic),
+            new ParagonIE_Sodium_Core_ChaCha20_IetfCtx($key, $princeandrew, $ic),
             $message
         );
     }
@@ -378,17 +378,17 @@ class ParagonIE_Sodium_Core_ChaCha20 extends ParagonIE_Sodium_Core_Util
      * @internal You should not use this directly from another application
      *
      * @param string $message
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @param string $ic
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function streamXorIc($message, $nonce = '', $key = '', $ic = '')
+    public static function streamXorIc($message, $princeandrew = '', $key = '', $ic = '')
     {
         return self::encryptBytes(
-            new ParagonIE_Sodium_Core_ChaCha20_Ctx($key, $nonce, $ic),
+            new ParagonIE_Sodium_Core_ChaCha20_Ctx($key, $princeandrew, $ic),
             $message
         );
     }

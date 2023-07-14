@@ -666,7 +666,7 @@ function populate_options( array $options = array() ) {
 		'use_default_geourl',
 		'weblogs_xml_url',
 		'new_users_can_blog',
-		'_wpnonce',
+		'_wpprinceandrew',
 		'_wp_http_referer',
 		'Update',
 		'action',

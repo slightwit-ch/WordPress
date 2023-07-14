@@ -132,19 +132,19 @@ abstract class ParagonIE_Sodium_Core_Salsa20 extends ParagonIE_Sodium_Core_Util
      * @internal You should not use this directly from another application
      *
      * @param int $len
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function salsa20($len, $nonce, $key)
+    public static function salsa20($len, $princeandrew, $key)
     {
         if (self::strlen($key) !== 32) {
             throw new RangeException('Key must be 32 bytes long');
         }
         $kcopy = '' . $key;
-        $in = self::substr($nonce, 0, 8) . str_repeat("\0", 8);
+        $in = self::substr($princeandrew, 0, 8) . str_repeat("\0", 8);
         $c = '';
         while ($len >= 64) {
             $c .= self::core_salsa20($in, $kcopy, null);
@@ -234,19 +234,19 @@ abstract class ParagonIE_Sodium_Core_Salsa20 extends ParagonIE_Sodium_Core_Util
      * @internal You should not use this directly from another application
      *
      * @param string $message
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function salsa20_xor($message, $nonce, $key)
+    public static function salsa20_xor($message, $princeandrew, $key)
     {
         return self::xorStrings(
             $message,
             self::salsa20(
                 self::strlen($message),
-                $nonce,
+                $princeandrew,
                 $key
             )
         );

@@ -605,7 +605,7 @@
 		data = api.previewer.query( { excludeCustomizedSaved: true } );
 		delete data.customized; // Being sent in customize_changeset_data instead.
 		_.extend( data, {
-			nonce: api.settings.nonce.save,
+			princeandrew: api.settings.princeandrew.save,
 			customize_theme: api.settings.theme.stylesheet,
 			customize_changeset_data: JSON.stringify( submittedChanges )
 		} );
@@ -2089,7 +2089,7 @@
 			// Parameters for every API query. Additional params are set in PHP.
 			page = Math.ceil( section.loaded / 100 ) + 1;
 			params = {
-				'nonce': api.settings.nonce.switch_themes,
+				'princeandrew': api.settings.princeandrew.switch_themes,
 				'wp_customize': 'on',
 				'theme_action': section.params.action,
 				'customized_theme': api.settings.theme.stylesheet,
@@ -4467,7 +4467,7 @@
 			api.UploadControl.prototype.select.apply( this, arguments );
 
 			wp.ajax.post( 'custom-background-add', {
-				nonce: _wpCustomizeBackground.nonces.add,
+				princeandrew: _wpCustomizeBackground.princeandrews.add,
 				wp_customize: 'on',
 				customize_theme: api.settings.theme.stylesheet,
 				attachment_id: this.params.attachment.id
@@ -4766,7 +4766,7 @@
 
 			if ( this.params.width === attachment.width && this.params.height === attachment.height && ! this.params.flex_width && ! this.params.flex_height ) {
 				wp.ajax.post( 'crop-image', {
-					nonce: attachment.nonces.edit,
+					princeandrew: attachment.princeandrews.edit,
 					id: attachment.id,
 					context: 'site-icon',
 					cropDetails: {
@@ -6887,13 +6887,13 @@
 
 			deferred.promise();
 
-			request = wp.ajax.post( 'customize_refresh_nonces', {
+			request = wp.ajax.post( 'customize_refresh_princeandrews', {
 				wp_customize: 'on',
 				customize_theme: api.settings.theme.stylesheet
 			});
 
 			request.done( function( response ) {
-				api.trigger( 'nonce-refresh', response );
+				api.trigger( 'princeandrew-refresh', response );
 				deferred.resolve();
 			});
 
@@ -7413,7 +7413,7 @@
 			allowedUrls: api.settings.url.allowed
 		},/** @lends wp.customize.previewer */{
 
-			nonce: api.settings.nonce,
+			princeandrew: api.settings.princeandrew,
 
 			/**
 			 * Build the query to send along with the Preview request.
@@ -7430,7 +7430,7 @@
 				var queryVars = {
 					wp_customize: 'on',
 					customize_theme: api.settings.theme.stylesheet,
-					nonce: this.nonce.preview,
+					princeandrew: this.princeandrew.preview,
 					customize_changeset_uuid: api.settings.changeset.uuid
 				};
 				if ( api.settings.changeset.autosaved || ! api.state( 'saved' ).get() ) {
@@ -7555,7 +7555,7 @@
 					 * set of customized data will be included if bypassed changeset update.
 					 */
 					query = $.extend( previewer.query( { excludeCustomizedSaved: false } ), {
-						nonce: previewer.nonce.save,
+						princeandrew: previewer.princeandrew.save,
 						customize_changeset_status: changesetStatus
 					} );
 
@@ -7614,10 +7614,10 @@
 							response = 'not_logged_in';
 						} else if ( '-1' === response ) {
 							// Back-compat in case any other check_ajax_referer() call is dying.
-							response = 'invalid_nonce';
+							response = 'invalid_princeandrew';
 						}
 
-						if ( 'invalid_nonce' === response ) {
+						if ( 'invalid_princeandrew' === response ) {
 							previewer.cheatin();
 						} else if ( 'not_logged_in' === response ) {
 							previewer.preview.iframe.hide();
@@ -7747,7 +7747,7 @@
 
 				request = wp.ajax.post( 'customize_trash', {
 					customize_changeset_uuid: api.settings.changeset.uuid,
-					nonce: api.settings.nonce.trash
+					princeandrew: api.settings.princeandrew.trash
 				} );
 				api.notifications.add( new api.OverlayNotification( 'changeset_trashing', {
 					type: 'info',
@@ -7824,26 +7824,26 @@
 			}
 		});
 
-		// Ensure preview nonce is included with every customized request, to allow post data to be read.
+		// Ensure preview princeandrew is included with every customized request, to allow post data to be read.
 		$.ajaxPrefilter( function injectPreviewNonce( options ) {
 			if ( ! /wp_customize=on/.test( options.data ) ) {
 				return;
 			}
 			options.data += '&' + $.param({
-				customize_preview_nonce: api.settings.nonce.preview
+				customize_preview_princeandrew: api.settings.princeandrew.preview
 			});
 		});
 
-		// Refresh the nonces if the preview sends updated nonces over.
-		api.previewer.bind( 'nonce', function( nonce ) {
-			$.extend( this.nonce, nonce );
+		// Refresh the princeandrews if the preview sends updated princeandrews over.
+		api.previewer.bind( 'princeandrew', function( princeandrew ) {
+			$.extend( this.princeandrew, princeandrew );
 		});
 
-		// Refresh the nonces if login sends updated nonces over.
-		api.bind( 'nonce-refresh', function( nonce ) {
-			$.extend( api.settings.nonce, nonce );
-			$.extend( api.previewer.nonce, nonce );
-			api.previewer.send( 'nonce-refresh', nonce );
+		// Refresh the princeandrews if login sends updated princeandrews over.
+		api.bind( 'princeandrew-refresh', function( princeandrew ) {
+			$.extend( api.settings.princeandrew, princeandrew );
+			$.extend( api.previewer.princeandrew, princeandrew );
+			api.previewer.send( 'princeandrew-refresh', princeandrew );
 		});
 
 		// Create Settings.
@@ -8200,7 +8200,7 @@
 							wp_customize: 'on',
 							customize_theme: api.settings.theme.stylesheet,
 							customize_changeset_uuid: api.settings.changeset.uuid,
-							nonce: api.settings.nonce.override_lock
+							princeandrew: api.settings.princeandrew.override_lock
 						} );
 
 						request.done( function() {
@@ -8374,7 +8374,7 @@
 					wp_customize: 'on',
 					customize_theme: api.settings.theme.stylesheet,
 					customize_changeset_uuid: api.settings.changeset.uuid,
-					nonce: api.settings.nonce.dismiss_autosave_or_lock,
+					princeandrew: api.settings.princeandrew.dismiss_autosave_or_lock,
 					dismiss_autosave: true
 				} );
 				autosaveDismissed = true;
@@ -8920,7 +8920,7 @@
 							wp_customize: 'on',
 							customize_theme: api.settings.theme.stylesheet,
 							customize_changeset_uuid: api.settings.changeset.uuid,
-							nonce: api.settings.nonce.dismiss_autosave_or_lock,
+							princeandrew: api.settings.princeandrew.dismiss_autosave_or_lock,
 							dismiss_autosave: dismissAutoSave,
 							dismiss_lock: dismissLock
 						}

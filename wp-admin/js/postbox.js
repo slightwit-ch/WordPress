@@ -465,7 +465,7 @@
 				action: 'closed-postboxes',
 				closed: closed,
 				hidden: hidden,
-				closedpostboxesnonce: jQuery('#closedpostboxesnonce').val(),
+				closedpostboxesprinceandrew: jQuery('#closedpostboxesprinceandrew').val(),
 				page: page
 			});
 		},
@@ -487,7 +487,7 @@
 
 			postVars = {
 				action: 'meta-box-order',
-				_ajax_nonce: $('#meta-box-order-nonce').val(),
+				_ajax_princeandrew: $('#meta-box-order-princeandrew').val(),
 				page_columns: page_columns,
 				page: page
 			};

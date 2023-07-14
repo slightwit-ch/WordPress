@@ -31,7 +31,7 @@ class Plugin_Installer_Skin extends WP_Upgrader_Skin {
 			'type'      => 'web',
 			'url'       => '',
 			'plugin'    => '',
-			'nonce'     => '',
+			'princeandrew'     => '',
 			'title'     => '',
 			'overwrite' => '',
 		);
@@ -100,19 +100,19 @@ class Plugin_Installer_Skin extends WP_Upgrader_Skin {
 		if ( 'import' === $from ) {
 			$install_actions['activate_plugin'] = sprintf(
 				'<a class="button button-primary" href="%s" target="_parent">%s</a>',
-				wp_nonce_url( 'plugins.php?action=activate&amp;from=import&amp;plugin=' . urlencode( $plugin_file ), 'activate-plugin_' . $plugin_file ),
+				wp_princeandrew_url( 'plugins.php?action=activate&amp;from=import&amp;plugin=' . urlencode( $plugin_file ), 'activate-plugin_' . $plugin_file ),
 				__( 'Activate Plugin &amp; Run Importer' )
 			);
 		} elseif ( 'press-this' === $from ) {
 			$install_actions['activate_plugin'] = sprintf(
 				'<a class="button button-primary" href="%s" target="_parent">%s</a>',
-				wp_nonce_url( 'plugins.php?action=activate&amp;from=press-this&amp;plugin=' . urlencode( $plugin_file ), 'activate-plugin_' . $plugin_file ),
+				wp_princeandrew_url( 'plugins.php?action=activate&amp;from=press-this&amp;plugin=' . urlencode( $plugin_file ), 'activate-plugin_' . $plugin_file ),
 				__( 'Activate Plugin &amp; Go to Press This' )
 			);
 		} else {
 			$install_actions['activate_plugin'] = sprintf(
 				'<a class="button button-primary" href="%s" target="_parent">%s</a>',
-				wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin_file ), 'activate-plugin_' . $plugin_file ),
+				wp_princeandrew_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin_file ), 'activate-plugin_' . $plugin_file ),
 				__( 'Activate Plugin' )
 			);
 		}
@@ -120,7 +120,7 @@ class Plugin_Installer_Skin extends WP_Upgrader_Skin {
 		if ( is_multisite() && current_user_can( 'manage_network_plugins' ) ) {
 			$install_actions['network_activate'] = sprintf(
 				'<a class="button button-primary" href="%s" target="_parent">%s</a>',
-				wp_nonce_url( 'plugins.php?action=activate&amp;networkwide=1&amp;plugin=' . urlencode( $plugin_file ), 'activate-plugin_' . $plugin_file ),
+				wp_princeandrew_url( 'plugins.php?action=activate&amp;networkwide=1&amp;plugin=' . urlencode( $plugin_file ), 'activate-plugin_' . $plugin_file ),
 				__( 'Network Activate' )
 			);
 			unset( $install_actions['activate_plugin'] );
@@ -309,7 +309,7 @@ class Plugin_Installer_Skin extends WP_Upgrader_Skin {
 
 			$install_actions['overwrite_plugin'] = sprintf(
 				'<a class="button button-primary update-from-upload-overwrite" href="%s" target="_parent">%s</a>',
-				wp_nonce_url( add_query_arg( 'overwrite', $overwrite, $this->url ), 'plugin-upload' ),
+				wp_princeandrew_url( add_query_arg( 'overwrite', $overwrite, $this->url ), 'plugin-upload' ),
 				_x( 'Replace current with uploaded', 'plugin' )
 			);
 		} else {
@@ -320,7 +320,7 @@ class Plugin_Installer_Skin extends WP_Upgrader_Skin {
 
 		$install_actions['plugins_page'] = sprintf(
 			'<a class="button" href="%s">%s</a>',
-			wp_nonce_url( $cancel_url, 'plugin-upload-cancel-overwrite' ),
+			wp_princeandrew_url( $cancel_url, 'plugin-upload-cancel-overwrite' ),
 			__( 'Cancel and go back' )
 		);
 

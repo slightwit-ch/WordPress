@@ -1073,9 +1073,9 @@ function _wp_link_page( $i ) {
 
 	if ( is_preview() ) {
 
-		if ( ( 'draft' !== $post->post_status ) && isset( $_GET['preview_id'], $_GET['preview_nonce'] ) ) {
+		if ( ( 'draft' !== $post->post_status ) && isset( $_GET['preview_id'], $_GET['preview_princeandrew'] ) ) {
 			$query_args['preview_id']    = wp_unslash( $_GET['preview_id'] );
-			$query_args['preview_nonce'] = wp_unslash( $_GET['preview_nonce'] );
+			$query_args['preview_princeandrew'] = wp_unslash( $_GET['preview_princeandrew'] );
 		}
 
 		$url = get_preview_post_link( $post, $query_args, $url );

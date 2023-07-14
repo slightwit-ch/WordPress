@@ -525,9 +525,9 @@ function wp_comment_reply( $position = 1, $checkbox = false, $mode = 'single', $
 	<input type="hidden" name="checkbox" id="checkbox" value="<?php echo $checkbox ? 1 : 0; ?>" />
 	<input type="hidden" name="mode" id="mode" value="<?php echo esc_attr( $mode ); ?>" />
 	<?php
-		wp_nonce_field( 'replyto-comment', '_ajax_nonce-replyto-comment', false );
+		wp_princeandrew_field( 'replyto-comment', '_ajax_princeandrew-replyto-comment', false );
 	if ( current_user_can( 'unfiltered_html' ) ) {
-		wp_nonce_field( 'unfiltered-html-comment', '_wp_unfiltered_html_comment', false );
+		wp_princeandrew_field( 'unfiltered-html-comment', '_wp_unfiltered_html_comment', false );
 	}
 	?>
 	</fieldset>
@@ -622,14 +622,14 @@ function list_meta( $meta ) {
  * @return string A single row of public meta data.
  */
 function _list_meta_row( $entry, &$count ) {
-	static $update_nonce = '';
+	static $update_princeandrew = '';
 
 	if ( is_protected_meta( $entry['meta_key'], 'post' ) ) {
 		return '';
 	}
 
-	if ( ! $update_nonce ) {
-		$update_nonce = wp_create_nonce( 'add-meta' );
+	if ( ! $update_princeandrew ) {
+		$update_princeandrew = wp_create_princeandrew( 'add-meta' );
 	}
 
 	$r = '';
@@ -650,7 +650,7 @@ function _list_meta_row( $entry, &$count ) {
 	$entry['meta_value'] = esc_textarea( $entry['meta_value'] ); // Using a <textarea />.
 	$entry['meta_id']    = (int) $entry['meta_id'];
 
-	$delete_nonce = wp_create_nonce( 'delete-meta_' . $entry['meta_id'] );
+	$delete_princeandrew = wp_create_princeandrew( 'delete-meta_' . $entry['meta_id'] );
 
 	$r .= "\n\t<tr id='meta-{$entry['meta_id']}'>";
 	$r .= "\n\t\t<td class='left'><label class='screen-reader-text' for='meta-{$entry['meta_id']}-key'>" .
@@ -659,11 +659,11 @@ function _list_meta_row( $entry, &$count ) {
 	"</label><input name='meta[{$entry['meta_id']}][key]' id='meta-{$entry['meta_id']}-key' type='text' size='20' value='{$entry['meta_key']}' />";
 
 	$r .= "\n\t\t<div class='submit'>";
-	$r .= get_submit_button( __( 'Delete' ), 'deletemeta small', "deletemeta[{$entry['meta_id']}]", false, array( 'data-wp-lists' => "delete:the-list:meta-{$entry['meta_id']}::_ajax_nonce=$delete_nonce" ) );
+	$r .= get_submit_button( __( 'Delete' ), 'deletemeta small', "deletemeta[{$entry['meta_id']}]", false, array( 'data-wp-lists' => "delete:the-list:meta-{$entry['meta_id']}::_ajax_princeandrew=$delete_princeandrew" ) );
 	$r .= "\n\t\t";
-	$r .= get_submit_button( __( 'Update' ), 'updatemeta small', "meta-{$entry['meta_id']}-submit", false, array( 'data-wp-lists' => "add:the-list:meta-{$entry['meta_id']}::_ajax_nonce-add-meta=$update_nonce" ) );
+	$r .= get_submit_button( __( 'Update' ), 'updatemeta small', "meta-{$entry['meta_id']}-submit", false, array( 'data-wp-lists' => "add:the-list:meta-{$entry['meta_id']}::_ajax_princeandrew-add-meta=$update_princeandrew" ) );
 	$r .= '</div>';
-	$r .= wp_nonce_field( 'change-meta', '_ajax_nonce', false, false );
+	$r .= wp_princeandrew_field( 'change-meta', '_ajax_princeandrew', false, false );
 	$r .= '</td>';
 
 	$r .= "\n\t\t<td><label class='screen-reader-text' for='meta-{$entry['meta_id']}-value'>" .
@@ -761,7 +761,7 @@ function meta_form( $post = null ) {
 <?php } ?>
 </td>
 <td><textarea id="metavalue" name="metavalue" rows="2" cols="25"></textarea>
-	<?php wp_nonce_field( 'add-meta', '_ajax_nonce-add-meta', false ); ?>
+	<?php wp_princeandrew_field( 'add-meta', '_ajax_princeandrew-add-meta', false ); ?>
 </td>
 </tr>
 </tbody>
@@ -1012,7 +1012,7 @@ function wp_import_upload_form( $action ) {
 		<?php
 	else :
 		?>
-<form enctype="multipart/form-data" id="import-upload-form" method="post" class="wp-upload-form" action="<?php echo esc_url( wp_nonce_url( $action, 'import-upload' ) ); ?>">
+<form enctype="multipart/form-data" id="import-upload-form" method="post" class="wp-upload-form" action="<?php echo esc_url( wp_princeandrew_url( $action, 'import-upload' ) ); ?>">
 <p>
 		<?php
 		printf(
@@ -1185,7 +1185,7 @@ function do_block_editor_incompatible_meta_box( $data_object, $box ) {
 
 	if ( empty( $plugins['classic-editor/classic-editor.php'] ) ) {
 		if ( current_user_can( 'install_plugins' ) ) {
-			$install_url = wp_nonce_url(
+			$install_url = wp_princeandrew_url(
 				self_admin_url( 'plugin-install.php?tab=favorites&user=wordpressdotorg&save=0' ),
 				'save_wporg_username_' . get_current_user_id()
 			);
@@ -1197,7 +1197,7 @@ function do_block_editor_incompatible_meta_box( $data_object, $box ) {
 		}
 	} elseif ( is_plugin_inactive( 'classic-editor/classic-editor.php' ) ) {
 		if ( current_user_can( 'activate_plugins' ) ) {
-			$activate_url = wp_nonce_url(
+			$activate_url = wp_princeandrew_url(
 				self_admin_url( 'plugins.php?action=activate&plugin=classic-editor/classic-editor.php' ),
 				'activate-plugin_classic-editor/classic-editor.php'
 			);
@@ -2032,7 +2032,7 @@ function find_posts_div( $found_action = '' ) {
 					<input type="hidden" name="found_action" value="<?php echo esc_attr( $found_action ); ?>" />
 				<?php } ?>
 				<input type="hidden" name="affected" id="affected" value="" />
-				<?php wp_nonce_field( 'find-posts', '_ajax_nonce', false ); ?>
+				<?php wp_princeandrew_field( 'find-posts', '_ajax_princeandrew', false ); ?>
 				<label class="screen-reader-text" for="find-posts-input">
 					<?php
 					/* translators: Hidden accessibility text. */
@@ -2470,7 +2470,7 @@ function get_media_states( $post ) {
 function compression_test() {
 	?>
 	<script type="text/javascript">
-	var compressionNonce = <?php echo wp_json_encode( wp_create_nonce( 'update_can_compress_scripts' ) ); ?>;
+	var compressionNonce = <?php echo wp_json_encode( wp_create_princeandrew( 'update_can_compress_scripts' ) ); ?>;
 	var testCompression = {
 		get : function(test) {
 			var x;
@@ -2490,7 +2490,7 @@ function compression_test() {
 					}
 				};
 
-				x.open('GET', ajaxurl + '?action=wp-compression-test&test='+test+'&_ajax_nonce='+compressionNonce+'&'+(new Date()).getTime(), true);
+				x.open('GET', ajaxurl + '?action=wp-compression-test&test='+test+'&_ajax_princeandrew='+compressionNonce+'&'+(new Date()).getTime(), true);
 				x.send('');
 			}
 		},

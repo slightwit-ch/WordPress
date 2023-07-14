@@ -440,7 +440,7 @@ window.setCommentsList = function() {
 
 			$('strong', '#undo-' + id).text(author);
 			a = $('.undo a', '#undo-' + id);
-			a.attr('href', 'comment.php?action=un' + action + 'comment&c=' + id + '&_wpnonce=' + settings.data._ajax_nonce);
+			a.attr('href', 'comment.php?action=un' + action + 'comment&c=' + id + '&_wpprinceandrew=' + settings.data._ajax_princeandrew);
 			a.attr('data-wp-lists', 'delete:the-comment-list:comment-' + id + '::un' + action + '=1');
 			a.attr('class', 'vim-z vim-destructive aria-button-if-js');
 			$('.avatar', el).first().clone().prependTo('#undo-' + id + ' .' + action + '-undo-inside');
@@ -735,7 +735,7 @@ window.setCommentsList = function() {
 		args = $.extend(args, {
 			'action': 'fetch-list',
 			'list_args': list_args,
-			'_ajax_fetch_list_nonce': $('#_ajax_fetch_list_nonce').val()
+			'_ajax_fetch_list_princeandrew': $('#_ajax_fetch_list_princeandrew').val()
 		});
 
 		$.ajax({

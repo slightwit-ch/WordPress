@@ -147,7 +147,7 @@ if ( isset( $_GET['updated'] ) ) {
 <div class="wrap">
 	<h1><?php echo esc_html( $title ); ?></h1>
 	<form method="post" action="settings.php" novalidate="novalidate">
-		<?php wp_nonce_field( 'siteoptions' ); ?>
+		<?php wp_princeandrew_field( 'siteoptions' ); ?>
 		<h2><?php _e( 'Operational Settings' ); ?></h2>
 		<table class="form-table" role="presentation">
 			<tr>
@@ -178,7 +178,7 @@ if ( isset( $_GET['updated'] ) ) {
 							);
 							printf(
 								' <a href="%1$s">%2$s</a>',
-								esc_url( wp_nonce_url( network_admin_url( 'settings.php?dismiss=new_network_admin_email' ), 'dismiss_new_network_admin_email' ) ),
+								esc_url( wp_princeandrew_url( network_admin_url( 'settings.php?dismiss=new_network_admin_email' ), 'dismiss_new_network_admin_email' ) ),
 								__( 'Cancel' )
 							);
 						?>

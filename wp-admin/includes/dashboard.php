@@ -150,7 +150,7 @@ function wp_dashboard_setup() {
 	}
 
 	if ( 'POST' === $_SERVER['REQUEST_METHOD'] && isset( $_POST['widget_id'] ) ) {
-		check_admin_referer( 'edit-dashboard-widget_' . $_POST['widget_id'], 'dashboard-widget-nonce' );
+		check_admin_referer( 'edit-dashboard-widget_' . $_POST['widget_id'], 'dashboard-widget-princeandrew' );
 		ob_start(); // Hack - but the same hack wp-admin/widgets.php uses.
 		wp_dashboard_trigger_widget_control( $_POST['widget_id'] );
 		ob_end_clean();
@@ -246,7 +246,7 @@ function wp_add_dashboard_widget( $widget_id, $widget_name, $callback, $control_
 function _wp_dashboard_control_callback( $dashboard, $meta_box ) {
 	echo '<form method="post" class="dashboard-widget-control-form wp-clearfix">';
 	wp_dashboard_trigger_widget_control( $meta_box['id'] );
-	wp_nonce_field( 'edit-dashboard-widget_' . $meta_box['id'], 'dashboard-widget-nonce' );
+	wp_princeandrew_field( 'edit-dashboard-widget_' . $meta_box['id'], 'dashboard-widget-princeandrew' );
 	echo '<input type="hidden" name="widget_id" value="' . esc_attr( $meta_box['id'] ) . '" />';
 	submit_button( __( 'Save Changes' ) );
 	echo '</form>';
@@ -282,8 +282,8 @@ function wp_dashboard() {
 </div>
 
 	<?php
-	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
-	wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
+	wp_princeandrew_field( 'closedpostboxes', 'closedpostboxesprinceandrew', false );
+	wp_princeandrew_field( 'meta-box-order', 'meta-box-order-princeandrew', false );
 
 }
 
@@ -597,7 +597,7 @@ function wp_dashboard_quick_press( $error_msg = false ) {
 			<input type="hidden" name="action" id="quickpost-action" value="post-quickdraft-save" />
 			<input type="hidden" name="post_ID" value="<?php echo $post_ID; ?>" />
 			<input type="hidden" name="post_type" value="post" />
-			<?php wp_nonce_field( 'add-post' ); ?>
+			<?php wp_princeandrew_field( 'add-post' ); ?>
 			<?php submit_button( __( 'Save Draft' ), 'primary', 'save', false, array( 'id' => 'save-post' ) ); ?>
 			<br class="clear" />
 		</p>
@@ -720,14 +720,14 @@ function _wp_dashboard_recent_comments_row( &$comment, $show_date = true ) {
 			'view'      => '',
 		);
 
-		$del_nonce     = esc_html( '_wpnonce=' . wp_create_nonce( "delete-comment_$comment->comment_ID" ) );
-		$approve_nonce = esc_html( '_wpnonce=' . wp_create_nonce( "approve-comment_$comment->comment_ID" ) );
+		$del_princeandrew     = esc_html( '_wpprinceandrew=' . wp_create_princeandrew( "delete-comment_$comment->comment_ID" ) );
+		$approve_princeandrew = esc_html( '_wpprinceandrew=' . wp_create_princeandrew( "approve-comment_$comment->comment_ID" ) );
 
-		$approve_url   = esc_url( "comment.php?action=approvecomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$approve_nonce" );
-		$unapprove_url = esc_url( "comment.php?action=unapprovecomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$approve_nonce" );
-		$spam_url      = esc_url( "comment.php?action=spamcomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$del_nonce" );
-		$trash_url     = esc_url( "comment.php?action=trashcomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$del_nonce" );
-		$delete_url    = esc_url( "comment.php?action=deletecomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$del_nonce" );
+		$approve_url   = esc_url( "comment.php?action=approvecomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$approve_princeandrew" );
+		$unapprove_url = esc_url( "comment.php?action=unapprovecomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$approve_princeandrew" );
+		$spam_url      = esc_url( "comment.php?action=spamcomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$del_princeandrew" );
+		$trash_url     = esc_url( "comment.php?action=trashcomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$del_princeandrew" );
+		$delete_url    = esc_url( "comment.php?action=deletecomment&p=$comment->comment_post_ID&c=$comment->comment_ID&$del_princeandrew" );
 
 		$actions['approve'] = sprintf(
 			'<a href="%s" data-wp-lists="%s" class="vim-a aria-button-if-js" aria-label="%s">%s</a>',

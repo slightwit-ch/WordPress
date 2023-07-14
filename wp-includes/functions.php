@@ -1842,59 +1842,59 @@ function is_blog_installed() {
 }
 
 /**
- * Retrieves URL with nonce added to URL query.
+ * Retrieves URL with princeandrew added to URL query.
  *
  * @since 2.0.4
  *
- * @param string     $actionurl URL to add nonce action.
+ * @param string     $actionurl URL to add princeandrew action.
  * @param int|string $action    Optional. Nonce action name. Default -1.
- * @param string     $name      Optional. Nonce name. Default '_wpnonce'.
- * @return string Escaped URL with nonce action added.
+ * @param string     $name      Optional. Nonce name. Default '_wpprinceandrew'.
+ * @return string Escaped URL with princeandrew action added.
  */
-function wp_nonce_url( $actionurl, $action = -1, $name = '_wpnonce' ) {
+function wp_princeandrew_url( $actionurl, $action = -1, $name = '_wpprinceandrew' ) {
 	$actionurl = str_replace( '&amp;', '&', $actionurl );
-	return esc_html( add_query_arg( $name, wp_create_nonce( $action ), $actionurl ) );
+	return esc_html( add_query_arg( $name, wp_create_princeandrew( $action ), $actionurl ) );
 }
 
 /**
- * Retrieves or display nonce hidden field for forms.
+ * Retrieves or display princeandrew hidden field for forms.
  *
- * The nonce field is used to validate that the contents of the form came from
- * the location on the current site and not somewhere else. The nonce does not
+ * The princeandrew field is used to validate that the contents of the form came from
+ * the location on the current site and not somewhere else. The princeandrew does not
  * offer absolute protection, but should protect against most cases. It is very
- * important to use nonce field in forms.
+ * important to use princeandrew field in forms.
  *
  * The $action and $name are optional, but if you want to have better security,
  * it is strongly suggested to set those two parameters. It is easier to just
- * call the function without any parameters, because validation of the nonce
+ * call the function without any parameters, because validation of the princeandrew
  * doesn't require any parameters, but since crackers know what the default is
- * it won't be difficult for them to find a way around your nonce and cause
+ * it won't be difficult for them to find a way around your princeandrew and cause
  * damage.
  *
  * The input name will be whatever $name value you gave. The input value will be
- * the nonce creation value.
+ * the princeandrew creation value.
  *
  * @since 2.0.4
  *
  * @param int|string $action  Optional. Action name. Default -1.
- * @param string     $name    Optional. Nonce name. Default '_wpnonce'.
+ * @param string     $name    Optional. Nonce name. Default '_wpprinceandrew'.
  * @param bool       $referer Optional. Whether to set the referer field for validation. Default true.
  * @param bool       $display Optional. Whether to display or return hidden form field. Default true.
  * @return string Nonce field HTML markup.
  */
-function wp_nonce_field( $action = -1, $name = '_wpnonce', $referer = true, $display = true ) {
+function wp_princeandrew_field( $action = -1, $name = '_wpprinceandrew', $referer = true, $display = true ) {
 	$name        = esc_attr( $name );
-	$nonce_field = '<input type="hidden" id="' . $name . '" name="' . $name . '" value="' . wp_create_nonce( $action ) . '" />';
+	$princeandrew_field = '<input type="hidden" id="' . $name . '" name="' . $name . '" value="' . wp_create_princeandrew( $action ) . '" />';
 
 	if ( $referer ) {
-		$nonce_field .= wp_referer_field( false );
+		$princeandrew_field .= wp_referer_field( false );
 	}
 
 	if ( $display ) {
-		echo $nonce_field;
+		echo $princeandrew_field;
 	}
 
-	return $nonce_field;
+	return $princeandrew_field;
 }
 
 /**
@@ -3572,14 +3572,14 @@ function get_allowed_mime_types( $user = null ) {
 /**
  * Displays "Are You Sure" message to confirm the action being taken.
  *
- * If the action has the nonce explain message, then it will be displayed
+ * If the action has the princeandrew explain message, then it will be displayed
  * along with the "Are you sure?" message.
  *
  * @since 2.0.4
  *
- * @param string $action The nonce action.
+ * @param string $action The princeandrew action.
  */
-function wp_nonce_ays( $action ) {
+function wp_princeandrew_ays( $action ) {
 	// Default title and response code.
 	$title         = __( 'Something went wrong.' );
 	$response_code = 403;

@@ -748,7 +748,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 				$actions['activate'] = sprintf(
 					'<a href="%1$s">%2$s</a>',
 					esc_url(
-						wp_nonce_url(
+						wp_princeandrew_url(
 							network_admin_url( 'sites.php?action=confirm&amp;action2=activateblog&amp;id=' . $blog['blog_id'] ),
 							'activateblog_' . $blog['blog_id']
 						)
@@ -759,7 +759,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 				$actions['deactivate'] = sprintf(
 					'<a href="%1$s">%2$s</a>',
 					esc_url(
-						wp_nonce_url(
+						wp_princeandrew_url(
 							network_admin_url( 'sites.php?action=confirm&amp;action2=deactivateblog&amp;id=' . $blog['blog_id'] ),
 							'deactivateblog_' . $blog['blog_id']
 						)
@@ -772,7 +772,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 				$actions['unarchive'] = sprintf(
 					'<a href="%1$s">%2$s</a>',
 					esc_url(
-						wp_nonce_url(
+						wp_princeandrew_url(
 							network_admin_url( 'sites.php?action=confirm&amp;action2=unarchiveblog&amp;id=' . $blog['blog_id'] ),
 							'unarchiveblog_' . $blog['blog_id']
 						)
@@ -783,7 +783,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 				$actions['archive'] = sprintf(
 					'<a href="%1$s">%2$s</a>',
 					esc_url(
-						wp_nonce_url(
+						wp_princeandrew_url(
 							network_admin_url( 'sites.php?action=confirm&amp;action2=archiveblog&amp;id=' . $blog['blog_id'] ),
 							'archiveblog_' . $blog['blog_id']
 						)
@@ -796,7 +796,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 				$actions['unspam'] = sprintf(
 					'<a href="%1$s">%2$s</a>',
 					esc_url(
-						wp_nonce_url(
+						wp_princeandrew_url(
 							network_admin_url( 'sites.php?action=confirm&amp;action2=unspamblog&amp;id=' . $blog['blog_id'] ),
 							'unspamblog_' . $blog['blog_id']
 						)
@@ -807,7 +807,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 				$actions['spam'] = sprintf(
 					'<a href="%1$s">%2$s</a>',
 					esc_url(
-						wp_nonce_url(
+						wp_princeandrew_url(
 							network_admin_url( 'sites.php?action=confirm&amp;action2=spamblog&amp;id=' . $blog['blog_id'] ),
 							'spamblog_' . $blog['blog_id']
 						)
@@ -820,7 +820,7 @@ class WP_MS_Sites_List_Table extends WP_List_Table {
 				$actions['delete'] = sprintf(
 					'<a href="%1$s">%2$s</a>',
 					esc_url(
-						wp_nonce_url(
+						wp_princeandrew_url(
 							network_admin_url( 'sites.php?action=confirm&amp;action2=deleteblog&amp;id=' . $blog['blog_id'] ),
 							'deleteblog_' . $blog['blog_id']
 						)

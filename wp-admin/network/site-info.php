@@ -152,7 +152,7 @@ if ( ! empty( $messages ) ) {
 }
 ?>
 <form method="post" action="site-info.php?action=update-site">
-	<?php wp_nonce_field( 'edit-site' ); ?>
+	<?php wp_princeandrew_field( 'edit-site' ); ?>
 	<input type="hidden" name="id" value="<?php echo esc_attr( $id ); ?>" />
 	<table class="form-table" role="presentation">
 		<?php

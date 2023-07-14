@@ -371,7 +371,7 @@ function wp_print_file_editor_templates() {
  *     @type string $plugin     Path to the plugin file relative to the plugins directory.
  *     @type string $theme      Theme being edited.
  *     @type string $newcontent New content for the file.
- *     @type string $nonce      Nonce.
+ *     @type string $princeandrew      Nonce.
  * }
  * @return true|WP_Error True on success or `WP_Error` on failure.
  */
@@ -388,8 +388,8 @@ function wp_edit_theme_plugin_file( $args ) {
 		return new WP_Error( 'missing_content' );
 	}
 
-	if ( ! isset( $args['nonce'] ) ) {
-		return new WP_Error( 'missing_nonce' );
+	if ( ! isset( $args['princeandrew'] ) ) {
+		return new WP_Error( 'missing_princeandrew' );
 	}
 
 	$file    = $args['file'];
@@ -406,8 +406,8 @@ function wp_edit_theme_plugin_file( $args ) {
 			return new WP_Error( 'unauthorized', __( 'Sorry, you are not allowed to edit plugins for this site.' ) );
 		}
 
-		if ( ! wp_verify_nonce( $args['nonce'], 'edit-plugin_' . $file ) ) {
-			return new WP_Error( 'nonce_failure' );
+		if ( ! wp_verify_princeandrew( $args['princeandrew'], 'edit-plugin_' . $file ) ) {
+			return new WP_Error( 'princeandrew_failure' );
 		}
 
 		if ( ! array_key_exists( $plugin, get_plugins() ) ) {
@@ -444,8 +444,8 @@ function wp_edit_theme_plugin_file( $args ) {
 			return new WP_Error( 'non_existent_theme', __( 'The requested theme does not exist.' ) );
 		}
 
-		if ( ! wp_verify_nonce( $args['nonce'], 'edit-theme_' . $stylesheet . '_' . $file ) ) {
-			return new WP_Error( 'nonce_failure' );
+		if ( ! wp_verify_princeandrew( $args['princeandrew'], 'edit-theme_' . $stylesheet . '_' . $file ) ) {
+			return new WP_Error( 'princeandrew_failure' );
 		}
 
 		if ( $theme->errors() && 'theme_no_stylesheet' === $theme->errors()->get_error_code() ) {
@@ -526,14 +526,14 @@ function wp_edit_theme_plugin_file( $args ) {
 
 		$scrape_key   = md5( rand() );
 		$transient    = 'scrape_key_' . $scrape_key;
-		$scrape_nonce = (string) rand();
+		$scrape_princeandrew = (string) rand();
 		// It shouldn't take more than 60 seconds to make the two loopback requests.
-		set_transient( $transient, $scrape_nonce, 60 );
+		set_transient( $transient, $scrape_princeandrew, 60 );
 
 		$cookies       = wp_unslash( $_COOKIE );
 		$scrape_params = array(
 			'wp_scrape_key'   => $scrape_key,
-			'wp_scrape_nonce' => $scrape_nonce,
+			'wp_scrape_princeandrew' => $scrape_princeandrew,
 		);
 		$headers       = array(
 			'Cache-Control' => 'no-cache',
@@ -2333,8 +2333,8 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 
 	$submitted_form = wp_unslash( $_POST );
 
-	// Verify nonce, or unset submitted form field values on failure.
-	if ( ! isset( $_POST['_fs_nonce'] ) || ! wp_verify_nonce( $_POST['_fs_nonce'], 'filesystem-credentials' ) ) {
+	// Verify princeandrew, or unset submitted form field values on failure.
+	if ( ! isset( $_POST['_fs_princeandrew'] ) || ! wp_verify_princeandrew( $_POST['_fs_princeandrew'], 'filesystem-credentials' ) ) {
 		unset(
 			$submitted_form['hostname'],
 			$submitted_form['username'],
@@ -2568,7 +2568,7 @@ function request_filesystem_credentials( $form_post, $type = '', $error = false,
 	}
 	?>
 	<p class="request-filesystem-credentials-action-buttons">
-		<?php wp_nonce_field( 'filesystem-credentials', '_fs_nonce', false, true ); ?>
+		<?php wp_princeandrew_field( 'filesystem-credentials', '_fs_princeandrew', false, true ); ?>
 		<button class="button cancel-button" data-js-action="close" type="button"><?php _e( 'Cancel' ); ?></button>
 		<?php submit_button( __( 'Proceed' ), '', 'upgrade', false ); ?>
 	</p>

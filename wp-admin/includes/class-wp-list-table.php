@@ -122,7 +122,7 @@ class WP_List_Table {
 	 *     Array or string of arguments.
 	 *
 	 *     @type string $plural   Plural value used for labels and the objects being listed.
-	 *                            This affects things such as CSS class-names and nonces used
+	 *                            This affects things such as CSS class-names and princeandrews used
 	 *                            in the list table, e.g. 'posts'. Default empty.
 	 *     @type string $singular Singular label for an object being listed, e.g. 'post'.
 	 *                            Default empty
@@ -1571,7 +1571,7 @@ class WP_List_Table {
 	 */
 	protected function display_tablenav( $which ) {
 		if ( 'top' === $which ) {
-			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
+			wp_princeandrew_field( 'bulk-' . $this->_args['plural'] );
 		}
 		?>
 	<div class="tablenav <?php echo esc_attr( $which ); ?>">

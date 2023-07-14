@@ -30,7 +30,7 @@ if ( is_multisite() ) {
 }
 
 if ( isset( $_REQUEST['action'] ) && 'adduser' === $_REQUEST['action'] ) {
-	check_admin_referer( 'add-user', '_wpnonce_add-user' );
+	check_admin_referer( 'add-user', '_wpprinceandrew_add-user' );
 
 	$user_details = null;
 	$user_email   = wp_unslash( $_REQUEST['email'] );
@@ -181,7 +181,7 @@ Please click the following link to confirm the invite:
 	wp_redirect( $redirect );
 	die();
 } elseif ( isset( $_REQUEST['action'] ) && 'createuser' === $_REQUEST['action'] ) {
-	check_admin_referer( 'create-user', '_wpnonce_create-user' );
+	check_admin_referer( 'create-user', '_wpprinceandrew_create-user' );
 
 	if ( ! current_user_can( 'create_users' ) ) {
 		wp_die(
@@ -438,7 +438,7 @@ if ( is_multisite() && current_user_can( 'promote_users' ) ) {
 	?>
 >
 <input name="action" type="hidden" value="adduser" />
-	<?php wp_nonce_field( 'add-user', '_wpnonce_add-user' ); ?>
+	<?php wp_princeandrew_field( 'add-user', '_wpprinceandrew_add-user' ); ?>
 
 <table class="form-table" role="presentation">
 	<tr class="form-field form-required">
@@ -494,7 +494,7 @@ if ( current_user_can( 'create_users' ) ) {
 	?>
 >
 <input name="action" type="hidden" value="createuser" />
-	<?php wp_nonce_field( 'create-user', '_wpnonce_create-user' ); ?>
+	<?php wp_princeandrew_field( 'create-user', '_wpprinceandrew_create-user' ); ?>
 	<?php
 	// Load up the passed data, else set to a default.
 	$creating = isset( $_POST['createuser'] );

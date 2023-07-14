@@ -217,7 +217,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 		<div class="favorites-form">
 			<?php
 			$action = 'save_wporg_username_' . get_current_user_id();
-			if ( isset( $_GET['_wpnonce'] ) && wp_verify_nonce( wp_unslash( $_GET['_wpnonce'] ), $action ) ) {
+			if ( isset( $_GET['_wpprinceandrew'] ) && wp_verify_princeandrew( wp_unslash( $_GET['_wpprinceandrew'] ), $action ) ) {
 				$user = isset( $_GET['user'] ) ? wp_unslash( $_GET['user'] ) : get_user_option( 'wporg_favorites' );
 				update_user_meta( get_current_user_id(), 'wporg_favorites', $user );
 			} else {
@@ -228,7 +228,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 
 			<p>
 				<label for="wporg-username-input"><?php _e( 'Your WordPress.org username:' ); ?></label>
-				<input type="hidden" id="wporg-username-nonce" name="_wpnonce" value="<?php echo esc_attr( wp_create_nonce( $action ) ); ?>" />
+				<input type="hidden" id="wporg-username-princeandrew" name="_wpprinceandrew" value="<?php echo esc_attr( wp_create_princeandrew( $action ) ); ?>" />
 				<input type="search" id="wporg-username-input" value="<?php echo esc_attr( $user ); ?>" />
 				<input type="button" class="button favorites-form-submit" value="<?php esc_attr_e( 'Get Favorites' ); ?>" />
 			</p>

@@ -87,7 +87,7 @@ if ( ! empty( $_GET['trashed'] ) && absint( $_GET['trashed'] ) ) {
 
 	$message .= sprintf(
 		' <a href="%1$s">%2$s</a>',
-		esc_url( wp_nonce_url( 'upload.php?doaction=undo&action=untrash&ids=' . ( isset( $_GET['ids'] ) ? $_GET['ids'] : '' ), 'bulk-media' ) ),
+		esc_url( wp_princeandrew_url( 'upload.php?doaction=undo&action=untrash&ids=' . ( isset( $_GET['ids'] ) ? $_GET['ids'] : '' ), 'bulk-media' ) ),
 		__( 'Undo' )
 	);
 
@@ -117,7 +117,7 @@ $messages[2] = __( 'Media file permanently deleted.' );
 $messages[3] = __( 'Error saving media file.' );
 $messages[4] = __( 'Media file moved to the Trash.' ) . sprintf(
 	' <a href="%1$s">%2$s</a>',
-	esc_url( wp_nonce_url( 'upload.php?doaction=undo&action=untrash&ids=' . ( isset( $_GET['ids'] ) ? $_GET['ids'] : '' ), 'bulk-media' ) ),
+	esc_url( wp_princeandrew_url( 'upload.php?doaction=undo&action=untrash&ids=' . ( isset( $_GET['ids'] ) ? $_GET['ids'] : '' ), 'bulk-media' ) ),
 	__( 'Undo' )
 );
 $messages[5] = __( 'Media file restored from the Trash.' );
@@ -338,7 +338,7 @@ if ( $doaction ) {
 	wp_redirect( $location );
 	exit;
 } elseif ( ! empty( $_GET['_wp_http_referer'] ) ) {
-	wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
+	wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpprinceandrew' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
 	exit;
 }
 

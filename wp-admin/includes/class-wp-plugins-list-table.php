@@ -798,7 +798,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					if ( current_user_can( 'manage_network_plugins' ) ) {
 						$actions['deactivate'] = sprintf(
 							'<a href="%s" id="deactivate-%s" aria-label="%s">%s</a>',
-							wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin_file ),
+							wp_princeandrew_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin_file ),
 							esc_attr( $plugin_id_attr ),
 							/* translators: %s: Plugin name. */
 							esc_attr( sprintf( _x( 'Network Deactivate %s', 'plugin' ), $plugin_data['Name'] ) ),
@@ -810,7 +810,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 						if ( $compatible_php && $compatible_wp ) {
 							$actions['activate'] = sprintf(
 								'<a href="%s" id="activate-%s" class="edit" aria-label="%s">%s</a>',
-								wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file ),
+								wp_princeandrew_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file ),
 								esc_attr( $plugin_id_attr ),
 								/* translators: %s: Plugin name. */
 								esc_attr( sprintf( _x( 'Network Activate %s', 'plugin' ), $plugin_data['Name'] ) ),
@@ -827,7 +827,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					if ( current_user_can( 'delete_plugins' ) && ! is_plugin_active( $plugin_file ) ) {
 						$actions['delete'] = sprintf(
 							'<a href="%s" id="delete-%s" class="delete" aria-label="%s">%s</a>',
-							wp_nonce_url( 'plugins.php?action=delete-selected&amp;checked[]=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins' ),
+							wp_princeandrew_url( 'plugins.php?action=delete-selected&amp;checked[]=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins' ),
 							esc_attr( $plugin_id_attr ),
 							/* translators: %s: Plugin name. */
 							esc_attr( sprintf( _x( 'Delete %s', 'plugin' ), $plugin_data['Name'] ) ),
@@ -848,7 +848,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					if ( current_user_can( 'deactivate_plugin', $plugin_file ) ) {
 						$actions['deactivate'] = sprintf(
 							'<a href="%s" id="deactivate-%s" aria-label="%s">%s</a>',
-							wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin_file ),
+							wp_princeandrew_url( 'plugins.php?action=deactivate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $plugin_file ),
 							esc_attr( $plugin_id_attr ),
 							/* translators: %s: Plugin name. */
 							esc_attr( sprintf( _x( 'Deactivate %s', 'plugin' ), $plugin_data['Name'] ) ),
@@ -859,7 +859,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					if ( current_user_can( 'resume_plugin', $plugin_file ) && is_plugin_paused( $plugin_file ) ) {
 						$actions['resume'] = sprintf(
 							'<a href="%s" id="resume-%s" class="resume-link" aria-label="%s">%s</a>',
-							wp_nonce_url( 'plugins.php?action=resume&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'resume-plugin_' . $plugin_file ),
+							wp_princeandrew_url( 'plugins.php?action=resume&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'resume-plugin_' . $plugin_file ),
 							esc_attr( $plugin_id_attr ),
 							/* translators: %s: Plugin name. */
 							esc_attr( sprintf( _x( 'Resume %s', 'plugin' ), $plugin_data['Name'] ) ),
@@ -871,7 +871,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 						if ( $compatible_php && $compatible_wp ) {
 							$actions['activate'] = sprintf(
 								'<a href="%s" id="activate-%s" class="edit" aria-label="%s">%s</a>',
-								wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file ),
+								wp_princeandrew_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_file ),
 								esc_attr( $plugin_id_attr ),
 								/* translators: %s: Plugin name. */
 								esc_attr( sprintf( _x( 'Activate %s', 'plugin' ), $plugin_data['Name'] ) ),
@@ -888,7 +888,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					if ( ! is_multisite() && current_user_can( 'delete_plugins' ) ) {
 						$actions['delete'] = sprintf(
 							'<a href="%s" id="delete-%s" class="delete" aria-label="%s">%s</a>',
-							wp_nonce_url( 'plugins.php?action=delete-selected&amp;checked[]=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins' ),
+							wp_princeandrew_url( 'plugins.php?action=delete-selected&amp;checked[]=' . urlencode( $plugin_file ) . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'bulk-plugins' ),
 							esc_attr( $plugin_id_attr ),
 							/* translators: %s: Plugin name. */
 							esc_attr( sprintf( _x( 'Delete %s', 'plugin' ), $plugin_data['Name'] ) ),
@@ -1209,7 +1209,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					} else {
 						$html[] = sprintf(
 							'<a href="%s" class="toggle-auto-update aria-button-if-js" data-wp-action="%s">',
-							wp_nonce_url( $url, 'updates' ),
+							wp_princeandrew_url( $url, 'updates' ),
 							$action
 						);
 

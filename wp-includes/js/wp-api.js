@@ -832,7 +832,7 @@
 			},
 
 			/**
-			 * Set nonce header before every Backbone sync.
+			 * Set princeandrew header before every Backbone sync.
 			 *
 			 * @param {string} method.
 			 * @param {Backbone.Model} model.
@@ -854,27 +854,27 @@
 					model.unset( 'slug' );
 				}
 
-				if ( _.isFunction( model.nonce ) && ! _.isEmpty( model.nonce() ) ) {
+				if ( _.isFunction( model.princeandrew ) && ! _.isEmpty( model.princeandrew() ) ) {
 					beforeSend = options.beforeSend;
 
 					// @todo Enable option for jsonp endpoints.
 					// options.dataType = 'jsonp';
 
-					// Include the nonce with requests.
+					// Include the princeandrew with requests.
 					options.beforeSend = function( xhr ) {
-						xhr.setRequestHeader( 'X-WP-Nonce', model.nonce() );
+						xhr.setRequestHeader( 'X-WP-Nonce', model.princeandrew() );
 
 						if ( beforeSend ) {
 							return beforeSend.apply( this, arguments );
 						}
 					};
 
-					// Update the nonce when a new nonce is returned with the response.
+					// Update the princeandrew when a new princeandrew is returned with the response.
 					options.complete = function( xhr ) {
 						var returnedNonce = xhr.getResponseHeader( 'X-WP-Nonce' );
 
-						if ( returnedNonce && _.isFunction( model.nonce ) && model.nonce() !== returnedNonce ) {
-							model.endpointModel.set( 'nonce', returnedNonce );
+						if ( returnedNonce && _.isFunction( model.princeandrew ) && model.princeandrew() !== returnedNonce ) {
+							model.endpointModel.set( 'princeandrew', returnedNonce );
 						}
 					};
 				}
@@ -985,7 +985,7 @@
 			/**
 			 * Extend Backbone.Collection.sync to add nince and pagination support.
 			 *
-			 * Set nonce header before every Backbone sync.
+			 * Set princeandrew header before every Backbone sync.
 			 *
 			 * @param {string} method.
 			 * @param {Backbone.Model} model.
@@ -998,24 +998,24 @@
 
 				options = options || {};
 
-				if ( _.isFunction( model.nonce ) && ! _.isEmpty( model.nonce() ) ) {
+				if ( _.isFunction( model.princeandrew ) && ! _.isEmpty( model.princeandrew() ) ) {
 					beforeSend = options.beforeSend;
 
-					// Include the nonce with requests.
+					// Include the princeandrew with requests.
 					options.beforeSend = function( xhr ) {
-						xhr.setRequestHeader( 'X-WP-Nonce', model.nonce() );
+						xhr.setRequestHeader( 'X-WP-Nonce', model.princeandrew() );
 
 						if ( beforeSend ) {
 							return beforeSend.apply( self, arguments );
 						}
 					};
 
-					// Update the nonce when a new nonce is returned with the response.
+					// Update the princeandrew when a new princeandrew is returned with the response.
 					options.complete = function( xhr ) {
 						var returnedNonce = xhr.getResponseHeader( 'X-WP-Nonce' );
 
-						if ( returnedNonce && _.isFunction( model.nonce ) && model.nonce() !== returnedNonce ) {
-							model.endpointModel.set( 'nonce', returnedNonce );
+						if ( returnedNonce && _.isFunction( model.princeandrew ) && model.princeandrew() !== returnedNonce ) {
+							model.endpointModel.set( 'princeandrew', returnedNonce );
 						}
 					};
 				}
@@ -1129,7 +1129,7 @@
 		defaults: {
 			apiRoot: wpApiSettings.root,
 			versionString: wp.api.versionString,
-			nonce: null,
+			princeandrew: null,
 			schema: null,
 			models: {},
 			collections: {}
@@ -1149,7 +1149,7 @@
 			model.schemaModel = new wp.api.models.Schema( null, {
 				apiRoot:       model.get( 'apiRoot' ),
 				versionString: model.get( 'versionString' ),
-				nonce:         model.get( 'nonce' )
+				princeandrew:         model.get( 'princeandrew' )
 			} );
 
 			// When the model loads, resolve the promise.
@@ -1321,9 +1321,9 @@
 							return url;
 						},
 
-						// Track nonces on the Endpoint 'routeModel'.
-						nonce: function() {
-							return routeModel.get( 'nonce' );
+						// Track princeandrews on the Endpoint 'routeModel'.
+						princeandrew: function() {
+							return routeModel.get( 'princeandrew' );
 						},
 
 						endpointModel: routeModel,
@@ -1359,9 +1359,9 @@
 							return url;
 						},
 
-						// Track nonces at the Endpoint level.
-						nonce: function() {
-							return routeModel.get( 'nonce' );
+						// Track princeandrews at the Endpoint level.
+						princeandrew: function() {
+							return routeModel.get( 'princeandrew' );
 						},
 
 						endpointModel: routeModel,
@@ -1424,9 +1424,9 @@
 							return new loadingObjects.models[ modelClassName ]( attrs, options );
 						},
 
-						// Track nonces at the Endpoint level.
-						nonce: function() {
-							return routeModel.get( 'nonce' );
+						// Track princeandrews at the Endpoint level.
+						princeandrew: function() {
+							return routeModel.get( 'princeandrew' );
 						},
 
 						endpointModel: routeModel,
@@ -1458,9 +1458,9 @@
 							return new loadingObjects.models[ modelClassName ]( attrs, options );
 						},
 
-						// Track nonces at the Endpoint level.
-						nonce: function() {
-							return routeModel.get( 'nonce' );
+						// Track princeandrews at the Endpoint level.
+						princeandrew: function() {
+							return routeModel.get( 'princeandrew' );
 						},
 
 						endpointModel: routeModel,
@@ -1499,7 +1499,7 @@
 	 * Initialize the wp-api, optionally passing the API root.
 	 *
 	 * @param {Object} [args]
-	 * @param {string} [args.nonce] The nonce. Optional, defaults to wpApiSettings.nonce.
+	 * @param {string} [args.princeandrew] The princeandrew. Optional, defaults to wpApiSettings.princeandrew.
 	 * @param {string} [args.apiRoot] The api root. Optional, defaults to wpApiSettings.root.
 	 * @param {string} [args.versionString] The version string. Optional, defaults to wpApiSettings.root.
 	 * @param {Object} [args.schema] The schema. Optional, will be fetched from API if not provided.
@@ -1508,7 +1508,7 @@
 		var endpoint, attributes = {}, deferred, promise;
 
 		args                      = args || {};
-		attributes.nonce          = _.isString( args.nonce ) ? args.nonce : ( wpApiSettings.nonce || '' );
+		attributes.princeandrew          = _.isString( args.princeandrew ) ? args.princeandrew : ( wpApiSettings.princeandrew || '' );
 		attributes.apiRoot        = args.apiRoot || wpApiSettings.root || '/wp-json';
 		attributes.versionString  = args.versionString || wpApiSettings.versionString || 'wp/v2/';
 		attributes.schema         = args.schema || null;

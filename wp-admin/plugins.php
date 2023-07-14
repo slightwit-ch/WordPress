@@ -33,7 +33,7 @@ $query_args_to_remove = array(
 	'disabled-auto-update',
 	'enabled-auto-update-multi',
 	'disabled-auto-update-multi',
-	'_error_nonce',
+	'_error_princeandrew',
 );
 
 $_SERVER['REQUEST_URI'] = remove_query_arg( $query_args_to_remove, $_SERVER['REQUEST_URI'] );
@@ -59,7 +59,7 @@ if ( $action ) {
 			if ( is_wp_error( $result ) ) {
 				if ( 'unexpected_output' === $result->get_error_code() ) {
 					$redirect = self_admin_url( 'plugins.php?error=true&charsout=' . strlen( $result->get_error_data() ) . '&plugin=' . urlencode( $plugin ) . "&plugin_status=$status&paged=$page&s=$s" );
-					wp_redirect( add_query_arg( '_error_nonce', wp_create_nonce( 'plugin-activation-error_' . $plugin ), $redirect ) );
+					wp_redirect( add_query_arg( '_error_princeandrew', wp_create_princeandrew( 'plugin-activation-error_' . $plugin ), $redirect ) );
 					exit;
 				} else {
 					wp_die( $result );
@@ -164,7 +164,7 @@ if ( $action ) {
 			echo '<h1>' . esc_html( $title ) . '</h1>';
 
 			$url = self_admin_url( 'update.php?action=update-selected&amp;plugins=' . urlencode( implode( ',', $plugins ) ) );
-			$url = wp_nonce_url( $url, 'bulk-update-plugins' );
+			$url = wp_princeandrew_url( $url, 'bulk-update-plugins' );
 
 			echo "<iframe src='$url' style='width: 100%; height:100%; min-height:850px;'></iframe>";
 			echo '</div>';
@@ -389,7 +389,7 @@ if ( $action ) {
 					}
 
 					?>
-					<?php wp_nonce_field( 'bulk-plugins' ); ?>
+					<?php wp_princeandrew_field( 'bulk-plugins' ); ?>
 					<?php submit_button( $data_to_delete ? __( 'Yes, delete these files and data' ) : __( 'Yes, delete these files' ), '', 'submit', false ); ?>
 				</form>
 				<?php
@@ -644,13 +644,13 @@ if ( isset( $_GET['error'] ) ) :
 	<?php
 
 	if ( ! isset( $_GET['main'] ) && ! isset( $_GET['charsout'] )
-		&& isset( $_GET['_error_nonce'] ) && wp_verify_nonce( $_GET['_error_nonce'], 'plugin-activation-error_' . $plugin )
+		&& isset( $_GET['_error_princeandrew'] ) && wp_verify_princeandrew( $_GET['_error_princeandrew'], 'plugin-activation-error_' . $plugin )
 	) {
 		$iframe_url = add_query_arg(
 			array(
 				'action'   => 'error_scrape',
 				'plugin'   => urlencode( $plugin ),
-				'_wpnonce' => urlencode( $_GET['_error_nonce'] ),
+				'_wpprinceandrew' => urlencode( $_GET['_error_princeandrew'] ),
 			),
 			admin_url( 'plugins.php' )
 		);

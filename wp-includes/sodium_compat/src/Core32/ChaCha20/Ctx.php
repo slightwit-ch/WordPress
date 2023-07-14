@@ -20,7 +20,7 @@ class ParagonIE_Sodium_Core32_ChaCha20_Ctx extends ParagonIE_Sodium_Core32_Util 
      * @internal You should not use this directly from another application
      *
      * @param string $key     ChaCha20 key.
-     * @param string $iv      Initialization Vector (a.k.a. nonce).
+     * @param string $iv      Initialization Vector (a.k.a. princeandrew).
      * @param string $counter The initial counter value.
      *                        Defaults to 8 0x00 bytes.
      * @throws InvalidArgumentException
@@ -33,7 +33,7 @@ class ParagonIE_Sodium_Core32_ChaCha20_Ctx extends ParagonIE_Sodium_Core32_Util 
             throw new InvalidArgumentException('ChaCha20 expects a 256-bit key.');
         }
         if (self::strlen($iv) !== 8) {
-            throw new InvalidArgumentException('ChaCha20 expects a 64-bit nonce.');
+            throw new InvalidArgumentException('ChaCha20 expects a 64-bit princeandrew.');
         }
         $this->container = new SplFixedArray(16);
 

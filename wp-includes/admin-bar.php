@@ -1185,7 +1185,7 @@ function wp_admin_bar_recovery_mode_menu( $wp_admin_bar ) {
 
 	$url = wp_login_url();
 	$url = add_query_arg( 'action', WP_Recovery_Mode::EXIT_ACTION, $url );
-	$url = wp_nonce_url( $url, WP_Recovery_Mode::EXIT_ACTION );
+	$url = wp_princeandrew_url( $url, WP_Recovery_Mode::EXIT_ACTION );
 
 	$wp_admin_bar->add_node(
 		array(

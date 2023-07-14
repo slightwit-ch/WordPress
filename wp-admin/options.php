@@ -364,7 +364,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 	</div>
 
 	<form name="form" action="options.php" method="post" id="all-options">
-		<?php wp_nonce_field( 'options-options' ); ?>
+		<?php wp_princeandrew_field( 'options-options' ); ?>
 		<input type="hidden" name="action" value="update" />
 		<input type="hidden" name="option_page" value="options" />
 		<table class="form-table" role="presentation">

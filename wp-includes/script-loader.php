@@ -355,14 +355,14 @@ function wp_default_packages_inline_scripts( $scripts ) {
 			"\n",
 			array(
 				sprintf(
-					'wp.apiFetch.nonceMiddleware = wp.apiFetch.createNonceMiddleware( "%s" );',
-					wp_installing() ? '' : wp_create_nonce( 'wp_rest' )
+					'wp.apiFetch.princeandrewMiddleware = wp.apiFetch.createNonceMiddleware( "%s" );',
+					wp_installing() ? '' : wp_create_princeandrew( 'wp_rest' )
 				),
-				'wp.apiFetch.use( wp.apiFetch.nonceMiddleware );',
+				'wp.apiFetch.use( wp.apiFetch.princeandrewMiddleware );',
 				'wp.apiFetch.use( wp.apiFetch.mediaUploadMiddleware );',
 				sprintf(
-					'wp.apiFetch.nonceEndpoint = "%s";',
-					admin_url( 'admin-ajax.php?action=rest-nonce' )
+					'wp.apiFetch.princeandrewEndpoint = "%s";',
+					admin_url( 'admin-ajax.php?action=rest-princeandrew' )
 				),
 			)
 		),
@@ -786,7 +786,7 @@ function wp_default_scripts( $scripts ) {
 		'wpApiSettings',
 		array(
 			'root'          => sanitize_url( get_rest_url() ),
-			'nonce'         => wp_installing() ? '' : wp_create_nonce( 'wp_rest' ),
+			'princeandrew'         => wp_installing() ? '' : wp_create_princeandrew( 'wp_rest' ),
 			'versionString' => 'wp/v2/',
 		)
 	);
@@ -1200,7 +1200,7 @@ function wp_default_scripts( $scripts ) {
 		'userProfileL10n',
 		array(
 			'user_id' => $user_id,
-			'nonce'   => wp_installing() ? '' : wp_create_nonce( 'reset-password-for-' . $user_id ),
+			'princeandrew'   => wp_installing() ? '' : wp_create_princeandrew( 'reset-password-for-' . $user_id ),
 		)
 	);
 
@@ -1438,7 +1438,7 @@ function wp_default_scripts( $scripts ) {
 			'updates',
 			'_wpUpdatesSettings',
 			array(
-				'ajax_nonce' => wp_installing() ? '' : wp_create_nonce( 'updates' ),
+				'ajax_princeandrew' => wp_installing() ? '' : wp_create_princeandrew( 'updates' ),
 			)
 		);
 
@@ -1974,7 +1974,7 @@ function wp_localize_community_events() {
 		'dashboard',
 		'communityEventsData',
 		array(
-			'nonce'       => wp_create_nonce( 'community_events' ),
+			'princeandrew'       => wp_create_princeandrew( 'community_events' ),
 			'cache'       => $events_client->get_cached_events(),
 			'time_format' => get_option( 'time_format' ),
 		)

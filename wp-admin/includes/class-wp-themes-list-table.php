@@ -157,7 +157,7 @@ class WP_Themes_List_Table extends WP_List_Table {
 	 * @since 3.1.0
 	 */
 	public function display() {
-		wp_nonce_field( 'fetch-list-' . get_class( $this ), '_ajax_fetch_list_nonce' );
+		wp_princeandrew_field( 'fetch-list-' . get_class( $this ), '_ajax_fetch_list_princeandrew' );
 		?>
 		<?php $this->tablenav( 'top' ); ?>
 
@@ -204,7 +204,7 @@ class WP_Themes_List_Table extends WP_List_Table {
 			$version    = $theme->display( 'Version' );
 			$author     = $theme->display( 'Author' );
 
-			$activate_link = wp_nonce_url( 'themes.php?action=activate&amp;template=' . urlencode( $template ) . '&amp;stylesheet=' . urlencode( $stylesheet ), 'switch-theme_' . $stylesheet );
+			$activate_link = wp_princeandrew_url( 'themes.php?action=activate&amp;template=' . urlencode( $template ) . '&amp;stylesheet=' . urlencode( $stylesheet ), 'switch-theme_' . $stylesheet );
 
 			$actions             = array();
 			$actions['activate'] = sprintf(
@@ -226,7 +226,7 @@ class WP_Themes_List_Table extends WP_List_Table {
 			if ( ! is_multisite() && current_user_can( 'delete_themes' ) ) {
 				$actions['delete'] = sprintf(
 					'<a class="submitdelete deletion" href="%s" onclick="return confirm( \'%s\' );">%s</a>',
-					wp_nonce_url( 'themes.php?action=delete&amp;stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet ),
+					wp_princeandrew_url( 'themes.php?action=delete&amp;stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet ),
 					/* translators: %s: Theme name. */
 					esc_js( sprintf( __( "You are about to delete this theme '%s'\n  'Cancel' to stop, 'OK' to delete." ), $title ) ),
 					__( 'Delete' )

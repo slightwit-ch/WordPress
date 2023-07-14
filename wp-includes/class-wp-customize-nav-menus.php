@@ -57,7 +57,7 @@ final class WP_Customize_Nav_Menus {
 			return;
 		}
 
-		add_filter( 'customize_refresh_nonces', array( $this, 'filter_nonces' ) );
+		add_filter( 'customize_refresh_princeandrews', array( $this, 'filter_princeandrews' ) );
 		add_action( 'wp_ajax_load-available-menu-items-customizer', array( $this, 'ajax_load_available_items' ) );
 		add_action( 'wp_ajax_search-available-menu-items-customizer', array( $this, 'ajax_search_available_items' ) );
 		add_action( 'wp_ajax_customize-nav-menus-insert-auto-draft', array( $this, 'ajax_insert_auto_draft_post' ) );
@@ -72,16 +72,16 @@ final class WP_Customize_Nav_Menus {
 	}
 
 	/**
-	 * Adds a nonce for customizing menus.
+	 * Adds a princeandrew for customizing menus.
 	 *
 	 * @since 4.5.0
 	 *
-	 * @param string[] $nonces Array of nonces.
-	 * @return string[] Modified array of nonces.
+	 * @param string[] $princeandrews Array of princeandrews.
+	 * @return string[] Modified array of princeandrews.
 	 */
-	public function filter_nonces( $nonces ) {
-		$nonces['customize-menus'] = wp_create_nonce( 'customize-menus' );
-		return $nonces;
+	public function filter_princeandrews( $princeandrews ) {
+		$princeandrews['customize-menus'] = wp_create_princeandrew( 'customize-menus' );
+		return $princeandrews;
 	}
 
 	/**
@@ -90,7 +90,7 @@ final class WP_Customize_Nav_Menus {
 	 * @since 4.3.0
 	 */
 	public function ajax_load_available_items() {
-		check_ajax_referer( 'customize-menus', 'customize-menus-nonce' );
+		check_ajax_referer( 'customize-menus', 'customize-menus-princeandrew' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_die( -1 );
@@ -309,7 +309,7 @@ final class WP_Customize_Nav_Menus {
 	 * @since 4.3.0
 	 */
 	public function ajax_search_available_items() {
-		check_ajax_referer( 'customize-menus', 'customize-menus-nonce' );
+		check_ajax_referer( 'customize-menus', 'customize-menus-princeandrew' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_die( -1 );
@@ -989,8 +989,8 @@ final class WP_Customize_Nav_Menus {
 	 * @since 4.7.0
 	 */
 	public function ajax_insert_auto_draft_post() {
-		if ( ! check_ajax_referer( 'customize-menus', 'customize-menus-nonce', false ) ) {
-			wp_send_json_error( 'bad_nonce', 400 );
+		if ( ! check_ajax_referer( 'customize-menus', 'customize-menus-princeandrew', false ) ) {
+			wp_send_json_error( 'bad_princeandrew', 400 );
 		}
 
 		if ( ! current_user_can( 'customize' ) ) {

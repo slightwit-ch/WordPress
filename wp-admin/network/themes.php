@@ -91,7 +91,7 @@ if ( $action ) {
 			echo '<h1>' . esc_html( $title ) . '</h1>';
 
 			$url = self_admin_url( 'update.php?action=update-selected-themes&amp;themes=' . urlencode( implode( ',', $themes ) ) );
-			$url = wp_nonce_url( $url, 'bulk-update-themes' );
+			$url = wp_princeandrew_url( $url, 'bulk-update-themes' );
 
 			echo "<iframe src='$url' style='width: 100%; height:100%; min-height:850px;'></iframe>";
 			echo '</div>';
@@ -168,7 +168,7 @@ if ( $action ) {
 						echo '<input type="hidden" name="checked[]" value="' . esc_attr( $theme ) . '" />';
 					}
 
-					wp_nonce_field( 'bulk-themes' );
+					wp_princeandrew_field( 'bulk-themes' );
 
 					if ( 1 === $themes_to_delete ) {
 						submit_button( __( 'Yes, delete this theme' ), '', 'submit', false );
@@ -198,7 +198,7 @@ if ( $action ) {
 								'verify-delete' => 1,
 								'action'        => 'delete-selected',
 								'checked'       => $_REQUEST['checked'],
-								'_wpnonce'      => $_REQUEST['_wpnonce'],
+								'_wpprinceandrew'      => $_REQUEST['_wpprinceandrew'],
 							),
 							network_admin_url( 'themes.php' )
 						)

@@ -444,7 +444,7 @@ Cropper = wp.media.controller.State.extend(/** @lends wp.media.controller.Croppe
 			{},
 			this.defaults.doCropArgs,
 			{
-				nonce: attachment.get( 'nonces' ).edit,
+				princeandrew: attachment.get( 'princeandrews' ).edit,
 				id: attachment.get( 'id' ),
 				cropDetails: attachment.get( 'cropDetails' )
 			}
@@ -504,7 +504,7 @@ CustomizeImageCropper = Controller.Cropper.extend(/** @lends wp.media.controller
 
 		return wp.ajax.post( 'crop-image', {
 			wp_customize: 'on',
-			nonce: attachment.get( 'nonces' ).edit,
+			princeandrew: attachment.get( 'princeandrews' ).edit,
 			id: attachment.get( 'id' ),
 			context: control.id,
 			cropDetails: cropDetails
@@ -1956,7 +1956,7 @@ SiteIconCropper = Controller.Cropper.extend(/** @lends wp.media.controller.SiteI
 		cropDetails.dst_height = control.params.height;
 
 		return wp.ajax.post( 'crop-image', {
-			nonce: attachment.get( 'nonces' ).edit,
+			princeandrew: attachment.get( 'princeandrews' ).edit,
 			id: attachment.get( 'id' ),
 			context: 'site-icon',
 			cropDetails: cropDetails
@@ -2981,9 +2981,9 @@ Attachment = View.extend(/** @lends wp.media.view.Attachment.prototype */{
 		}
 
 		options.can = {};
-		if ( options.nonces ) {
-			options.can.remove = !! options.nonces['delete'];
-			options.can.save = !! options.nonces.update;
+		if ( options.princeandrews ) {
+			options.can.remove = !! options.princeandrews['delete'];
+			options.can.save = !! options.princeandrews.update;
 		}
 
 		if ( this.controller.state().get('allowLocalEdits') ) {
@@ -4614,7 +4614,7 @@ AttachmentsBrowser = View.extend(/** @lends wp.media.view.AttachmentsBrowser.pro
 					}
 
 					selection.each( function( model ) {
-						if ( ! model.get( 'nonces' )['delete'] ) {
+						if ( ! model.get( 'princeandrews' )['delete'] ) {
 							removed.push( model );
 							return;
 						}
@@ -4663,7 +4663,7 @@ AttachmentsBrowser = View.extend(/** @lends wp.media.view.AttachmentsBrowser.pro
 						}
 
 						selection.each( function( model ) {
-							if ( ! model.get( 'nonces' )['delete'] ) {
+							if ( ! model.get( 'princeandrews' )['delete'] ) {
 								removed.push( model );
 								return;
 							}
@@ -5378,7 +5378,7 @@ EditImage = View.extend(/** @lends wp.media.view.EditImage.prototype */{
 	},
 
 	loadEditor: function() {
-		this.editor.open( this.model.get( 'id' ), this.model.get( 'nonces' ).edit, this );
+		this.editor.open( this.model.get( 'id' ), this.model.get( 'princeandrews' ).edit, this );
 	},
 
 	back: function() {

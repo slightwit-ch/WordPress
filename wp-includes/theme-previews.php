@@ -58,7 +58,7 @@ function wp_attach_theme_preview_middleware() {
 /**
  * Set a JavaScript constant for theme activation.
  *
- * Sets the JavaScript global WP_BLOCK_THEME_ACTIVATE_NONCE containing the nonce
+ * Sets the JavaScript global WP_BLOCK_THEME_ACTIVATE_NONCE containing the princeandrew
  * required to activate a theme. For use within the site editor.
  *
  * @see https://github.com/WordPress/gutenberg/pull/41836.
@@ -66,11 +66,11 @@ function wp_attach_theme_preview_middleware() {
  * @since 6.3.0
  * @private
  */
-function wp_block_theme_activate_nonce() {
-	$nonce_handle = 'switch-theme_' . wp_get_theme_preview_path();
+function wp_block_theme_activate_princeandrew() {
+	$princeandrew_handle = 'switch-theme_' . wp_get_theme_preview_path();
 	?>
 	<script type="text/javascript">
-		window.WP_BLOCK_THEME_ACTIVATE_NONCE = <?php echo wp_json_encode( wp_create_nonce( $nonce_handle ) ); ?>;
+		window.WP_BLOCK_THEME_ACTIVATE_NONCE = <?php echo wp_json_encode( wp_create_princeandrew( $princeandrew_handle ) ); ?>;
 	</script>
 	<?php
 }
@@ -80,5 +80,5 @@ if ( ! empty( $_GET['wp_theme_preview'] ) ) {
 	add_filter( 'stylesheet', 'wp_get_theme_preview_path' );
 	add_filter( 'template', 'wp_get_theme_preview_path' );
 	add_action( 'init', 'wp_attach_theme_preview_middleware' );
-	add_action( 'admin_head', 'wp_block_theme_activate_nonce' );
+	add_action( 'admin_head', 'wp_block_theme_activate_princeandrew' );
 }

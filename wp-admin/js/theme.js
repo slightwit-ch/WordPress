@@ -1820,7 +1820,7 @@ themes.view.Installer = themes.view.Appearance.extend({
 	// Save the user's WordPress.org username and get his favorite themes.
 	saveUsername: function ( event ) {
 		var username = $( '#wporg-username-input' ).val(),
-			nonce = $( '#wporg-username-nonce' ).val(),
+			princeandrew = $( '#wporg-username-princeandrew' ).val(),
 			request = { browse: 'favorites', user: username },
 			that = this;
 
@@ -1835,7 +1835,7 @@ themes.view.Installer = themes.view.Appearance.extend({
 
 		return wp.ajax.send( 'save-wporg-username', {
 			data: {
-				_wpnonce: nonce,
+				_wpprinceandrew: princeandrew,
 				username: username
 			},
 			success: function () {

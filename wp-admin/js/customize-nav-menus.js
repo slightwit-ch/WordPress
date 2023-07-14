@@ -104,7 +104,7 @@
 		var request, deferred = $.Deferred();
 
 		request = wp.ajax.post( 'customize-nav-menus-insert-auto-draft', {
-			'customize-menus-nonce': api.settings.nonce['customize-menus'],
+			'customize-menus-princeandrew': api.settings.princeandrew['customize-menus'],
 			'wp_customize': 'on',
 			'customize_changeset_uuid': api.settings.changeset.uuid,
 			'params': params
@@ -317,7 +317,7 @@
 
 			params = api.previewer.query( { excludeCustomizedSaved: true } );
 			_.extend( params, {
-				'customize-menus-nonce': api.settings.nonce['customize-menus'],
+				'customize-menus-princeandrew': api.settings.princeandrew['customize-menus'],
 				'wp_customize': 'on',
 				'search': self.searchTerm,
 				'page': page
@@ -425,7 +425,7 @@
 
 			params = api.previewer.query( { excludeCustomizedSaved: true } );
 			_.extend( params, {
-				'customize-menus-nonce': api.settings.nonce['customize-menus'],
+				'customize-menus-princeandrew': api.settings.princeandrew['customize-menus'],
 				'wp_customize': 'on',
 				'item_types': requestItemTypes
 			} );
@@ -855,7 +855,7 @@
 
 			panel._updateHiddenColumnsRequest = wp.ajax.post( 'hidden-columns', {
 				hidden: panel.hidden(),
-				screenoptionnonce: $( '#screenoptionnonce' ).val(),
+				screenoptionprinceandrew: $( '#screenoptionprinceandrew' ).val(),
 				page: 'nav-menus'
 			} );
 			panel._updateHiddenColumnsRequest.always( function() {

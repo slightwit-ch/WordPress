@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $comment;
 ?>
 <form name="post" action="comment.php" method="post" id="post">
-<?php wp_nonce_field( 'update-comment_' . $comment->comment_ID ); ?>
+<?php wp_princeandrew_field( 'update-comment_' . $comment->comment_ID ); ?>
 <div class="wrap">
 <h1><?php _e( 'Edit Comment' ); ?></h1>
 
@@ -95,7 +95,7 @@ if ( 'approved' === wp_get_comment_status( $comment ) && $comment->comment_post_
 			'quicktags'     => $quicktags_settings,
 		)
 	);
-	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
+	wp_princeandrew_field( 'closedpostboxes', 'closedpostboxesprinceandrew', false );
 	?>
 </div>
 </div><!-- /post-body-content -->
@@ -239,7 +239,7 @@ endif;
 
 <div id="major-publishing-actions">
 <div id="delete-action">
-<?php echo "<a class='submitdelete deletion' href='" . wp_nonce_url( 'comment.php?action=' . ( ! EMPTY_TRASH_DAYS ? 'deletecomment' : 'trashcomment' ) . "&amp;c=$comment->comment_ID&amp;_wp_original_http_referer=" . urlencode( wp_get_referer() ), 'delete-comment_' . $comment->comment_ID ) . "'>" . ( ! EMPTY_TRASH_DAYS ? __( 'Delete Permanently' ) : __( 'Move to Trash' ) ) . "</a>\n"; ?>
+<?php echo "<a class='submitdelete deletion' href='" . wp_princeandrew_url( 'comment.php?action=' . ( ! EMPTY_TRASH_DAYS ? 'deletecomment' : 'trashcomment' ) . "&amp;c=$comment->comment_ID&amp;_wp_original_http_referer=" . urlencode( wp_get_referer() ), 'delete-comment_' . $comment->comment_ID ) . "'>" . ( ! EMPTY_TRASH_DAYS ? __( 'Delete Permanently' ) : __( 'Move to Trash' ) ) . "</a>\n"; ?>
 </div>
 <div id="publishing-action">
 <?php submit_button( __( 'Update' ), 'primary large', 'save', false ); ?>

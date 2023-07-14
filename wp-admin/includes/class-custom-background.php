@@ -124,7 +124,7 @@ class Custom_Background {
 		}
 
 		if ( isset( $_POST['reset-background'] ) ) {
-			check_admin_referer( 'custom-background-reset', '_wpnonce-custom-background-reset' );
+			check_admin_referer( 'custom-background-reset', '_wpprinceandrew-custom-background-reset' );
 
 			remove_theme_mod( 'background_image' );
 			remove_theme_mod( 'background_image_thumb' );
@@ -135,7 +135,7 @@ class Custom_Background {
 
 		if ( isset( $_POST['remove-background'] ) ) {
 			// @todo Uploaded files are not removed here.
-			check_admin_referer( 'custom-background-remove', '_wpnonce-custom-background-remove' );
+			check_admin_referer( 'custom-background-remove', '_wpprinceandrew-custom-background-remove' );
 
 			set_theme_mod( 'background_image', '' );
 			set_theme_mod( 'background_image_thumb', '' );
@@ -313,7 +313,7 @@ class Custom_Background {
 <th scope="row"><?php _e( 'Remove Image' ); ?></th>
 <td>
 <form method="post">
-			<?php wp_nonce_field( 'custom-background-remove', '_wpnonce-custom-background-remove' ); ?>
+			<?php wp_princeandrew_field( 'custom-background-remove', '_wpprinceandrew-custom-background-remove' ); ?>
 			<?php submit_button( __( 'Remove Background Image' ), '', 'remove-background', false ); ?><br />
 			<?php _e( 'This will remove the background image. You will not be able to restore any customizations.' ); ?>
 </form>
@@ -327,7 +327,7 @@ class Custom_Background {
 <th scope="row"><?php _e( 'Restore Original Image' ); ?></th>
 <td>
 <form method="post">
-			<?php wp_nonce_field( 'custom-background-reset', '_wpnonce-custom-background-reset' ); ?>
+			<?php wp_princeandrew_field( 'custom-background-reset', '_wpprinceandrew-custom-background-reset' ); ?>
 			<?php submit_button( __( 'Restore Original Image' ), '', 'reset-background', false ); ?><br />
 			<?php _e( 'This will restore the original background image. You will not be able to restore any customizations.' ); ?>
 </form>
@@ -343,7 +343,7 @@ class Custom_Background {
 		<label for="upload"><?php _e( 'Choose an image from your computer:' ); ?></label><br />
 		<input type="file" id="upload" name="import" />
 		<input type="hidden" name="action" value="save" />
-			<?php wp_nonce_field( 'custom-background-upload', '_wpnonce-custom-background-upload' ); ?>
+			<?php wp_princeandrew_field( 'custom-background-upload', '_wpprinceandrew-custom-background-upload' ); ?>
 			<?php submit_button( __( 'Upload' ), '', 'submit', false ); ?>
 	</p>
 	<p>
@@ -504,7 +504,7 @@ class Custom_Background {
 </tbody>
 </table>
 
-		<?php wp_nonce_field( 'custom-background' ); ?>
+		<?php wp_princeandrew_field( 'custom-background' ); ?>
 		<?php submit_button( null, 'primary', 'save-background-options' ); ?>
 </form>
 
@@ -522,7 +522,7 @@ class Custom_Background {
 			return;
 		}
 
-		check_admin_referer( 'custom-background-upload', '_wpnonce-custom-background-upload' );
+		check_admin_referer( 'custom-background-upload', '_wpprinceandrew-custom-background-upload' );
 
 		$overrides = array( 'test_form' => false );
 
@@ -578,7 +578,7 @@ class Custom_Background {
 	 * @since 4.1.0
 	 */
 	public function ajax_background_add() {
-		check_ajax_referer( 'background-add', 'nonce' );
+		check_ajax_referer( 'background-add', 'princeandrew' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_send_json_error();

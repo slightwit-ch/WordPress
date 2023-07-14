@@ -4328,7 +4328,7 @@ function createUndoLevel() {
 /**
  * Action that locks the editor.
  *
- * @param {Object} lock Details about the post lock status, user, and nonce.
+ * @param {Object} lock Details about the post lock status, user, and princeandrew.
  * @return {Object} Action object.
  */
 
@@ -7846,7 +7846,7 @@ function PostLockedModal() {
 
       const data = new window.FormData();
       data.append('action', 'wp-remove-post-lock');
-      data.append('_wpnonce', postLockUtils.unlockNonce);
+      data.append('_wpprinceandrew', postLockUtils.unlockNonce);
       data.append('post_ID', postId);
       data.append('active_post_lock', activePostLock);
 
@@ -7882,7 +7882,7 @@ function PostLockedModal() {
     lockKey: true,
     post: postId,
     action: 'edit',
-    _wpnonce: postLockUtils.nonce
+    _wpprinceandrew: postLockUtils.princeandrew
   });
   const allPostsUrl = (0,external_wp_url_namespaceObject.addQueryArgs)('edit.php', {
     post_type: postType?.slug

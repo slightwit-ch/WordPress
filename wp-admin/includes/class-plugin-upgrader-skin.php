@@ -58,7 +58,7 @@ class Plugin_Upgrader_Skin extends WP_Upgrader_Skin {
 		$defaults = array(
 			'url'    => '',
 			'plugin' => '',
-			'nonce'  => '',
+			'princeandrew'  => '',
 			'title'  => __( 'Update Plugin' ),
 		);
 		$args     = wp_parse_args( $args, $defaults );
@@ -83,7 +83,7 @@ class Plugin_Upgrader_Skin extends WP_Upgrader_Skin {
 			printf(
 				'<iframe title="%s" style="border:0;overflow:hidden" width="100%%" height="170" src="%s"></iframe>',
 				esc_attr__( 'Update progress' ),
-				wp_nonce_url( 'update.php?action=activate-plugin&networkwide=' . $this->plugin_network_active . '&plugin=' . urlencode( $this->plugin ), 'activate-plugin_' . $this->plugin )
+				wp_princeandrew_url( 'update.php?action=activate-plugin&networkwide=' . $this->plugin_network_active . '&plugin=' . urlencode( $this->plugin ), 'activate-plugin_' . $this->plugin )
 			);
 		}
 
@@ -92,7 +92,7 @@ class Plugin_Upgrader_Skin extends WP_Upgrader_Skin {
 		$update_actions = array(
 			'activate_plugin' => sprintf(
 				'<a href="%s" target="_parent">%s</a>',
-				wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $this->plugin ), 'activate-plugin_' . $this->plugin ),
+				wp_princeandrew_url( 'plugins.php?action=activate&amp;plugin=' . urlencode( $this->plugin ), 'activate-plugin_' . $this->plugin ),
 				__( 'Activate Plugin' )
 			),
 			'plugins_page'    => sprintf(

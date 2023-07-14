@@ -241,7 +241,7 @@ if ( 'auto-draft' === $post->post_status ) {
 }
 
 $form_action  = 'editpost';
-$nonce_action = 'update-post_' . $post->ID;
+$princeandrew_action = 'update-post_' . $post->ID;
 $form_extra  .= "<input type='hidden' id='post_ID' name='post_ID' value='" . esc_attr( $post->ID ) . "' />";
 
 // Detect if there exists an autosave newer than the post and if that autosave is different than the post.
@@ -465,7 +465,7 @@ do_action( 'post_edit_form_tag', $post );
 $referer = wp_get_referer();
 ?>
 >
-<?php wp_nonce_field( $nonce_action ); ?>
+<?php wp_princeandrew_field( $princeandrew_action ); ?>
 <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID; ?>" />
 <input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ); ?>" />
 <input type="hidden" id="originalaction" name="originalaction" value="<?php echo esc_attr( $form_action ); ?>" />
@@ -483,15 +483,15 @@ if ( 'draft' !== get_post_status( $post ) ) {
 
 echo $form_extra;
 
-wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
-wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
+wp_princeandrew_field( 'meta-box-order', 'meta-box-order-princeandrew', false );
+wp_princeandrew_field( 'closedpostboxes', 'closedpostboxesprinceandrew', false );
 ?>
 
 <?php
 /**
  * Fires at the beginning of the edit form.
  *
- * At this point, the required hidden fields and nonces have already been output.
+ * At this point, the required hidden fields and princeandrews have already been output.
  *
  * @since 3.7.0
  *
@@ -566,7 +566,7 @@ endif;
 	?>
 </div>
 	<?php
-	wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
+	wp_princeandrew_field( 'samplepermalink', 'samplepermalinkprinceandrew', false );
 	?>
 </div><!-- /titlediv -->
 	<?php

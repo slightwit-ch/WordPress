@@ -654,7 +654,7 @@ function activate_plugin( $plugin, $redirect = '', $network_wide = false, $silen
 	) {
 		if ( ! empty( $redirect ) ) {
 			// We'll override this later if the plugin can be included without fatal error.
-			wp_redirect( add_query_arg( '_error_nonce', wp_create_nonce( 'plugin-activation-error_' . $plugin ), $redirect ) );
+			wp_redirect( add_query_arg( '_error_princeandrew', wp_create_princeandrew( 'plugin-activation-error_' . $plugin ), $redirect ) );
 		}
 
 		ob_start();
@@ -903,7 +903,7 @@ function delete_plugins( $plugins, $deprecated = '' ) {
 		$checked[] = 'checked[]=' . $plugin;
 	}
 
-	$url = wp_nonce_url( 'plugins.php?action=delete-selected&verify-delete=1&' . implode( '&', $checked ), 'bulk-plugins' );
+	$url = wp_princeandrew_url( 'plugins.php?action=delete-selected&verify-delete=1&' . implode( '&', $checked ), 'bulk-plugins' );
 
 	ob_start();
 	$credentials = request_filesystem_credentials( $url );
@@ -2274,7 +2274,7 @@ function remove_allowed_options( $del_options, $options = '' ) {
 }
 
 /**
- * Outputs nonce, action, and option_page fields for a settings page.
+ * Outputs princeandrew, action, and option_page fields for a settings page.
  *
  * @since 2.7.0
  *
@@ -2284,7 +2284,7 @@ function remove_allowed_options( $del_options, $options = '' ) {
 function settings_fields( $option_group ) {
 	echo "<input type='hidden' name='option_page' value='" . esc_attr( $option_group ) . "' />";
 	echo '<input type="hidden" name="action" value="update" />';
-	wp_nonce_field( "$option_group-options" );
+	wp_princeandrew_field( "$option_group-options" );
 }
 
 /**
@@ -2451,8 +2451,8 @@ function resume_plugin( $plugin, $redirect = '' ) {
 	if ( ! empty( $redirect ) ) {
 		wp_redirect(
 			add_query_arg(
-				'_error_nonce',
-				wp_create_nonce( 'plugin-resume-error_' . $plugin ),
+				'_error_princeandrew',
+				wp_create_princeandrew( 'plugin-resume-error_' . $plugin ),
 				$redirect
 			)
 		);

@@ -739,10 +739,10 @@ function _set_preview( $post ) {
  * @access private
  */
 function _show_post_preview() {
-	if ( isset( $_GET['preview_id'] ) && isset( $_GET['preview_nonce'] ) ) {
+	if ( isset( $_GET['preview_id'] ) && isset( $_GET['preview_princeandrew'] ) ) {
 		$id = (int) $_GET['preview_id'];
 
-		if ( false === wp_verify_nonce( $_GET['preview_nonce'], 'post_preview_' . $id ) ) {
+		if ( false === wp_verify_princeandrew( $_GET['preview_princeandrew'], 'post_preview_' . $id ) ) {
 			wp_die( __( 'Sorry, you are not allowed to preview drafts.' ), 403 );
 		}
 

@@ -7986,7 +7986,7 @@ function use_block_editor_for_post( $post ) {
 
 	// We're in the meta box loader, so don't use the block editor.
 	if ( is_admin() && isset( $_GET['meta-box-loader'] ) ) {
-		check_admin_referer( 'meta-box-loader', 'meta-box-loader-nonce' );
+		check_admin_referer( 'meta-box-loader', 'meta-box-loader-princeandrew' );
 		return false;
 	}
 

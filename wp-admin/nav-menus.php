@@ -62,7 +62,7 @@ _wp_expand_nav_menu_post_data();
 
 switch ( $action ) {
 	case 'add-menu-item':
-		check_admin_referer( 'add-menu_item', 'menu-settings-column-nonce' );
+		check_admin_referer( 'add-menu_item', 'menu-settings-column-princeandrew' );
 
 		if ( isset( $_REQUEST['nav-menu-locations'] ) ) {
 			set_theme_mod( 'nav_menu_locations', array_map( 'absint', $_REQUEST['menu-locations'] ) );
@@ -332,7 +332,7 @@ switch ( $action ) {
 		break;
 
 	case 'update':
-		check_admin_referer( 'update-nav_menu', 'update-nav-menu-nonce' );
+		check_admin_referer( 'update-nav_menu', 'update-nav-menu-princeandrew' );
 
 		// Merge new and existing menu locations if any new ones are set.
 		$new_menu_locations = array();
@@ -842,7 +842,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 				</tbody>
 			</table>
 			<p class="button-controls wp-clearfix"><?php submit_button( __( 'Save Changes' ), 'primary left', 'nav-menu-locations', false ); ?></p>
-			<?php wp_nonce_field( 'save-menu-locations' ); ?>
+			<?php wp_princeandrew_field( 'save-menu-locations' ); ?>
 			<input type="hidden" name="menu" id="nav-menu-meta-object-id" value="<?php echo esc_attr( $nav_menu_selected_id ); ?>" />
 		</form>
 	</div><!-- #menu-locations-wrap -->
@@ -979,7 +979,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 		<form id="nav-menu-meta" class="nav-menu-meta" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="menu" id="nav-menu-meta-object-id" value="<?php echo esc_attr( $nav_menu_selected_id ); ?>" />
 			<input type="hidden" name="action" value="add-menu-item" />
-			<?php wp_nonce_field( 'add-menu_item', 'menu-settings-column-nonce' ); ?>
+			<?php wp_princeandrew_field( 'add-menu_item', 'menu-settings-column-princeandrew' ); ?>
 			<h2><?php _e( 'Add menu items' ); ?></h2>
 			<?php do_accordion_sections( 'nav-menus', 'side', null ); ?>
 		</form>
@@ -992,9 +992,9 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 				<div class="menu-edit">
 					<input type="hidden" name="nav-menu-data">
 					<?php
-					wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
-					wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
-					wp_nonce_field( 'update-nav_menu', 'update-nav-menu-nonce' );
+					wp_princeandrew_field( 'closedpostboxes', 'closedpostboxesprinceandrew', false );
+					wp_princeandrew_field( 'meta-box-order', 'meta-box-order-princeandrew', false );
+					wp_princeandrew_field( 'update-nav_menu', 'update-nav-menu-princeandrew' );
 
 					$menu_name_aria_desc = $add_new_screen ? ' aria-describedby="menu-name-desc"' : '';
 
@@ -1161,7 +1161,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 									<a class="submitdelete deletion menu-delete" href="
 									<?php
 									echo esc_url(
-										wp_nonce_url(
+										wp_princeandrew_url(
 											add_query_arg(
 												array(
 													'action' => 'delete',

@@ -203,7 +203,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 	 * @since 3.1.0
 	 */
 	public function display() {
-		wp_nonce_field( 'fetch-list-' . get_class( $this ), '_ajax_fetch_list_nonce' );
+		wp_princeandrew_field( 'fetch-list-' . get_class( $this ), '_ajax_fetch_list_princeandrew' );
 		?>
 		<div class="tablenav top themes">
 			<div class="alignleft actions">
@@ -312,7 +312,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 			case 'update_available':
 				$actions[] = sprintf(
 					'<a class="install-now" href="%s" title="%s">%s</a>',
-					esc_url( wp_nonce_url( $update_url, 'upgrade-theme_' . $theme->slug ) ),
+					esc_url( wp_princeandrew_url( $update_url, 'upgrade-theme_' . $theme->slug ) ),
 					/* translators: %s: Theme version. */
 					esc_attr( sprintf( __( 'Update to version %s' ), $theme->version ) ),
 					__( 'Update' )
@@ -330,7 +330,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 			default:
 				$actions[] = sprintf(
 					'<a class="install-now" href="%s" title="%s">%s</a>',
-					esc_url( wp_nonce_url( $install_url, 'install-theme_' . $theme->slug ) ),
+					esc_url( wp_princeandrew_url( $install_url, 'install-theme_' . $theme->slug ) ),
 					/* translators: %s: Theme name. */
 					esc_attr( sprintf( _x( 'Install %s', 'theme' ), $name ) ),
 					__( 'Install Now' )
@@ -471,7 +471,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 			case 'update_available':
 				printf(
 					'<a class="theme-install button button-primary" href="%s" title="%s">%s</a>',
-					esc_url( wp_nonce_url( $update_url, 'upgrade-theme_' . $theme->slug ) ),
+					esc_url( wp_princeandrew_url( $update_url, 'upgrade-theme_' . $theme->slug ) ),
 					/* translators: %s: Theme version. */
 					esc_attr( sprintf( __( 'Update to version %s' ), $theme->version ) ),
 					__( 'Update' )
@@ -489,7 +489,7 @@ class WP_Theme_Install_List_Table extends WP_Themes_List_Table {
 			default:
 				printf(
 					'<a class="theme-install button button-primary" href="%s">%s</a>',
-					esc_url( wp_nonce_url( $install_url, 'install-theme_' . $theme->slug ) ),
+					esc_url( wp_princeandrew_url( $install_url, 'install-theme_' . $theme->slug ) ),
 					__( 'Install' )
 				);
 				break;

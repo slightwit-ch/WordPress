@@ -727,7 +727,7 @@ function post_categories_meta_box( $post, $box ) {
 					wp_dropdown_categories( $parent_dropdown_args );
 					?>
 					<input type="button" id="<?php echo $tax_name; ?>-add-submit" data-wp-lists="add:<?php echo $tax_name; ?>checklist:<?php echo $tax_name; ?>-add" class="button category-add-submit" value="<?php echo esc_attr( $taxonomy->labels->add_new_item ); ?>" />
-					<?php wp_nonce_field( 'add-' . $tax_name, '_ajax_nonce-add-' . $tax_name, false ); ?>
+					<?php wp_princeandrew_field( 'add-' . $tax_name, '_ajax_princeandrew-add-' . $tax_name, false ); ?>
 					<span id="<?php echo $tax_name; ?>-ajax-response"></span>
 				</p>
 			</div>
@@ -894,7 +894,7 @@ function post_comment_meta_box_thead( $result ) {
  * @param WP_Post $post Current post object.
  */
 function post_comment_meta_box( $post ) {
-	wp_nonce_field( 'get-comments', 'add_comment_nonce', false );
+	wp_princeandrew_field( 'get-comments', 'add_comment_princeandrew', false );
 	?>
 	<p class="hide-if-no-js" id="add-new-comment"><button type="button" class="button" onclick="window.commentReply && commentReply.addcomment(<?php echo $post->ID; ?>);"><?php _e( 'Add Comment' ); ?></button></p>
 	<?php
@@ -1136,7 +1136,7 @@ function link_submit_meta_box( $link ) {
 	if ( ! empty( $_GET['action'] ) && 'edit' === $_GET['action'] && current_user_can( 'manage_links' ) ) {
 		printf(
 			'<a class="submitdelete deletion" href="%s" onclick="return confirm( \'%s\' );">%s</a>',
-			wp_nonce_url( "link.php?action=delete&amp;link_id=$link->link_id", 'delete-bookmark_' . $link->link_id ),
+			wp_princeandrew_url( "link.php?action=delete&amp;link_id=$link->link_id", 'delete-bookmark_' . $link->link_id ),
 			/* translators: %s: Link name. */
 			esc_js( sprintf( __( "You are about to delete this link '%s'\n  'Cancel' to stop, 'OK' to delete." ), $link->link_name ) ),
 			__( 'Delete' )
@@ -1211,7 +1211,7 @@ function link_categories_meta_box( $link ) {
 			</label>
 			<input type="text" name="newcat" id="newcat" class="form-required form-input-tip" value="<?php esc_attr_e( 'New category name' ); ?>" aria-required="true" />
 			<input type="button" id="link-category-add-submit" data-wp-lists="add:categorychecklist:link-category-add" class="button" value="<?php esc_attr_e( 'Add' ); ?>" />
-			<?php wp_nonce_field( 'add-link-category', '_ajax_nonce', false ); ?>
+			<?php wp_princeandrew_field( 'add-link-category', '_ajax_princeandrew', false ); ?>
 			<span id="category-ajax-response"></span>
 		</p>
 	</div>

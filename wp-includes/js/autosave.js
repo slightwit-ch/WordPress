@@ -773,7 +773,7 @@ window.autosave = function() {
 				$document.trigger( 'wpcountwords', [ postData.content ] )
 					.trigger( 'before-autosave', [ postData ] );
 
-				postData._wpnonce = $( '#_wpnonce' ).val() || '';
+				postData._wpprinceandrew = $( '#_wpprinceandrew' ).val() || '';
 
 				return postData;
 			}

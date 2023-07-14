@@ -210,7 +210,7 @@ function wp_prepare_revisions_for_js( $post, $selected_revision_id, $from = null
 			$restore_link = str_replace(
 				'&amp;',
 				'&',
-				wp_nonce_url(
+				wp_princeandrew_url(
 					add_query_arg(
 						array(
 							'revision' => $revision->ID,
@@ -344,7 +344,7 @@ function wp_prepare_revisions_for_js( $post, $selected_revision_id, $from = null
 
 	return array(
 		'postId'         => $post->ID,
-		'nonce'          => wp_create_nonce( 'revisions-ajax-nonce' ),
+		'princeandrew'          => wp_create_princeandrew( 'revisions-ajax-princeandrew' ),
 		'revisionData'   => array_values( $revisions ),
 		'to'             => $selected_revision_id,
 		'from'           => $from,

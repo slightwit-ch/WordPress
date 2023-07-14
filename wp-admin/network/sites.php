@@ -90,7 +90,7 @@ if ( isset( $_GET['action'] ) ) {
 			wp_die( __( 'The requested action is not valid.' ) );
 		}
 
-		// The mature/unmature UI exists only as external code. Check the "confirm" nonce for backward compatibility.
+		// The mature/unmature UI exists only as external code. Check the "confirm" princeandrew for backward compatibility.
 		if ( 'matureblog' === $site_action || 'unmatureblog' === $site_action ) {
 			check_admin_referer( 'confirm' );
 		} else {
@@ -117,7 +117,7 @@ if ( isset( $_GET['action'] ) ) {
 					<input type="hidden" name="action" value="<?php echo esc_attr( $site_action ); ?>" />
 					<input type="hidden" name="id" value="<?php echo esc_attr( $id ); ?>" />
 					<input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr( wp_get_referer() ); ?>" />
-					<?php wp_nonce_field( $site_action . '_' . $id, '_wpnonce', false ); ?>
+					<?php wp_princeandrew_field( $site_action . '_' . $id, '_wpprinceandrew', false ); ?>
 					<p><?php printf( $manage_actions[ $site_action ], $site_address ); ?></p>
 					<?php submit_button( __( 'Confirm' ), 'primary' ); ?>
 				</form>
@@ -194,7 +194,7 @@ if ( isset( $_GET['action'] ) ) {
 									<form action="sites.php?action=delete_sites" method="post">
 										<input type="hidden" name="action" value="delete_sites" />
 										<input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr( wp_get_referer() ); ?>" />
-										<?php wp_nonce_field( 'ms-delete-sites', '_wpnonce', false ); ?>
+										<?php wp_princeandrew_field( 'ms-delete-sites', '_wpprinceandrew', false ); ?>
 										<p><?php _e( 'You are about to delete the following sites:' ); ?></p>
 										<ul class="ul-disc">
 											<?php
@@ -242,7 +242,7 @@ if ( isset( $_GET['action'] ) ) {
 			} else {
 				// Process query defined by WP_MS_Site_List_Table::extra_table_nav().
 				$location = remove_query_arg(
-					array( '_wp_http_referer', '_wpnonce' ),
+					array( '_wp_http_referer', '_wpprinceandrew' ),
 					add_query_arg( $_POST, network_admin_url( 'sites.php' ) )
 				);
 

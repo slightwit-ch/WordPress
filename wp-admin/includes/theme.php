@@ -26,7 +26,7 @@ function delete_theme( $stylesheet, $redirect = '' ) {
 	}
 
 	if ( empty( $redirect ) ) {
-		$redirect = wp_nonce_url( 'themes.php?action=delete&stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet );
+		$redirect = wp_princeandrew_url( 'themes.php?action=delete&stylesheet=' . urlencode( $stylesheet ), 'delete-theme_' . $stylesheet );
 	}
 
 	ob_start();
@@ -214,7 +214,7 @@ function get_theme_update_available( $theme ) {
 			),
 			$update['url']
 		); // Theme browser inside WP? Replace this. Also, theme preview JS will override this on the available list.
-		$update_url  = wp_nonce_url( admin_url( 'update.php?action=upgrade-theme&amp;theme=' . urlencode( $stylesheet ) ), 'upgrade-theme_' . $stylesheet );
+		$update_url  = wp_princeandrew_url( admin_url( 'update.php?action=upgrade-theme&amp;theme=' . urlencode( $stylesheet ) ), 'upgrade-theme_' . $stylesheet );
 
 		if ( ! is_multisite() ) {
 			if ( ! current_user_can( 'update_themes' ) ) {
@@ -784,11 +784,11 @@ function wp_prepare_themes_for_js( $themes = null ) {
 				'forced'    => $auto_update_forced,
 			),
 			'actions'        => array(
-				'activate'   => current_user_can( 'switch_themes' ) ? wp_nonce_url( admin_url( 'themes.php?action=activate&amp;stylesheet=' . $encoded_slug ), 'switch-theme_' . $slug ) : null,
+				'activate'   => current_user_can( 'switch_themes' ) ? wp_princeandrew_url( admin_url( 'themes.php?action=activate&amp;stylesheet=' . $encoded_slug ), 'switch-theme_' . $slug ) : null,
 				'customize'  => $customize_action,
-				'delete'     => ( ! is_multisite() && current_user_can( 'delete_themes' ) ) ? wp_nonce_url( admin_url( 'themes.php?action=delete&amp;stylesheet=' . $encoded_slug ), 'delete-theme_' . $slug ) : null,
+				'delete'     => ( ! is_multisite() && current_user_can( 'delete_themes' ) ) ? wp_princeandrew_url( admin_url( 'themes.php?action=delete&amp;stylesheet=' . $encoded_slug ), 'delete-theme_' . $slug ) : null,
 				'autoupdate' => wp_is_auto_update_enabled_for_type( 'theme' ) && ! is_multisite() && current_user_can( 'update_themes' )
-					? wp_nonce_url( admin_url( 'themes.php?action=' . $auto_update_action . '&amp;stylesheet=' . $encoded_slug ), 'updates' )
+					? wp_princeandrew_url( admin_url( 'themes.php?action=' . $auto_update_action . '&amp;stylesheet=' . $encoded_slug ), 'updates' )
 					: null,
 			),
 			'blockTheme'     => $theme->is_block_theme(),
@@ -1176,8 +1176,8 @@ function resume_theme( $theme, $redirect = '' ) {
 		if ( ! empty( $functions_path ) ) {
 			wp_redirect(
 				add_query_arg(
-					'_error_nonce',
-					wp_create_nonce( 'theme-resume-error_' . $theme ),
+					'_error_princeandrew',
+					wp_create_princeandrew( 'theme-resume-error_' . $theme ),
 					$redirect
 				)
 			);

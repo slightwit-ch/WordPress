@@ -553,7 +553,7 @@ function wp_nav_menu_item_post_type_meta_box( $data_object, $box ) {
 		'edit-menu-item',
 		'menu-item',
 		'page-tab',
-		'_wpnonce',
+		'_wpprinceandrew',
 	);
 
 	$most_recent_url = '';
@@ -925,7 +925,7 @@ function wp_nav_menu_item_taxonomy_meta_box( $data_object, $box ) {
 		'edit-menu-item',
 		'menu-item',
 		'page-tab',
-		'_wpnonce',
+		'_wpprinceandrew',
 	);
 
 	$most_used_url = '';

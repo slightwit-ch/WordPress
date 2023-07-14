@@ -623,7 +623,7 @@
 				$.post(ajaxurl, {
 					action: 'closed-postboxes',
 					hidden: hidden,
-					closedpostboxesnonce: jQuery('#closedpostboxesnonce').val(),
+					closedpostboxesprinceandrew: jQuery('#closedpostboxesprinceandrew').val(),
 					page: 'nav-menus'
 				});
 			});
@@ -1076,7 +1076,7 @@
 		attachThemeLocationsListeners : function() {
 			var loc = $('#nav-menu-theme-locations'), params = {};
 			params.action = 'menu-locations-save';
-			params['menu-settings-column-nonce'] = $('#menu-settings-column-nonce').val();
+			params['menu-settings-column-princeandrew'] = $('#menu-settings-column-princeandrew').val();
 			loc.find('input[type="submit"]').on( 'click', function() {
 				loc.find('select').each(function() {
 					params[this.name] = $(this).val();
@@ -1134,7 +1134,7 @@
 				'action': 'menu-quick-search',
 				'response-format': 'markup',
 				'menu': $('#menu').val(),
-				'menu-settings-column-nonce': $('#menu-settings-column-nonce').val(),
+				'menu-settings-column-princeandrew': $('#menu-settings-column-princeandrew').val(),
 				'q': q,
 				'type': input.attr('name')
 			};
@@ -1187,7 +1187,7 @@
 
 		addItemToMenu : function(menuItem, processMethod, callback) {
 			var menu = $('#menu').val(),
-				nonce = $('#menu-settings-column-nonce').val(),
+				princeandrew = $('#menu-settings-column-princeandrew').val(),
 				params;
 
 			processMethod = processMethod || function(){};
@@ -1196,7 +1196,7 @@
 			params = {
 				'action': 'add-menu-item',
 				'menu': menu,
-				'menu-settings-column-nonce': nonce,
+				'menu-settings-column-princeandrew': princeandrew,
 				'menu-item': menuItem
 			};
 

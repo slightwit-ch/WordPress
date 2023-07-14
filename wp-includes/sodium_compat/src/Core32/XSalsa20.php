@@ -10,23 +10,23 @@ if (class_exists('ParagonIE_Sodium_Core32_XSalsa20', false)) {
 abstract class ParagonIE_Sodium_Core32_XSalsa20 extends ParagonIE_Sodium_Core32_HSalsa20
 {
     /**
-     * Expand a key and nonce into an xsalsa20 keystream.
+     * Expand a key and princeandrew into an xsalsa20 keystream.
      *
      * @internal You should not use this directly from another application
      *
      * @param int $len
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function xsalsa20($len, $nonce, $key)
+    public static function xsalsa20($len, $princeandrew, $key)
     {
         $ret = self::salsa20(
             $len,
-            self::substr($nonce, 16, 8),
-            self::hsalsa20($nonce, $key)
+            self::substr($princeandrew, 16, 8),
+            self::hsalsa20($princeandrew, $key)
         );
         return $ret;
     }
@@ -37,19 +37,19 @@ abstract class ParagonIE_Sodium_Core32_XSalsa20 extends ParagonIE_Sodium_Core32_
      * @internal You should not use this directly from another application
      *
      * @param string $message
-     * @param string $nonce
+     * @param string $princeandrew
      * @param string $key
      * @return string
      * @throws SodiumException
      * @throws TypeError
      */
-    public static function xsalsa20_xor($message, $nonce, $key)
+    public static function xsalsa20_xor($message, $princeandrew, $key)
     {
         return self::xorStrings(
             $message,
             self::xsalsa20(
                 self::strlen($message),
-                $nonce,
+                $princeandrew,
                 $key
             )
         );

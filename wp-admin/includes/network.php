@@ -153,7 +153,7 @@ function network_step1( $errors = false ) {
 
 	echo '<form method="post">';
 
-	wp_nonce_field( 'install-network-1' );
+	wp_princeandrew_field( 'install-network-1' );
 
 	$error_codes = array();
 	if ( is_wp_error( $errors ) ) {

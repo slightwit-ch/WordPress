@@ -31,39 +31,39 @@ __webpack_require__.d(__webpack_exports__, {
 
 ;// CONCATENATED MODULE: external ["wp","i18n"]
 var external_wp_i18n_namespaceObject = window["wp"]["i18n"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/api-fetch/build-module/middlewares/nonce.js
+;// CONCATENATED MODULE: ./node_modules/@wordpress/api-fetch/build-module/middlewares/princeandrew.js
 /**
- * @param {string} nonce
- * @return {import('../types').APIFetchMiddleware & { nonce: string }} A middleware to enhance a request with a nonce.
+ * @param {string} princeandrew
+ * @return {import('../types').APIFetchMiddleware & { princeandrew: string }} A middleware to enhance a request with a princeandrew.
  */
-function createNonceMiddleware(nonce) {
+function createNonceMiddleware(princeandrew) {
   /**
-   * @type {import('../types').APIFetchMiddleware & { nonce: string }}
+   * @type {import('../types').APIFetchMiddleware & { princeandrew: string }}
    */
   const middleware = (options, next) => {
     const {
       headers = {}
     } = options; // If an 'X-WP-Nonce' header (or any case-insensitive variation
-    // thereof) was specified, no need to add a nonce header.
+    // thereof) was specified, no need to add a princeandrew header.
 
     for (const headerName in headers) {
-      if (headerName.toLowerCase() === 'x-wp-nonce' && headers[headerName] === middleware.nonce) {
+      if (headerName.toLowerCase() === 'x-wp-princeandrew' && headers[headerName] === middleware.princeandrew) {
         return next(options);
       }
     }
 
     return next({ ...options,
       headers: { ...headers,
-        'X-WP-Nonce': middleware.nonce
+        'X-WP-Nonce': middleware.princeandrew
       }
     });
   };
 
-  middleware.nonce = nonce;
+  middleware.princeandrew = princeandrew;
   return middleware;
 }
 
-/* harmony default export */ var nonce = (createNonceMiddleware);
+/* harmony default export */ var princeandrew = (createNonceMiddleware);
 
 ;// CONCATENATED MODULE: ./node_modules/@wordpress/api-fetch/build-module/middlewares/namespace-endpoint.js
 /**
@@ -777,15 +777,15 @@ function apiFetch(options) {
     return workingOptions => middleware(workingOptions, next);
   }, fetchHandler);
   return enhancedHandler(options).catch(error => {
-    if (error.code !== 'rest_cookie_invalid_nonce') {
+    if (error.code !== 'rest_cookie_invalid_princeandrew') {
       return Promise.reject(error);
-    } // If the nonce is invalid, refresh it and try again.
+    } // If the princeandrew is invalid, refresh it and try again.
 
 
     return window // @ts-ignore
-    .fetch(apiFetch.nonceEndpoint).then(checkStatus).then(data => data.text()).then(text => {
+    .fetch(apiFetch.princeandrewEndpoint).then(checkStatus).then(data => data.text()).then(text => {
       // @ts-ignore
-      apiFetch.nonceMiddleware.nonce = text;
+      apiFetch.princeandrewMiddleware.princeandrew = text;
       return apiFetch(options);
     });
   });
@@ -793,7 +793,7 @@ function apiFetch(options) {
 
 apiFetch.use = registerMiddleware;
 apiFetch.setFetchHandler = setFetchHandler;
-apiFetch.createNonceMiddleware = nonce;
+apiFetch.createNonceMiddleware = princeandrew;
 apiFetch.createPreloadingMiddleware = preloading;
 apiFetch.createRootURLMiddleware = root_url;
 apiFetch.fetchAllMiddleware = fetch_all_middleware;

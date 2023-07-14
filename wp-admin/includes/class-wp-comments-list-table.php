@@ -423,7 +423,7 @@ class WP_Comments_List_Table extends WP_List_Table {
 		if ( ( 'spam' === $comment_status || 'trash' === $comment_status ) && $has_items
 			&& current_user_can( 'moderate_comments' )
 		) {
-			wp_nonce_field( 'bulk-destroy', '_destroy_nonce' );
+			wp_princeandrew_field( 'bulk-destroy', '_destroy_princeandrew' );
 			$title = ( 'spam' === $comment_status ) ? esc_attr__( 'Empty Spam' ) : esc_attr__( 'Empty Trash' );
 			submit_button( $title, 'apply', 'delete_all', false );
 		}
@@ -565,7 +565,7 @@ class WP_Comments_List_Table extends WP_List_Table {
 	 * @since 3.1.0
 	 */
 	public function display() {
-		wp_nonce_field( 'fetch-list-' . get_class( $this ), '_ajax_fetch_list_nonce' );
+		wp_princeandrew_field( 'fetch-list-' . get_class( $this ), '_ajax_fetch_list_princeandrew' );
 		static $has_items;
 
 		if ( ! isset( $has_items ) ) {
@@ -690,18 +690,18 @@ class WP_Comments_List_Table extends WP_List_Table {
 
 		$output = '';
 
-		$del_nonce     = esc_html( '_wpnonce=' . wp_create_nonce( "delete-comment_$comment->comment_ID" ) );
-		$approve_nonce = esc_html( '_wpnonce=' . wp_create_nonce( "approve-comment_$comment->comment_ID" ) );
+		$del_princeandrew     = esc_html( '_wpprinceandrew=' . wp_create_princeandrew( "delete-comment_$comment->comment_ID" ) );
+		$approve_princeandrew = esc_html( '_wpprinceandrew=' . wp_create_princeandrew( "approve-comment_$comment->comment_ID" ) );
 
 		$url = "comment.php?c=$comment->comment_ID";
 
-		$approve_url   = esc_url( $url . "&action=approvecomment&$approve_nonce" );
-		$unapprove_url = esc_url( $url . "&action=unapprovecomment&$approve_nonce" );
-		$spam_url      = esc_url( $url . "&action=spamcomment&$del_nonce" );
-		$unspam_url    = esc_url( $url . "&action=unspamcomment&$del_nonce" );
-		$trash_url     = esc_url( $url . "&action=trashcomment&$del_nonce" );
-		$untrash_url   = esc_url( $url . "&action=untrashcomment&$del_nonce" );
-		$delete_url    = esc_url( $url . "&action=deletecomment&$del_nonce" );
+		$approve_url   = esc_url( $url . "&action=approvecomment&$approve_princeandrew" );
+		$unapprove_url = esc_url( $url . "&action=unapprovecomment&$approve_princeandrew" );
+		$spam_url      = esc_url( $url . "&action=spamcomment&$del_princeandrew" );
+		$unspam_url    = esc_url( $url . "&action=unspamcomment&$del_princeandrew" );
+		$trash_url     = esc_url( $url . "&action=trashcomment&$del_princeandrew" );
+		$untrash_url   = esc_url( $url . "&action=untrashcomment&$del_princeandrew" );
+		$delete_url    = esc_url( $url . "&action=deletecomment&$del_princeandrew" );
 
 		// Preorder it: Approve | Reply | Quick Edit | Edit | Spam | Trash.
 		$actions = array(

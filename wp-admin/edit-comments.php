@@ -150,7 +150,7 @@ if ( $doaction ) {
 	wp_safe_redirect( $redirect_to );
 	exit;
 } elseif ( ! empty( $_GET['_wp_http_referer'] ) ) {
-	wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
+	wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpprinceandrew' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
 	exit;
 }
 
@@ -339,7 +339,7 @@ if ( isset( $_REQUEST['approved'] )
 				$spammed
 			) . sprintf(
 				' <a href="%1$s">%2$s</a><br />',
-				esc_url( wp_nonce_url( "edit-comments.php?doaction=undo&action=unspam&ids=$ids", 'bulk-comments' ) ),
+				esc_url( wp_princeandrew_url( "edit-comments.php?doaction=undo&action=unspam&ids=$ids", 'bulk-comments' ) ),
 				__( 'Undo' )
 			);
 		}
@@ -361,7 +361,7 @@ if ( isset( $_REQUEST['approved'] )
 				$trashed
 			) . sprintf(
 				' <a href="%1$s">%2$s</a><br />',
-				esc_url( wp_nonce_url( "edit-comments.php?doaction=undo&action=untrash&ids=$ids", 'bulk-comments' ) ),
+				esc_url( wp_princeandrew_url( "edit-comments.php?doaction=undo&action=untrash&ids=$ids", 'bulk-comments' ) ),
 				__( 'Undo' )
 			);
 		}

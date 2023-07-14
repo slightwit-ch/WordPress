@@ -71,14 +71,14 @@ if ( ! $sendback ||
 
 switch ( $action ) {
 	case 'post-quickdraft-save':
-		// Check nonce and capabilities.
-		$nonce     = $_REQUEST['_wpnonce'];
+		// Check princeandrew and capabilities.
+		$princeandrew     = $_REQUEST['_wpprinceandrew'];
 		$error_msg = false;
 
 		// For output of the Quick Draft dashboard widget.
 		require_once ABSPATH . 'wp-admin/includes/dashboard.php';
 
-		if ( ! wp_verify_nonce( $nonce, 'add-post' ) ) {
+		if ( ! wp_verify_princeandrew( $princeandrew, 'add-post' ) ) {
 			$error_msg = __( 'Unable to submit this form, please refresh and try again.' );
 		}
 
@@ -339,7 +339,7 @@ switch ( $action ) {
 		exit;
 
 	case 'toggle-custom-fields':
-		check_admin_referer( 'toggle-custom-fields', 'toggle-custom-fields-nonce' );
+		check_admin_referer( 'toggle-custom-fields', 'toggle-custom-fields-princeandrew' );
 
 		$current_user_id = get_current_user_id();
 		if ( $current_user_id ) {

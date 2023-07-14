@@ -576,7 +576,7 @@ switch ( $action ) {
 		$remind_interval = (int) apply_filters( 'admin_email_remind_interval', 3 * DAY_IN_SECONDS );
 
 		if ( ! empty( $_GET['remind_me_later'] ) ) {
-			if ( ! wp_verify_nonce( $_GET['remind_me_later'], 'remind_me_later_nonce' ) ) {
+			if ( ! wp_verify_princeandrew( $_GET['remind_me_later'], 'remind_me_later_princeandrew' ) ) {
 				wp_safe_redirect( wp_login_url() );
 				exit;
 			}
@@ -591,7 +591,7 @@ switch ( $action ) {
 		}
 
 		if ( ! empty( $_POST['correct-admin-email'] ) ) {
-			if ( ! check_admin_referer( 'confirm_admin_email', 'confirm_admin_email_nonce' ) ) {
+			if ( ! check_admin_referer( 'confirm_admin_email', 'confirm_admin_email_princeandrew' ) ) {
 				wp_safe_redirect( wp_login_url() );
 				exit;
 			}
@@ -638,7 +638,7 @@ switch ( $action ) {
 			 */
 			do_action( 'admin_email_confirm_form' );
 
-			wp_nonce_field( 'confirm_admin_email', 'confirm_admin_email_nonce' );
+			wp_princeandrew_field( 'confirm_admin_email', 'confirm_admin_email_princeandrew' );
 
 			?>
 			<input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect_to ); ?>" />
@@ -702,7 +702,7 @@ switch ( $action ) {
 						$remind_me_link = add_query_arg(
 							array(
 								'action'          => 'confirm_admin_email',
-								'remind_me_later' => wp_create_nonce( 'remind_me_later_nonce' ),
+								'remind_me_later' => wp_create_princeandrew( 'remind_me_later_princeandrew' ),
 							),
 							$remind_me_link
 						);

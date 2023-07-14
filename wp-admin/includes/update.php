@@ -554,7 +554,7 @@ function wp_plugin_update_row( $file, $plugin_data ) {
 						esc_attr( sprintf( __( 'View %1$s version %2$s details' ), $plugin_name, $response->new_version ) )
 					),
 					esc_attr( $response->new_version ),
-					wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $file, 'upgrade-plugin_' . $file ),
+					wp_princeandrew_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $file, 'upgrade-plugin_' . $file ),
 					sprintf(
 						'class="update-link" aria-label="%s"',
 						/* translators: %s: Plugin name. */
@@ -746,7 +746,7 @@ function wp_theme_update_row( $theme_key, $theme ) {
 					esc_attr( sprintf( __( 'View %1$s version %2$s details' ), $theme['Name'], $response['new_version'] ) )
 				),
 				$response['new_version'],
-				wp_nonce_url( self_admin_url( 'update.php?action=upgrade-theme&theme=' ) . $theme_key, 'upgrade-theme_' . $theme_key ),
+				wp_princeandrew_url( self_admin_url( 'update.php?action=upgrade-theme&theme=' ) . $theme_key, 'upgrade-theme_' . $theme_key ),
 				sprintf(
 					'class="update-link" aria-label="%s"',
 					/* translators: %s: Theme name. */
@@ -1047,7 +1047,7 @@ function wp_recovery_mode_nag() {
 
 	$url = wp_login_url();
 	$url = add_query_arg( 'action', WP_Recovery_Mode::EXIT_ACTION, $url );
-	$url = wp_nonce_url( $url, WP_Recovery_Mode::EXIT_ACTION );
+	$url = wp_princeandrew_url( $url, WP_Recovery_Mode::EXIT_ACTION );
 
 	?>
 	<div class="notice notice-info">

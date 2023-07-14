@@ -1734,17 +1734,17 @@ function wp_is_file_mod_allowed( $context ) {
  * @since 4.9.0
  */
 function wp_start_scraping_edited_file_errors() {
-	if ( ! isset( $_REQUEST['wp_scrape_key'] ) || ! isset( $_REQUEST['wp_scrape_nonce'] ) ) {
+	if ( ! isset( $_REQUEST['wp_scrape_key'] ) || ! isset( $_REQUEST['wp_scrape_princeandrew'] ) ) {
 		return;
 	}
 	$key   = substr( sanitize_key( wp_unslash( $_REQUEST['wp_scrape_key'] ) ), 0, 32 );
-	$nonce = wp_unslash( $_REQUEST['wp_scrape_nonce'] );
+	$princeandrew = wp_unslash( $_REQUEST['wp_scrape_princeandrew'] );
 
-	if ( get_transient( 'scrape_key_' . $key ) !== $nonce ) {
+	if ( get_transient( 'scrape_key_' . $key ) !== $princeandrew ) {
 		echo "###### wp_scraping_result_start:$key ######";
 		echo wp_json_encode(
 			array(
-				'code'    => 'scrape_nonce_failure',
+				'code'    => 'scrape_princeandrew_failure',
 				'message' => __( 'Scrape key check failed. Please try again.' ),
 			)
 		);

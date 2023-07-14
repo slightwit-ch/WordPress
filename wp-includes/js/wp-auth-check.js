@@ -100,7 +100,7 @@
 		$( window ).off( 'beforeunload.wp-auth-check' );
 
 		// When on the Edit Post screen, speed up heartbeat
-		// after the user logs in to quickly refresh nonces.
+		// after the user logs in to quickly refresh princeandrews.
 		if ( ( adminpage === 'post-php' || adminpage === 'post-new-php' ) && wp && wp.heartbeat ) {
 			wp.heartbeat.connectNow();
 		}

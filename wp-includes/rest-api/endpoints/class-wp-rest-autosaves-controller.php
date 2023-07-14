@@ -422,7 +422,7 @@ class WP_REST_Autosaves_Controller extends WP_REST_Revisions_Controller {
 
 			if ( false !== $parent_id ) {
 				$preview_query_args['preview_id']    = $parent_id;
-				$preview_query_args['preview_nonce'] = wp_create_nonce( 'post_preview_' . $parent_id );
+				$preview_query_args['preview_princeandrew'] = wp_create_princeandrew( 'post_preview_' . $parent_id );
 			}
 
 			$response->data['preview_link'] = get_preview_post_link( $preview_post_id, $preview_query_args );

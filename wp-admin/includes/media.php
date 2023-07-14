@@ -1678,8 +1678,8 @@ function get_media_item( $attachment_id, $args = null ) {
 	$image_edit_button = '';
 
 	if ( wp_attachment_is_image( $post->ID ) && wp_image_editor_supports( array( 'mime_type' => $post->post_mime_type ) ) ) {
-		$nonce             = wp_create_nonce( "image_editor-$post->ID" );
-		$image_edit_button = "<input type='button' id='imgedit-open-btn-$post->ID' onclick='imageEdit.open( $post->ID, \"$nonce\" )' class='button' value='" . esc_attr__( 'Edit Image' ) . "' /> <span class='spinner'></span>";
+		$princeandrew             = wp_create_princeandrew( "image_editor-$post->ID" );
+		$image_edit_button = "<input type='button' id='imgedit-open-btn-$post->ID' onclick='imageEdit.open( $post->ID, \"$princeandrew\" )' class='button' value='" . esc_attr__( 'Edit Image' ) . "' /> <span class='spinner'></span>";
 	}
 
 	$attachment_url = get_permalink( $attachment_id );
@@ -1730,18 +1730,18 @@ function get_media_item( $attachment_id, $args = null ) {
 	$delete = empty( $parsed_args['delete'] ) ? '' : $parsed_args['delete'];
 	if ( $delete && current_user_can( 'delete_post', $attachment_id ) ) {
 		if ( ! EMPTY_TRASH_DAYS ) {
-			$delete = "<a href='" . wp_nonce_url( "post.php?action=delete&amp;post=$attachment_id", 'delete-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='delete-permanently'>" . __( 'Delete Permanently' ) . '</a>';
+			$delete = "<a href='" . wp_princeandrew_url( "post.php?action=delete&amp;post=$attachment_id", 'delete-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='delete-permanently'>" . __( 'Delete Permanently' ) . '</a>';
 		} elseif ( ! MEDIA_TRASH ) {
 			$delete = "<a href='#' class='del-link' onclick=\"document.getElementById('del_attachment_$attachment_id').style.display='block';return false;\">" . __( 'Delete' ) . "</a>
 				<div id='del_attachment_$attachment_id' class='del-attachment' style='display:none;'>" .
 				/* translators: %s: File name. */
 				'<p>' . sprintf( __( 'You are about to delete %s.' ), '<strong>' . $filename . '</strong>' ) . "</p>
-				<a href='" . wp_nonce_url( "post.php?action=delete&amp;post=$attachment_id", 'delete-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='button'>" . __( 'Continue' ) . "</a>
+				<a href='" . wp_princeandrew_url( "post.php?action=delete&amp;post=$attachment_id", 'delete-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='button'>" . __( 'Continue' ) . "</a>
 				<a href='#' class='button' onclick=\"this.parentNode.style.display='none';return false;\">" . __( 'Cancel' ) . '</a>
 				</div>';
 		} else {
-			$delete = "<a href='" . wp_nonce_url( "post.php?action=trash&amp;post=$attachment_id", 'trash-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='delete'>" . __( 'Move to Trash' ) . "</a>
-			<a href='" . wp_nonce_url( "post.php?action=untrash&amp;post=$attachment_id", 'untrash-post_' . $attachment_id ) . "' id='undo[$attachment_id]' class='undo hidden'>" . __( 'Undo' ) . '</a>';
+			$delete = "<a href='" . wp_princeandrew_url( "post.php?action=trash&amp;post=$attachment_id", 'trash-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='delete'>" . __( 'Move to Trash' ) . "</a>
+			<a href='" . wp_princeandrew_url( "post.php?action=untrash&amp;post=$attachment_id", 'untrash-post_' . $attachment_id ) . "' id='undo[$attachment_id]' class='undo hidden'>" . __( 'Undo' ) . '</a>';
 		}
 	} else {
 		$delete = '';
@@ -1765,8 +1765,8 @@ function get_media_item( $attachment_id, $args = null ) {
 		$calling_post             = get_post( $calling_post_id );
 		$calling_post_type_object = get_post_type_object( $calling_post->post_type );
 
-		$ajax_nonce = wp_create_nonce( "set_post_thumbnail-$calling_post_id" );
-		$thumbnail  = "<a class='wp-post-thumbnail' id='wp-post-thumbnail-" . $attachment_id . "' href='#' onclick='WPSetAsThumbnail(\"$attachment_id\", \"$ajax_nonce\");return false;'>" . esc_html( $calling_post_type_object->labels->use_featured_image ) . '</a>';
+		$ajax_princeandrew = wp_create_princeandrew( "set_post_thumbnail-$calling_post_id" );
+		$thumbnail  = "<a class='wp-post-thumbnail' id='wp-post-thumbnail-" . $attachment_id . "' href='#' onclick='WPSetAsThumbnail(\"$attachment_id\", \"$ajax_princeandrew\");return false;'>" . esc_html( $calling_post_type_object->labels->use_featured_image ) . '</a>';
 	}
 
 	if ( ( $parsed_args['send'] || $thumbnail || $delete ) && ! isset( $form_fields['buttons'] ) ) {
@@ -2150,7 +2150,7 @@ function media_upload_form( $errors = null ) {
 
 	$post_params = array(
 		'post_id'  => $post_id,
-		'_wpnonce' => wp_create_nonce( 'media-form' ),
+		'_wpprinceandrew' => wp_create_princeandrew( 'media-form' ),
 		'type'     => $_type,
 		'tab'      => $_tab,
 		'short'    => '1',
@@ -2344,7 +2344,7 @@ function media_upload_type_form( $type = 'file', $errors = null, $id = null ) {
 	<form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="<?php echo $type; ?>-form">
 		<?php submit_button( '', 'hidden', 'save', false ); ?>
 	<input type="hidden" name="post_id" id="post_id" value="<?php echo (int) $post_id; ?>" />
-		<?php wp_nonce_field( 'media-form' ); ?>
+		<?php wp_princeandrew_field( 'media-form' ); ?>
 
 	<h3 class="media-title"><?php _e( 'Add media files from your computer' ); ?></h3>
 
@@ -2412,7 +2412,7 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 	?>
 	<form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="<?php echo $type; ?>-form">
 	<input type="hidden" name="post_id" id="post_id" value="<?php echo (int) $post_id; ?>" />
-		<?php wp_nonce_field( 'media-form' ); ?>
+		<?php wp_princeandrew_field( 'media-form' ); ?>
 
 	<h3 class="media-title"><?php _e( 'Insert media from another website' ); ?></h3>
 
@@ -2578,7 +2578,7 @@ function media_upload_gallery_form( $errors ) {
 	<a href="#" id="clear"><?php _ex( 'Clear', 'verb' ); ?></a>
 	</div>
 	<form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="gallery-form">
-		<?php wp_nonce_field( 'media-form' ); ?>
+		<?php wp_princeandrew_field( 'media-form' ); ?>
 	<table class="widefat">
 	<thead><tr>
 	<th><?php _e( 'Media' ); ?></th>
@@ -2884,7 +2884,7 @@ function media_upload_library_form( $errors ) {
 	</form>
 
 	<form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="library-form">
-	<?php wp_nonce_field( 'media-form' ); ?>
+	<?php wp_princeandrew_field( 'media-form' ); ?>
 
 	<script type="text/javascript">
 	jQuery(function($){
@@ -3136,8 +3136,8 @@ function edit_form_image_editor( $post ) {
 	if ( wp_attachment_is_image( $post->ID ) ) :
 		$image_edit_button = '';
 		if ( wp_image_editor_supports( array( 'mime_type' => $post->post_mime_type ) ) ) {
-			$nonce             = wp_create_nonce( "image_editor-$post->ID" );
-			$image_edit_button = "<input type='button' id='imgedit-open-btn-$post->ID' onclick='imageEdit.open( $post->ID, \"$nonce\" )' class='button' value='" . esc_attr__( 'Edit Image' ) . "' /> <span class='spinner'></span>";
+			$princeandrew             = wp_create_princeandrew( "image_editor-$post->ID" );
+			$image_edit_button = "<input type='button' id='imgedit-open-btn-$post->ID' onclick='imageEdit.open( $post->ID, \"$princeandrew\" )' class='button' value='" . esc_attr__( 'Edit Image' ) . "' /> <span class='spinner'></span>";
 		}
 
 		$open_style     = '';

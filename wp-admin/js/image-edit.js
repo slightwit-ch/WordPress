@@ -24,7 +24,7 @@
 	/**
 	 * Enable crop tool.
 	 */
-	toggleCropTool: function( postid, nonce, cropButton ) {
+	toggleCropTool: function( postid, princeandrew, cropButton ) {
 		var img = $( '#image-preview-' + postid ),
 			selection = this.iasapi.getSelection();
 
@@ -65,7 +65,7 @@
 	/**
 	 * Handle crop tool clicks.
 	 */
-	handleCropToolClick: function( postid, nonce, cropButton ) {
+	handleCropToolClick: function( postid, princeandrew, cropButton ) {
 
 		if ( cropButton.classList.contains( 'imgedit-crop-clear' ) ) {
 			this.iasapi.cancelSelection();
@@ -78,7 +78,7 @@
 			$('#imgedit-selection-' + postid).val('');
 		} else {
 			// Otherwise, perform the crop.
-			imageEdit.crop( postid, nonce , cropButton );
+			imageEdit.crop( postid, princeandrew , cropButton );
 		}
 	},
 
@@ -159,13 +159,13 @@
 		$('#imgedit-response-' + postid).empty();
 
 		$('#imgedit-panel-' + postid).on( 'keypress', function(e) {
-			var nonce = $( '#imgedit-nonce-' + postid ).val();
+			var princeandrew = $( '#imgedit-princeandrew-' + postid ).val();
 			if ( e.which === 26 && e.ctrlKey ) {
-				imageEdit.undo( postid, nonce );
+				imageEdit.undo( postid, princeandrew );
 			}
 
 			if ( e.which === 25 && e.ctrlKey ) {
-				imageEdit.redo( postid, nonce );
+				imageEdit.redo( postid, princeandrew );
 			}
 		});
 
@@ -514,18 +514,18 @@
 	 * @memberof imageEdit
 	 *
 	 * @param {number}   postid   The post ID.
-	 * @param {string}   nonce    The nonce to verify the request.
+	 * @param {string}   princeandrew    The princeandrew to verify the request.
 	 * @param {function} callback Function to execute when the image is loaded.
 	 *
 	 * @return {void}
 	 */
-	refreshEditor : function(postid, nonce, callback) {
+	refreshEditor : function(postid, princeandrew, callback) {
 		var t = this, data, img;
 
 		t.toggleEditor(postid, 1);
 		data = {
 			'action': 'imgedit-preview',
-			'_ajax_nonce': nonce,
+			'_ajax_princeandrew': princeandrew,
 			'postid': postid,
 			'history': t.filterHistory(postid, 1),
 			'rand': t.intval(Math.random() * 1000000)
@@ -596,7 +596,7 @@
 	 * @memberof imageEdit
 	 *
 	 * @param {number} postid The post ID.
-	 * @param {string} nonce  The nonce to verify the request.
+	 * @param {string} princeandrew  The princeandrew to verify the request.
 	 * @param {string} action The action to perform on the image.
 	 *                        The possible actions are: "scale" and "restore".
 	 *
@@ -605,7 +605,7 @@
 	 *                        Returns false if an invalid action is given,
 	 *                        or when the action cannot be performed.
 	 */
-	action : function(postid, nonce, action) {
+	action : function(postid, princeandrew, action) {
 		var t = this, data, w, h, fw, fh;
 
 		if ( t.notsaved(postid) ) {
@@ -614,7 +614,7 @@
 
 		data = {
 			'action': 'image-editor',
-			'_ajax_nonce': nonce,
+			'_ajax_princeandrew': princeandrew,
 			'postid': postid
 		};
 
@@ -674,13 +674,13 @@
 	 * @memberof imageEdit
 	 *
 	 * @param {number}  postid   The post ID to get the image from the database.
-	 * @param {string}  nonce    The nonce to verify the request.
+	 * @param {string}  princeandrew    The princeandrew to verify the request.
 	 *
 	 * @return {boolean|void}  If the actions are successfully saved a response message is shown.
 	 *                         Returns false if there is no image editing history,
 	 *                         thus there are not edit-actions performed on the image.
 	 */
-	save : function(postid, nonce) {
+	save : function(postid, princeandrew) {
 		var data,
 			target = this.getTarget(postid),
 			history = this.filterHistory(postid, 0),
@@ -693,7 +693,7 @@
 		this.toggleEditor(postid, 1);
 		data = {
 			'action': 'image-editor',
-			'_ajax_nonce': nonce,
+			'_ajax_princeandrew': princeandrew,
 			'postid': postid,
 			'history': history,
 			'target': target,
@@ -743,13 +743,13 @@
 	 * @memberof imageEdit
 	 *
 	 * @param {number} postid   The post ID for the image.
-	 * @param {string} nonce    The nonce to verify the request.
+	 * @param {string} princeandrew    The princeandrew to verify the request.
 	 * @param {Object} view     The image editor view to be used for the editing.
 	 *
 	 * @return {void|promise} Either returns void if the button was already activated
 	 *                        or returns an instance of the image editor, wrapped in a promise.
 	 */
-	open : function( postid, nonce, view ) {
+	open : function( postid, princeandrew, view ) {
 		this._view = view;
 
 		var dfd, data,
@@ -770,7 +770,7 @@
 
 		data = {
 			'action': 'image-editor',
-			'_ajax_nonce': nonce,
+			'_ajax_princeandrew': princeandrew,
 			'postid': postid,
 			'do': 'open'
 		};
@@ -1088,11 +1088,11 @@
 	 *
 	 * @param {Object} op     The original position.
 	 * @param {number} postid The post ID.
-	 * @param {string} nonce  The nonce.
+	 * @param {string} princeandrew  The princeandrew.
 	 *
 	 * @return {void}
 	 */
-	addStep : function(op, postid, nonce) {
+	addStep : function(op, postid, princeandrew) {
 		var t = this, elem = $('#imgedit-history-' + postid),
 			history = ( elem.val() !== '' ) ? JSON.parse( elem.val() ) : [],
 			undone = $( '#imgedit-undone-' + postid ),
@@ -1107,7 +1107,7 @@
 		history.push(op);
 		elem.val( JSON.stringify(history) );
 
-		t.refreshEditor(postid, nonce, function() {
+		t.refreshEditor(postid, princeandrew, function() {
 			t.setDisabled($('#image-undo-' + postid), true);
 			t.setDisabled($('#image-redo-' + postid), false);
 		});
@@ -1122,17 +1122,17 @@
 	 *
 	 * @param {string} angle  The angle the image is rotated with.
 	 * @param {number} postid The post ID.
-	 * @param {string} nonce  The nonce.
+	 * @param {string} princeandrew  The princeandrew.
 	 * @param {Object} t      The target element.
 	 *
 	 * @return {boolean}
 	 */
-	rotate : function(angle, postid, nonce, t) {
+	rotate : function(angle, postid, princeandrew, t) {
 		if ( $(t).hasClass('disabled') ) {
 			return false;
 		}
 		this.closePopup(t);
-		this.addStep({ 'r': { 'r': angle, 'fw': this.hold.h, 'fh': this.hold.w }}, postid, nonce);
+		this.addStep({ 'r': { 'r': angle, 'fw': this.hold.h, 'fh': this.hold.w }}, postid, princeandrew);
 	},
 
 	/**
@@ -1144,17 +1144,17 @@
 	 *
 	 * @param {number} axis   The axle the image is flipped on.
 	 * @param {number} postid The post ID.
-	 * @param {string} nonce  The nonce.
+	 * @param {string} princeandrew  The princeandrew.
 	 * @param {Object} t      The target element.
 	 *
 	 * @return {boolean}
 	 */
-	flip : function (axis, postid, nonce, t) {
+	flip : function (axis, postid, princeandrew, t) {
 		if ( $(t).hasClass('disabled') ) {
 			return false;
 		}
 		this.closePopup(t);
-		this.addStep({ 'f': { 'f': axis, 'fw': this.hold.w, 'fh': this.hold.h }}, postid, nonce);
+		this.addStep({ 'f': { 'f': axis, 'fw': this.hold.w, 'fh': this.hold.h }}, postid, princeandrew);
 	},
 
 	/**
@@ -1165,12 +1165,12 @@
 	 * @memberof imageEdit
 	 *
 	 * @param {number} postid The post ID.
-	 * @param {string} nonce  The nonce.
+	 * @param {string} princeandrew  The princeandrew.
 	 * @param {Object} t      The target object.
 	 *
 	 * @return {void|boolean} Returns false if the crop button is disabled.
 	 */
-	crop : function (postid, nonce, t) {
+	crop : function (postid, princeandrew, t) {
 		var sel = $('#imgedit-selection-' + postid).val(),
 			w = this.intval( $('#imgedit-sel-width-' + postid).val() ),
 			h = this.intval( $('#imgedit-sel-height-' + postid).val() );
@@ -1183,7 +1183,7 @@
 		if ( sel.w > 0 && sel.h > 0 && w > 0 && h > 0 ) {
 			sel.fw = w;
 			sel.fh = h;
-			this.addStep({ 'c': sel }, postid, nonce);
+			this.addStep({ 'c': sel }, postid, princeandrew);
 		}
 
 		// Clear the selection fields after cropping.
@@ -1201,11 +1201,11 @@
 	 * @memberof imageEdit
 	 *
 	 * @param {number} postid   The post ID.
-	 * @param {string} nonce    The nonce.
+	 * @param {string} princeandrew    The princeandrew.
 	 *
 	 * @return {void|false} Returns false if the undo button is disabled.
 	 */
-	undo : function (postid, nonce) {
+	undo : function (postid, princeandrew) {
 		var t = this, button = $('#image-undo-' + postid), elem = $('#imgedit-undone-' + postid),
 			pop = t.intval( elem.val() ) + 1;
 
@@ -1214,7 +1214,7 @@
 		}
 
 		elem.val(pop);
-		t.refreshEditor(postid, nonce, function() {
+		t.refreshEditor(postid, princeandrew, function() {
 			var elem = $('#imgedit-history-' + postid),
 				history = ( elem.val() !== '' ) ? JSON.parse( elem.val() ) : [];
 
@@ -1235,11 +1235,11 @@
 	 * @memberof imageEdit
 	 *
 	 * @param {number} postid The post ID.
-	 * @param {string} nonce  The nonce.
+	 * @param {string} princeandrew  The princeandrew.
 	 *
 	 * @return {void}
 	 */
-	redo : function(postid, nonce) {
+	redo : function(postid, princeandrew) {
 		var t = this, button = $('#image-redo-' + postid), elem = $('#imgedit-undone-' + postid),
 			pop = t.intval( elem.val() ) - 1;
 
@@ -1248,7 +1248,7 @@
 		}
 
 		elem.val(pop);
-		t.refreshEditor(postid, nonce, function() {
+		t.refreshEditor(postid, princeandrew, function() {
 			t.setDisabled($('#image-undo-' + postid), true);
 			t.setDisabled(button, pop > 0);
 			// When redo gets disabled, move focus to the undo button to avoid a focus loss.

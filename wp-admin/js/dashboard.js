@@ -30,7 +30,7 @@ jQuery( function($) {
 		$.post( ajaxurl, {
 			action: 'update-welcome-panel',
 			visible: visible,
-			welcomepanelnonce: $( '#welcomepanelnonce' ).val()
+			welcomepanelprinceandrew: $( '#welcomepanelprinceandrew' ).val()
 		});
 	};
 
@@ -415,7 +415,7 @@ jQuery( function( $ ) {
 				$spinner = $( '.community-events-form' ).children( '.spinner' );
 
 			requestParams          = requestParams || {};
-			requestParams._wpnonce = communityEventsData.nonce;
+			requestParams._wpprinceandrew = communityEventsData.princeandrew;
 			requestParams.timezone = window.Intl ? window.Intl.DateTimeFormat().resolvedOptions().timeZone : '';
 
 			initiatedBy = requestParams.location ? 'user' : 'app';

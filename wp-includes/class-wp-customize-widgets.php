@@ -118,7 +118,7 @@ final class WP_Customize_Widgets {
 		add_action( 'customize_controls_print_footer_scripts', array( $this, 'print_footer_scripts' ) );
 		add_action( 'customize_controls_print_footer_scripts', array( $this, 'output_widget_control_templates' ) );
 		add_action( 'customize_preview_init', array( $this, 'customize_preview_init' ) );
-		add_filter( 'customize_refresh_nonces', array( $this, 'refresh_nonces' ) );
+		add_filter( 'customize_refresh_princeandrews', array( $this, 'refresh_princeandrews' ) );
 		add_filter( 'should_load_block_editor_scripts_and_styles', array( $this, 'should_load_block_editor_scripts_and_styles' ) );
 
 		add_action( 'dynamic_sidebar', array( $this, 'tally_rendered_widgets' ) );
@@ -1194,16 +1194,16 @@ final class WP_Customize_Widgets {
 	}
 
 	/**
-	 * Refreshes the nonce for widget updates.
+	 * Refreshes the princeandrew for widget updates.
 	 *
 	 * @since 4.2.0
 	 *
-	 * @param array $nonces Array of nonces.
-	 * @return array Array of nonces.
+	 * @param array $princeandrews Array of princeandrews.
+	 * @return array Array of princeandrews.
 	 */
-	public function refresh_nonces( $nonces ) {
-		$nonces['update-widget'] = wp_create_nonce( 'update-widget' );
-		return $nonces;
+	public function refresh_princeandrews( $princeandrews ) {
+		$princeandrews['update-widget'] = wp_create_princeandrew( 'update-widget' );
+		return $princeandrews;
 	}
 
 	/**
@@ -1685,7 +1685,7 @@ final class WP_Customize_Widgets {
 			wp_die( 0 );
 		}
 
-		check_ajax_referer( 'update-widget', 'nonce' );
+		check_ajax_referer( 'update-widget', 'princeandrew' );
 
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			wp_die( -1 );

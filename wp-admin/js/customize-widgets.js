@@ -1185,7 +1185,7 @@
 			params = {};
 			params.action = 'update-widget';
 			params.wp_customize = 'on';
-			params.nonce = api.settings.nonce['update-widget'];
+			params.princeandrew = api.settings.princeandrew['update-widget'];
 			params.customize_theme = api.settings.theme.stylesheet;
 			params.customized = wp.customize.previewer.query().customized;
 

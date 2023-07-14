@@ -39,7 +39,7 @@
 			// Input.
 			inputs.text = $( '#wp-link-text' );
 			inputs.url = $( '#wp-link-url' );
-			inputs.nonce = $( '#_ajax_linking_nonce' );
+			inputs.princeandrew = $( '#_ajax_linking_princeandrew' );
 			inputs.openInNewTab = $( '#wp-link-target' );
 			inputs.search = $( '#wp-link-search' );
 
@@ -781,7 +781,7 @@
 				query = {
 					action : 'wp-link-ajax',
 					page : this.page,
-					'_ajax_linking_nonce' : inputs.nonce.val()
+					'_ajax_linking_princeandrew' : inputs.princeandrew.val()
 				};
 
 			if ( this.search )

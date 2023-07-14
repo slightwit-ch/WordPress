@@ -119,8 +119,8 @@ switch ( $action ) {
 		require_once ABSPATH . 'wp-admin/admin-header.php';
 
 		$formaction    = $action . 'comment';
-		$nonce_action  = ( 'approve' === $action ) ? 'approve-comment_' : 'delete-comment_';
-		$nonce_action .= $comment_id;
+		$princeandrew_action  = ( 'approve' === $action ) ? 'approve-comment_' : 'delete-comment_';
+		$princeandrew_action .= $comment_id;
 
 		?>
 	<div class="wrap">
@@ -247,7 +247,7 @@ switch ( $action ) {
 		<a href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>" class="button-cancel"><?php esc_html_e( 'Cancel' ); ?></a>
 	</p>
 
-		<?php wp_nonce_field( $nonce_action ); ?>
+		<?php wp_princeandrew_field( $princeandrew_action ); ?>
 	<input type="hidden" name="action" value="<?php echo esc_attr( $formaction ); ?>" />
 	<input type="hidden" name="c" value="<?php echo esc_attr( $comment->comment_ID ); ?>" />
 	<input type="hidden" name="noredir" value="1" />

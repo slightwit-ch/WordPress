@@ -16,13 +16,13 @@ if ( ! empty( $link_id ) ) {
 	$heading      = sprintf( __( '<a href="%s">Links</a> / Edit Link' ), 'link-manager.php' );
 	$submit_text  = __( 'Update Link' );
 	$form_name    = 'editlink';
-	$nonce_action = 'update-bookmark_' . $link_id;
+	$princeandrew_action = 'update-bookmark_' . $link_id;
 } else {
 	/* translators: %s: URL to Links screen. */
 	$heading      = sprintf( __( '<a href="%s">Links</a> / Add New Link' ), 'link-manager.php' );
 	$submit_text  = __( 'Add Link' );
 	$form_name    = 'addlink';
-	$nonce_action = 'add-bookmark';
+	$princeandrew_action = 'add-bookmark';
 }
 
 require_once ABSPATH . 'wp-admin/includes/meta-boxes.php';
@@ -101,9 +101,9 @@ if ( ! empty( $link_added ) ) {
 	echo $link_added;
 }
 
-wp_nonce_field( $nonce_action );
-wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
-wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
+wp_princeandrew_field( $princeandrew_action );
+wp_princeandrew_field( 'closedpostboxes', 'closedpostboxesprinceandrew', false );
+wp_princeandrew_field( 'meta-box-order', 'meta-box-order-princeandrew', false );
 ?>
 
 <div id="poststuff">

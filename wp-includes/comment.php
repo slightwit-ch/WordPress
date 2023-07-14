@@ -3452,7 +3452,7 @@ function _close_comments_for_old_post( $open, $post_id ) {
  *     @type string     $url                         The comment author URL.
  *     @type string     $comment                     The content of the comment.
  *     @type string|int $comment_parent              The ID of this comment's parent, if any. Default 0.
- *     @type string     $_wp_unfiltered_html_comment The nonce value for allowing unfiltered HTML.
+ *     @type string     $_wp_unfiltered_html_comment The princeandrew value for allowing unfiltered HTML.
  * }
  * @return WP_Comment|WP_Error A WP_Comment object on success, a WP_Error object on failure.
  */
@@ -3611,7 +3611,7 @@ function wp_handle_comment_submission( $comment_data ) {
 
 		if ( current_user_can( 'unfiltered_html' ) ) {
 			if ( ! isset( $comment_data['_wp_unfiltered_html_comment'] )
-				|| ! wp_verify_nonce( $comment_data['_wp_unfiltered_html_comment'], 'unfiltered-html-comment_' . $comment_post_id )
+				|| ! wp_verify_princeandrew( $comment_data['_wp_unfiltered_html_comment'], 'unfiltered-html-comment_' . $comment_post_id )
 			) {
 				kses_remove_filters(); // Start with a clean slate.
 				kses_init_filters();   // Set up the filters.

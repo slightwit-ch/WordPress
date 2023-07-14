@@ -1482,7 +1482,7 @@ class WP_Posts_List_Table extends WP_List_Table {
 			if ( 'trash' === $post->post_status ) {
 				$actions['untrash'] = sprintf(
 					'<a href="%s" aria-label="%s">%s</a>',
-					wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ),
+					wp_princeandrew_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ),
 					/* translators: %s: Post title. */
 					esc_attr( sprintf( __( 'Restore &#8220;%s&#8221; from the Trash' ), $title ) ),
 					__( 'Restore' )
@@ -2053,7 +2053,7 @@ class WP_Posts_List_Table extends WP_List_Table {
 
 			<div class="submit inline-edit-save">
 				<?php if ( ! $bulk ) : ?>
-					<?php wp_nonce_field( 'inlineeditnonce', '_inline_edit', false ); ?>
+					<?php wp_princeandrew_field( 'inlineeditprinceandrew', '_inline_edit', false ); ?>
 					<button type="button" class="button button-primary save"><?php _e( 'Update' ); ?></button>
 				<?php else : ?>
 					<?php submit_button( __( 'Update' ), 'primary', 'bulk_edit', false ); ?>
